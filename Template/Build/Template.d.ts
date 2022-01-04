@@ -1,71 +1,38 @@
-declare namespace Template {
-    function Introduction(): ƒS.SceneReturn;
+declare namespace Novel {
+    function Gasthaus(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Novel {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
-    let transitions: {
-        clock: {
+    let transition: {
+        transitionOne: {
             duration: number;
             alpha: string;
             edge: number;
         };
     };
-    let sound: {
-        backgroundTheme: string;
-        mainTheme: string;
-    };
-    let locations: {
-        beach: {
+    let location: {
+        blackscreen: {
             name: string;
             background: string;
         };
-        beach2: {
-            name: string;
-            background: string;
-        };
-        beach3: {
+        gasthausHauptraum: {
             name: string;
             background: string;
         };
     };
-    let characters: {
+    let character: {
         narrator: {
             name: string;
-            origin: ƒ.ORIGIN2D;
-            pose: {
-                standard: string;
-                happy: string;
-                angry: string;
-            };
-        };
-        Stickman: {
-            name: string;
-            origin: ƒ.ORIGIN2D;
-            pose: {
-                meh: string;
-                happy: string;
-                thinking: string;
-                dancing: string;
-            };
-        };
-    };
-    let items: {
-        pen: {
-            name: string;
-            description: string;
-            image: string;
         };
     };
     let dataForSave: {
         nameProtagonist: string;
-        points: number;
     };
-    function fromLeftToRight(): ƒS.AnimationDefinition;
 }
-declare namespace Template {
-    function Practice(): ƒS.SceneReturn;
+declare namespace Novel {
+    function Prolog(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Novel {
     function Scene(): ƒS.SceneReturn;
 }

@@ -1,88 +1,50 @@
-namespace Template {
+namespace Novel {
   export import ƒ = FudgeCore;
   export import ƒS = FudgeStory;
 
-  console.log("FudgeStory template starting");
+  console.log("FudgeStory Main.ts starting");
 
-  //define transitions
-  export let transitions = {
-    clock: {
+
+  export let transition = {
+    transitionOne: {
       duration: 1,
-      alpha: "Transitions/testTransition.jpg",
-      edge: 1                                   //Härtegrad der Transition
+      alpha: "Transitions/02.jpg",
+      edge: 1
     }
   };
 
-  export let sound = {
-    // music, am besten mp3, weil es am besten unterstützt wird, aber theorethisch egal
-    backgroundTheme: "",
-    mainTheme: ""
+  export let location = {
+    blackscreen: {
+      name: "Blackscreen",
+      background: "Images/Locations/TestLocation1.png"
+    },
+    gasthausHauptraum: {
+      name: "gasthausHauptraum",
+      background: "Images/Locations/TestLocation2.png"
+    }
   };
 
-  export let locations = {
-    beach: {
-      name: "Beach",
-      background: "Images/Strand.png"
-    },
-    beach2: {
-      name: "Beach2",
-      background: "Images/Strand2.jpg"
-    },
-    beach3: {
-      name: "Beach3",
-      background: "Images/Strand3.jpg"
-    }
-  }
-
-  export let characters = {
+  export let character = {
     narrator: {
-      name: "Bob",
-      origin: ƒS.ORIGIN.BOTTOMCENTER,
-      pose: {
-        standard: ".Images/Character/...",
-        happy: "",
-        angry: ""
-      }
-    },
-    Stickman: {
-      name: "Stickman",
-      origin: ƒS.ORIGIN.BOTTOMCENTER,
-      pose: {
-        meh: "Images/Stickman/Stickmen_Meh.png",
-        happy: "Images/Stickman/Stickmen_Happy.png",
-        thinking: "Images/Stickman/Stickmen_Thinking.png",
-        dancing: "Images/Stickman/Stickmen_Dancing.png"
-      }
+      name: ""
     }
   }
 
+  //ToDO:item
 
-  //Items
-  export let items = {
-    pen: {
-      name: "roter Buntstift",
-      description: "a red pen",
-      image: "./Images/Items/redPen"
-    } 
-  }
+  //ToDO:sound
 
 
-  //alle Sachen, die gespeichert werden sollen, um evtl. später weiter zu spielen
   export let dataForSave = {
-    nameProtagonist: "",
-    //kann man nutzen um zu entscvheiden zu welcher nächsten Szene der Nutzer kommt
-    points: 1
-  };
-
+    nameProtagonist: ""
+  }
 
   //Menü
-
-  let inGameMenu  = {
-    //buttons, die man angezeigt haben möchte & strings dienen zur css-gestaltung
-    save: "Save",
-    load: "Load",
-    close: "Close",
-    //open: "Open"
+  let inGameMenu = {
+   //buttons, die man angezeigt haben möchte & strings dienen zur css-gestaltung
+   save: "Save",
+   load: "Load",
+   close: "Close"
   }
 
   let gameMenu: ƒS.Menu;
@@ -103,13 +65,8 @@ namespace Template {
         gameMenu.close();
         menu = false;
         break;
-      /*case inGameMenu.open:
-        gameMenu.open();
-        menu = true;
-        break;*/
     }
   }
-
 
   //Shortcuts für's Menü
   document.addEventListener("keydown", handleKeyPress);
@@ -136,43 +93,18 @@ namespace Template {
           menu = true;
         }
     }
-    
   }
 
 
-  function jirkaAnimation(): ƒS.AnimationDefinition {
-    return {
-      start: {translation: ƒS.positions.bottomleft, rotation: -20, scaling: new ƒS.Position(0.5, 1.5), color: ƒS.Color.CSS("white", 0)},
-      end: {translation: ƒS.positions.bottomright, rotation: 20, scaling: new ƒS.Position(1.5, 0.5), color: ƒS.Color.CSS("red", 0)},
-      duration: 1,
-      playmode: ƒS.ANIMATION_PLAYMODE.LOOP
-    }
-  };
-
-  export function fromLeftToRight(): ƒS.AnimationDefinition {
-    return {
-      start: { translation: ƒS.positionPercent(30, 100) },
-      end: { translation: ƒS.positionPercent(200, 100) },
-      duration: 3,
-      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
-    };
-  }
 
   window.addEventListener("load", start);
   function start(_event: Event): void {
     //Menü
-    gameMenu = ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenuCSSClass");
+    gameMenu = ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
 
     let scenes: ƒS.Scenes = [
-      //Szenenstruktur -> Reihenfolge hier bestimmt Ablaufreihenfolge der Szenen
-      //hier: linear
-      //{ scene: Scene, name: "Scene" }
-      { scene: Practice, name: "Practice"}
-
-      //man kann Szenen auch ids geben und sie somit aufrufen: mit return End;
-      //{id: "End", scene: End, name: "End"}
-      //man kann eine Szene auch mit einer 2. id belegen; und auch direkt in der Szene die nächste angeben
-      //{id: "EndNummero2", scene: End, name: "End", next: "Ende"}
+      { scene: Prolog, name: "Prolog" },
+      { scene: Gasthaus, name: "Gasthaus" }
     ];
 
 
