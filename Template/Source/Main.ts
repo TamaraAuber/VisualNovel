@@ -15,7 +15,7 @@ namespace Novel {
 
   export let location = {
     blackscreen: {
-      name: "Blackscreen",
+      name: "blackscreen",
       background: "Images/Locations/TestLocation1.png"
     },
     gasthausHauptraum: {

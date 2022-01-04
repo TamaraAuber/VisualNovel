@@ -13,6 +13,7 @@ namespace Novel {
         //evtl kurze Zwischensequenz, in der shortcuts für menü gezeigt werden
 
         await ƒS.Location.show(location.blackscreen);
+        await ƒS.update(transition.transitionOne.duration, transition.transitionOne.alpha, transition.transitionOne.edge);
 
         await ƒS.Speech.tell(character.narrator, text.prologText.T000);
 

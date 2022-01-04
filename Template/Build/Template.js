@@ -16,6 +16,13 @@ var Novel;
 })(Novel || (Novel = {}));
 var Novel;
 (function (Novel) {
+    async function Laden() {
+        console.log("Laden");
+    }
+    Novel.Laden = Laden;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
     Novel.ƒ = FudgeCore;
     Novel.ƒS = FudgeStory;
     console.log("FudgeStory Main.ts starting");
@@ -28,7 +35,7 @@ var Novel;
     };
     Novel.location = {
         blackscreen: {
-            name: "Blackscreen",
+            name: "blackscreen",
             background: "Images/Locations/TestLocation1.png"
         },
         gasthausHauptraum: {
@@ -123,6 +130,7 @@ var Novel;
         };
         //evtl kurze Zwischensequenz, in der shortcuts für menü gezeigt werden
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T000);
     }
     Novel.Prolog = Prolog;

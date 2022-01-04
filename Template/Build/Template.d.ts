@@ -2,6 +2,9 @@ declare namespace Novel {
     function Gasthaus(): ƒS.SceneReturn;
 }
 declare namespace Novel {
+    function Laden(): ƒS.SceneReturn;
+}
+declare namespace Novel {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
     let transition: {
