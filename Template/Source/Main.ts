@@ -8,14 +8,24 @@ namespace Novel {
   export let transition = {
     transitionOne: {
       duration: 1,
-      alpha: "Transitions/02.jpg",
+      alpha: "Transitions/04.png",
+      edge: 0.4
+    }, 
+    transitionTwo: {
+      duration: 1,
+      alpha: "Transitions/05.png",
       edge: 1
     }
   };
 
   export let location = {
+    //ToDo: schauen ob überhaupt benötigt wird
     blackscreen: {
       name: "blackscreen",
+      background: "Images/Locations/blackscreen.png"
+    },
+    menuErklaerung: {
+      name: "menuErklaerung",
       background: "Images/Locations/TestLocation1.png"
     },
     gasthausHauptraum: {

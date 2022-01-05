@@ -16,9 +16,18 @@ declare namespace Novel {
             alpha: string;
             edge: number;
         };
+        transitionTwo: {
+            duration: number;
+            alpha: string;
+            edge: number;
+        };
     };
     let location: {
         blackscreen: {
+            name: string;
+            background: string;
+        };
+        menuErklaerung: {
             name: string;
             background: string;
         };

@@ -36,13 +36,23 @@ var Novel;
     Novel.transition = {
         transitionOne: {
             duration: 1,
-            alpha: "Transitions/02.jpg",
+            alpha: "Transitions/04.png",
+            edge: 0.4
+        },
+        transitionTwo: {
+            duration: 1,
+            alpha: "Transitions/05.png",
             edge: 1
         }
     };
     Novel.location = {
+        //ToDo: schauen ob überhaupt benötigt wird
         blackscreen: {
             name: "blackscreen",
+            background: "Images/Locations/blackscreen.png"
+        },
+        menuErklaerung: {
+            name: "menuErklaerung",
             background: "Images/Locations/TestLocation1.png"
         },
         gasthausHauptraum: {
@@ -135,9 +145,13 @@ var Novel;
                 T000: "Hier könnte ihr Prolog stehen"
             }
         };
-        //evtl kurze Zwischensequenz, in der shortcuts für menü gezeigt werden
+        //kurze Zwischensequenz, in der shortcuts für menü gezeigt werden
+        await Novel.ƒS.Location.show(Novel.location.menuErklaerung);
+        await Novel.ƒS.update();
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Menü Shortcuts");
+        //evtl. Transition raus
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
-        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.update(Novel.transition.transitionTwo.duration, Novel.transition.transitionTwo.alpha, Novel.transition.transitionTwo.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T000);
     }
     Novel.Prolog = Prolog;

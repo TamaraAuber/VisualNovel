@@ -10,10 +10,14 @@ namespace Novel {
         };
 
 
-        //evtl kurze Zwischensequenz, in der shortcuts für menü gezeigt werden
+        //kurze Zwischensequenz, in der shortcuts für menü gezeigt werden
+        await ƒS.Location.show(location.menuErklaerung);
+        await ƒS.update();
+        await ƒS.Speech.tell(character.narrator, "Menü Shortcuts");
 
+        //evtl. Transition raus
         await ƒS.Location.show(location.blackscreen);
-        await ƒS.update(transition.transitionOne.duration, transition.transitionOne.alpha, transition.transitionOne.edge);
+        await ƒS.update(transition.transitionTwo.duration, transition.transitionTwo.alpha, transition.transitionTwo.edge)
 
         await ƒS.Speech.tell(character.narrator, text.prologText.T000);
 
