@@ -1,6 +1,6 @@
 namespace Novel {
     export async function Gasthaus(): ƒS.SceneReturn {
-        console.log("Gasthaus");
+        console.log("Szene: Gasthaus");
 
 
         let text = {

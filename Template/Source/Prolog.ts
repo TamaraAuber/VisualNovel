@@ -1,6 +1,6 @@
 namespace Novel {
     export async function Prolog(): ƒS.SceneReturn {
-        console.log("Prolog");
+        console.log("Szene: Prolog");
 
 
         let text = {

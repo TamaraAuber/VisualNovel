@@ -1,8 +1,15 @@
 "use strict";
 var Novel;
 (function (Novel) {
+    async function Drachenhort() {
+        console.log("Szene: Drachenhort");
+    }
+    Novel.Drachenhort = Drachenhort;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
     async function Gasthaus() {
-        console.log("Gasthaus");
+        console.log("Szene: Gasthaus");
         let text = {
             narrator: {
                 T000: "Willkommen im Gasthaus"
@@ -17,7 +24,7 @@ var Novel;
 var Novel;
 (function (Novel) {
     async function Laden() {
-        console.log("Laden");
+        console.log("Szene: Laden");
     }
     Novel.Laden = Laden;
 })(Novel || (Novel = {}));
@@ -122,7 +129,7 @@ var Novel;
 var Novel;
 (function (Novel) {
     async function Prolog() {
-        console.log("Prolog");
+        console.log("Szene: Prolog");
         let text = {
             prologText: {
                 T000: "Hier könnte ihr Prolog stehen"
@@ -143,4 +150,18 @@ var Novel;
     Novel.Scene = Scene;
 })(Novel || (Novel = {}));
 //kann glaube ich weg
+var Novel;
+(function (Novel) {
+    async function Unterwegs1Goblins() {
+        console.log("Szene: Unterwegs1Goblins");
+    }
+    Novel.Unterwegs1Goblins = Unterwegs1Goblins;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
+    async function Unterwegs2Fee() {
+        console.log("Szene: Unterwegs2Fee");
+    }
+    Novel.Unterwegs2Fee = Unterwegs2Fee;
+})(Novel || (Novel = {}));
 //# sourceMappingURL=Template.js.map

@@ -1,4 +1,7 @@
 declare namespace Novel {
+    function Drachenhort(): ƒS.SceneReturn;
+}
+declare namespace Novel {
     function Gasthaus(): ƒS.SceneReturn;
 }
 declare namespace Novel {
@@ -38,4 +41,10 @@ declare namespace Novel {
 }
 declare namespace Novel {
     function Scene(): ƒS.SceneReturn;
+}
+declare namespace Novel {
+    function Unterwegs1Goblins(): ƒS.SceneReturn;
+}
+declare namespace Novel {
+    function Unterwegs2Fee(): ƒS.SceneReturn;
 }
