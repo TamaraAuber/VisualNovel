@@ -31,12 +31,53 @@ namespace Novel {
     gasthausHauptraum: {
       name: "gasthausHauptraum",
       background: "Images/Locations/TestLocation2.png"
+    },
+    gasthausBar: {
+      name: "gasthausBar",
+      background: "Images/Tavern/Bar_Background.png"
+    },
+    laden: {
+      name: "Laden",
+      background: "Images/Shop/Shop_Background2.png"
     }
   };
+
+  export let roomInventory = {
+    gasthausBarCounter: {
+      name: "gasthausBarCounter",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Tavern/Bar_BarCounter.png"
+      }
+    },
+    ladenTheke: {
+      name: "ladenTheke",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Shop/Shop_ShopCounter2.png"
+      }
+    }
+  }
 
   export let character = {
     narrator: {
       name: ""
+    },
+    dwarf: {
+      name: "Andvari",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Dwarf/DP1.png",
+        thinking: "Images/Dwarf/DP2.png"
+      }
+    },
+    tiefling: {
+      name: "Ruby",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Tiefling/TP1.png",
+        thinking: "Images/Tiefling/TP2.png"
+      }
     }
   }
 
@@ -114,7 +155,8 @@ namespace Novel {
 
     let scenes: ƒS.Scenes = [
       { scene: Prolog, name: "Prolog" },
-      { scene: Gasthaus, name: "Gasthaus" }
+      { scene: Gasthaus, name: "Gasthaus" },
+      { scene: Laden, name: "Laden"}
     ];
 
 

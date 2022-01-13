@@ -12,12 +12,33 @@ var Novel;
         console.log("Szene: Gasthaus");
         let text = {
             narrator: {
-                T000: "Willkommen im Gasthaus"
+                N000: "Willkommen im Gasthaus",
+                N001: "Auftritt Wirt",
+                N002: "Abgang Wirt",
+                N003: "weiter gehen"
+            },
+            dwarf: {
+                D000: "Willkommen im Gasthaus"
             }
         };
         await Novel.ƒS.Location.show(Novel.location.gasthausHauptraum);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.T000);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
+        await Novel.ƒS.Location.show(Novel.location.gasthausBar);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Character.show(Novel.roomInventory.gasthausBarCounter, Novel.roomInventory.gasthausBarCounter.pose.standard, Novel.ƒS.positionPercent(50, 100));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
+        await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.standard, Novel.ƒS.positionPercent(30, 96.5));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.dwarf, text.dwarf.D000);
+        await Novel.ƒS.Character.hide(Novel.character.dwarf);
+        await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.thinking, Novel.ƒS.positionPercent(30, 96.5));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
+        await Novel.ƒS.Character.hide(Novel.character.dwarf);
+        await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N003);
     }
     Novel.Gasthaus = Gasthaus;
 })(Novel || (Novel = {}));
@@ -25,6 +46,27 @@ var Novel;
 (function (Novel) {
     async function Laden() {
         console.log("Szene: Laden");
+        let text = {
+            narrator: {
+                N000: "Willkommen im Laden",
+                N001: "Auftritt Händlerin"
+            },
+            tiefling: {
+                T000: "Willkommen in meinem Laden"
+            }
+        };
+        await Novel.ƒS.Location.show(Novel.location.laden);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
+        await Novel.ƒS.Character.show(Novel.roomInventory.ladenTheke, Novel.roomInventory.ladenTheke.pose.standard, Novel.ƒS.positionPercent(50, 100));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
+        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 90));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T000);
+        await Novel.ƒS.Character.hide(Novel.character.tiefling);
+        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.thinking, Novel.ƒS.positionPercent(35, 90));
+        await Novel.ƒS.update(1);
     }
     Novel.Laden = Laden;
 })(Novel || (Novel = {}));
@@ -58,11 +100,51 @@ var Novel;
         gasthausHauptraum: {
             name: "gasthausHauptraum",
             background: "Images/Locations/TestLocation2.png"
+        },
+        gasthausBar: {
+            name: "gasthausBar",
+            background: "Images/Tavern/Bar_Background.png"
+        },
+        laden: {
+            name: "Laden",
+            background: "Images/Shop/Shop_Background2.png"
+        }
+    };
+    Novel.roomInventory = {
+        gasthausBarCounter: {
+            name: "gasthausBarCounter",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Tavern/Bar_BarCounter.png"
+            }
+        },
+        ladenTheke: {
+            name: "ladenTheke",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Shop/Shop_ShopCounter2.png"
+            }
         }
     };
     Novel.character = {
         narrator: {
             name: ""
+        },
+        dwarf: {
+            name: "Andvari",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Dwarf/DP1.png",
+                thinking: "Images/Dwarf/DP2.png"
+            }
+        },
+        tiefling: {
+            name: "Ruby",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Tiefling/TP1.png",
+                thinking: "Images/Tiefling/TP2.png"
+            }
         }
     };
     //ToDO:item
@@ -128,7 +210,8 @@ var Novel;
         gameMenu = Novel.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
             { scene: Novel.Prolog, name: "Prolog" },
-            { scene: Novel.Gasthaus, name: "Gasthaus" }
+            { scene: Novel.Gasthaus, name: "Gasthaus" },
+            { scene: Novel.Laden, name: "Laden" }
         ];
         let uiElement = document.querySelector("[type=interface]");
         Novel.dataForSave = Novel.ƒS.Progress.setData(Novel.dataForSave, uiElement);

@@ -1,12 +1,21 @@
+html {
+  background: aquamarine;
+}
+
 scene {
   width: 1280px;
-  height: 720px;
-  display: inline-block;
+  height: 750px;
+  /*display: inline-block;*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 canvas {
+  height: 90%;
   width: 100%;
 }
+
 
 speech {
   position: absolute;

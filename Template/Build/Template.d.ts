@@ -35,10 +35,50 @@ declare namespace Novel {
             name: string;
             background: string;
         };
+        gasthausBar: {
+            name: string;
+            background: string;
+        };
+        laden: {
+            name: string;
+            background: string;
+        };
+    };
+    let roomInventory: {
+        gasthausBarCounter: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
+        ladenTheke: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
     };
     let character: {
         narrator: {
             name: string;
+        };
+        dwarf: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+                thinking: string;
+            };
+        };
+        tiefling: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+                thinking: string;
+            };
         };
     };
     let dataForSave: {
