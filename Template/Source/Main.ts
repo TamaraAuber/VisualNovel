@@ -78,6 +78,24 @@ namespace Novel {
         standard: "Images/Tiefling/TP1.png",
         thinking: "Images/Tiefling/TP2.png"
       }
+    },
+    dragon: {
+      name: "Drache",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        sleeping: "",
+        angry: "Images/Dragon/D_Angry.png",
+        happyWithBaby: "Images/Dragon/D_WithBaby.png"
+      }
+    },
+    fairy: {
+      name: "",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Fairy/Fairy_P3.png",
+        grateful: "Images/Fairy/Fairy_P1.png",
+        afraid: "Images/Fairy/Fairy_P2.png"
+      }
     }
   }
 
@@ -154,9 +172,11 @@ namespace Novel {
     gameMenu = ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
 
     let scenes: ƒS.Scenes = [
-      { scene: Prolog, name: "Prolog" },
-      { scene: Gasthaus, name: "Gasthaus" },
-      { scene: Laden, name: "Laden"}
+      //{ scene: Prolog, name: "Prolog" },
+      //{ scene: Gasthaus, name: "Gasthaus" },
+      //{ scene: Laden, name: "Laden"},
+      //{ scene: Drachenhort, name: "Drachenhort"},
+      { scene: Unterwegs2Fee, name: "Unterwegs2Fee"}
     ];
 
 

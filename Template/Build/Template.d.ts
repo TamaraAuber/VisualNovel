@@ -80,6 +80,24 @@ declare namespace Novel {
                 thinking: string;
             };
         };
+        dragon: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                sleeping: string;
+                angry: string;
+                happyWithBaby: string;
+            };
+        };
+        fairy: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+                grateful: string;
+                afraid: string;
+            };
+        };
     };
     let dataForSave: {
         nameProtagonist: string;

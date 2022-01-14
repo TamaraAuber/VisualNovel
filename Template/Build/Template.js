@@ -3,6 +3,23 @@ var Novel;
 (function (Novel) {
     async function Drachenhort() {
         console.log("Szene: Drachenhort");
+        let text = {
+            narrator: {
+                N000: "Hier wohnt ein Drache",
+                N001: "Auftritt Drache",
+                N002: ":)"
+            }
+        };
+        await Novel.ƒS.Location.show(Novel.location.gasthausHauptraum);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
+        await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.angry, Novel.ƒS.positionPercent(50, 95));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
+        await Novel.ƒS.Character.hide(Novel.character.dragon);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
+        await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.happyWithBaby, Novel.ƒS.positionPercent(50, 100));
+        await Novel.ƒS.update(1);
     }
     Novel.Drachenhort = Drachenhort;
 })(Novel || (Novel = {}));
@@ -61,11 +78,12 @@ var Novel;
         await Novel.ƒS.Character.show(Novel.roomInventory.ladenTheke, Novel.roomInventory.ladenTheke.pose.standard, Novel.ƒS.positionPercent(50, 100));
         await Novel.ƒS.update(1);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
-        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 90));
+        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 95));
         await Novel.ƒS.update(1);
         await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T000);
         await Novel.ƒS.Character.hide(Novel.character.tiefling);
-        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.thinking, Novel.ƒS.positionPercent(35, 90));
+        await Novel.ƒS.update();
+        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.thinking, Novel.ƒS.positionPercent(35, 95));
         await Novel.ƒS.update(1);
     }
     Novel.Laden = Laden;
@@ -145,6 +163,24 @@ var Novel;
                 standard: "Images/Tiefling/TP1.png",
                 thinking: "Images/Tiefling/TP2.png"
             }
+        },
+        dragon: {
+            name: "Drache",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                sleeping: "",
+                angry: "Images/Dragon/D_Angry.png",
+                happyWithBaby: "Images/Dragon/D_WithBaby.png"
+            }
+        },
+        fairy: {
+            name: "",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Fairy/Fairy_P3.png",
+                grateful: "Images/Fairy/Fairy_P1.png",
+                afraid: "Images/Fairy/Fairy_P2.png"
+            }
         }
     };
     //ToDO:item
@@ -209,9 +245,11 @@ var Novel;
         //Menü
         gameMenu = Novel.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
-            { scene: Novel.Prolog, name: "Prolog" },
-            { scene: Novel.Gasthaus, name: "Gasthaus" },
-            { scene: Novel.Laden, name: "Laden" }
+            //{ scene: Prolog, name: "Prolog" },
+            //{ scene: Gasthaus, name: "Gasthaus" },
+            //{ scene: Laden, name: "Laden"},
+            //{ scene: Drachenhort, name: "Drachenhort"},
+            { scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" }
         ];
         let uiElement = document.querySelector("[type=interface]");
         Novel.dataForSave = Novel.ƒS.Progress.setData(Novel.dataForSave, uiElement);
@@ -228,6 +266,7 @@ var Novel;
                 T000: "Hier könnte ihr Prolog stehen"
             }
         };
+        //!!!!!!!!!!!!Startscreen durch Novel Page ersetzen?????????????
         //kurze Zwischensequenz, in der shortcuts für menü gezeigt werden
         await Novel.ƒS.Location.show(Novel.location.menuErklaerung);
         await Novel.ƒS.update();
@@ -258,6 +297,28 @@ var Novel;
 (function (Novel) {
     async function Unterwegs2Fee() {
         console.log("Szene: Unterwegs2Fee");
+        let text = {
+            narrator: {
+                N000: "Lerne die Fee kennen",
+                N001: "Auftritt Fee",
+                N002: ":)"
+            }
+        };
+        await Novel.ƒS.Location.show(Novel.location.gasthausHauptraum);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
+        await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.grateful, Novel.ƒS.positionPercent(70, 65));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
+        await Novel.ƒS.Character.hide(Novel.character.fairy);
+        await Novel.ƒS.update();
+        await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.standard, Novel.ƒS.positionPercent(55, 75));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
+        await Novel.ƒS.Character.hide(Novel.character.fairy);
+        await Novel.ƒS.update();
+        await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.afraid, Novel.ƒS.positionPercent(40, 65));
+        await Novel.ƒS.update(1);
     }
     Novel.Unterwegs2Fee = Unterwegs2Fee;
 })(Novel || (Novel = {}));

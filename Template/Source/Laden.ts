@@ -23,13 +23,14 @@ namespace Novel {
 
         await ƒS.Speech.tell(character.narrator, text.narrator.N001);
 
-        await ƒS.Character.show(character.tiefling, character.tiefling.pose.standard, ƒS.positionPercent(35, 90));
+        await ƒS.Character.show(character.tiefling, character.tiefling.pose.standard, ƒS.positionPercent(35, 95));
         await ƒS.update(1);
 
         await ƒS.Speech.tell(character.tiefling, text.tiefling.T000);
 
         await ƒS.Character.hide(character.tiefling);
-        await ƒS.Character.show(character.tiefling, character.tiefling.pose.thinking, ƒS.positionPercent(35, 90));
+        await ƒS.update();
+        await ƒS.Character.show(character.tiefling, character.tiefling.pose.thinking, ƒS.positionPercent(35, 95));
         await ƒS.update(1);
 
     }

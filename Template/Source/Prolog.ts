@@ -10,6 +10,7 @@ namespace Novel {
         };
 
 
+        //!!!!!!!!!!!!Startscreen durch Novel Page ersetzen?????????????
         //kurze Zwischensequenz, in der shortcuts für menü gezeigt werden
         await ƒS.Location.show(location.menuErklaerung);
         await ƒS.update();
