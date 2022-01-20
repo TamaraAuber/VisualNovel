@@ -1,5 +1,5 @@
 html {
-  background: aquamarine;
+  background: rgb(102, 67, 1);
 }
 
 scene {
@@ -16,6 +16,11 @@ canvas {
   width: 100%;
 }
 
+.gameMenu{
+  position: absolute;
+  margin-top: 0px;
+  margin-right: 0px;
+}
 
 speech {
   position: absolute;
