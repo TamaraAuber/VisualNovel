@@ -15,6 +15,11 @@ namespace Novel {
       duration: 1,
       alpha: "Transitions/05.png",
       edge: 1
+    },
+    transitionThree: {
+      duration: 1,
+      alpha: "Transitions/02.png",
+      edge: 1
     }
   };
 
@@ -39,6 +44,22 @@ namespace Novel {
     laden: {
       name: "Laden",
       background: "Images/Shop/Shop_Background2.png"
+    },
+    feld: {
+      name: "feld",
+      background: "Images/OnTheRoad/Field1.png"
+    },
+    wald: {
+      name: "wald",
+      background: "Images/OnTheRoad/Forrest_Background1.png"
+    },
+    drachenHoehleGang: {
+      name: "drachenhoehleGang",
+      background: "Images/DragonCave/DragonCave1.1.png"
+    },
+    drachenHoehle: {
+      name: "drachenhoehle",
+      background: "Images/DragonCave/DragonCave2.1.png"
     }
   };
 
@@ -55,6 +76,20 @@ namespace Novel {
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         standard: "Images/Shop/Shop_ShopCounter2.png"
+      }
+    },
+    waldBaeume: {
+      name: "waldBaeume",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/OnTheRoad/Forrest_Trees1.png"
+      }
+    },
+    sonnenstrahlen: {
+      name: "sonnenstrahlen",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/DragonCave/DragonCave_Sunlight1.png"
       }
     }
   }
@@ -83,13 +118,13 @@ namespace Novel {
       name: "Drache",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
-        sleeping: "",
+        sleeping: "Images/Dragon/Dragon_Sleeping.png",
         angry: "Images/Dragon/D_Angry.png",
         happyWithBaby: "Images/Dragon/D_WithBaby.png"
       }
     },
     fairy: {
-      name: "",
+      name: "fairy",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         standard: "Images/Fairy/Fairy_P3.png",
@@ -99,13 +134,15 @@ namespace Novel {
     }
   }
 
+
   //ToDO:item
 
   //ToDO:sound
 
 
   export let dataForSave = {
-    nameProtagonist: ""
+    nameProtagonist: "",
+    givenEnding: ""
   }
 
   //Menü
@@ -175,8 +212,10 @@ namespace Novel {
       //{ scene: Prolog, name: "Prolog" },
       //{ scene: Gasthaus, name: "Gasthaus" },
       //{ scene: Laden, name: "Laden"},
-      //{ scene: Drachenhort, name: "Drachenhort"},
-      { scene: Unterwegs2Fee, name: "Unterwegs2Fee"}
+      //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+      { scene: Drachenhort, name: "Drachenhort"},
+      { scene: Ende, name: "Ende"}
+      
     ];
 
 

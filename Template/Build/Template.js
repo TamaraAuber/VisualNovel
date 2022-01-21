@@ -3,25 +3,108 @@ var Novel;
 (function (Novel) {
     async function Drachenhort() {
         console.log("Szene: Drachenhort");
-        let text = {
+        /*let text = {
             narrator: {
                 N000: "Hier wohnt ein Drache",
                 N001: "Auftritt Drache",
                 N002: ":)"
             }
+        };*/
+        let ratschlagBefolgen = {
+            iChooseYes: "Ins Inventar schauen",
+            iCHooseNo: "Drache einfach bekämpfen"
         };
-        await Novel.ƒS.Location.show(Novel.location.gasthausHauptraum);
+        //schauen wie ich checke was Protagonist im Inventar dabei hat
+        let howToDealWithDragons = {
+            iChooseStaff: "Stab",
+            iChooseCloak: "Umhang",
+            iChooseSword: "Schwert",
+            iChooseStone: "Stein"
+        };
+        await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
-        await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.angry, Novel.ƒS.positionPercent(50, 95));
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Es ist dunkel");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du läufst weiter und es wird heller");
+        await Novel.ƒS.Location.show(Novel.location.drachenHoehleGang);
+        await Novel.ƒS.update(Novel.transition.transitionThree.duration, Novel.transition.transitionThree.alpha, Novel.transition.transitionThree.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "gelangst ans Ende der Höhle");
+        await Novel.ƒS.Location.show(Novel.location.drachenHoehle);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Entdeckst Drache");
+        await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.sleeping, Novel.ƒS.positionPercent(55, 80));
         await Novel.ƒS.update(1);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
+        await Novel.ƒS.Character.show(Novel.roomInventory.sonnenstrahlen, Novel.roomInventory.sonnenstrahlen.pose.standard, Novel.ƒS.positionPercent(50, 100));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Drache wacht auf");
         await Novel.ƒS.Character.hide(Novel.character.dragon);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
-        await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.happyWithBaby, Novel.ƒS.positionPercent(50, 100));
+        await Novel.ƒS.update();
+        await Novel.ƒS.Character.hide(Novel.roomInventory.sonnenstrahlen);
+        await Novel.ƒS.update();
+        await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.angry, Novel.ƒS.positionPercent(50, 100));
         await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Möchtest du in dein Inventar schauen?");
+        let dialogRatschlagBefolgen = await Novel.ƒS.Menu.getInput(ratschlagBefolgen, "DialogBoxRatschlagBefolgen");
+        switch (dialogRatschlagBefolgen) {
+            case ratschlagBefolgen.iChooseYes:
+                takeALookInTheInventory();
+                break;
+            case ratschlagBefolgen.iCHooseNo:
+                justIgnoreTheFairy();
+                break;
+        }
+        async function justIgnoreTheFairy() {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Angrif!!!!!!");
+            Novel.dataForSave.givenEnding = "0";
+            return "Ende";
+        }
+        async function takeALookInTheInventory() {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "What ya gonna do?");
+            let dialogHowToDealWithDragons = await Novel.ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
+            switch (dialogHowToDealWithDragons) {
+                case howToDealWithDragons.iChooseStaff:
+                    fightDragonWithStaff();
+                    break;
+                case howToDealWithDragons.iChooseCloak:
+                    presentTheCloak();
+                    break;
+                case howToDealWithDragons.iChooseSword:
+                    fightDragonWithSword();
+                    break;
+                case howToDealWithDragons.iChooseStone:
+                    presentTheStone();
+                    break;
+            }
+        }
+        async function fightDragonWithStaff() {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff Attack!");
+        }
+        async function presentTheCloak() {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Here's my cloak :)");
+        }
+        async function fightDragonWithSword() {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "My sword will kill you!");
+        }
+        async function presentTheStone() {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "I give you my stone :)");
+        }
     }
     Novel.Drachenhort = Drachenhort;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
+    async function Ende() {
+        console.log("This is the End");
+        switch (Novel.dataForSave.givenEnding) {
+            case "0":
+                console.log("End 0");
+                break;
+            case "1":
+                break;
+            case "2":
+                break;
+        }
+    }
+    Novel.Ende = Ende;
 })(Novel || (Novel = {}));
 var Novel;
 (function (Novel) {
@@ -103,6 +186,11 @@ var Novel;
             duration: 1,
             alpha: "Transitions/05.png",
             edge: 1
+        },
+        transitionThree: {
+            duration: 1,
+            alpha: "Transitions/02.png",
+            edge: 1
         }
     };
     Novel.location = {
@@ -126,6 +214,22 @@ var Novel;
         laden: {
             name: "Laden",
             background: "Images/Shop/Shop_Background2.png"
+        },
+        feld: {
+            name: "feld",
+            background: "Images/OnTheRoad/Field1.png"
+        },
+        wald: {
+            name: "wald",
+            background: "Images/OnTheRoad/Forrest_Background1.png"
+        },
+        drachenHoehleGang: {
+            name: "drachenhoehleGang",
+            background: "Images/DragonCave/DragonCave1.1.png"
+        },
+        drachenHoehle: {
+            name: "drachenhoehle",
+            background: "Images/DragonCave/DragonCave2.1.png"
         }
     };
     Novel.roomInventory = {
@@ -141,6 +245,20 @@ var Novel;
             origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
                 standard: "Images/Shop/Shop_ShopCounter2.png"
+            }
+        },
+        waldBaeume: {
+            name: "waldBaeume",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/OnTheRoad/Forrest_Trees1.png"
+            }
+        },
+        sonnenstrahlen: {
+            name: "sonnenstrahlen",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/DragonCave/DragonCave_Sunlight1.png"
             }
         }
     };
@@ -168,13 +286,13 @@ var Novel;
             name: "Drache",
             origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
-                sleeping: "",
+                sleeping: "Images/Dragon/Dragon_Sleeping.png",
                 angry: "Images/Dragon/D_Angry.png",
                 happyWithBaby: "Images/Dragon/D_WithBaby.png"
             }
         },
         fairy: {
-            name: "",
+            name: "fairy",
             origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
                 standard: "Images/Fairy/Fairy_P3.png",
@@ -186,7 +304,8 @@ var Novel;
     //ToDO:item
     //ToDO:sound
     Novel.dataForSave = {
-        nameProtagonist: ""
+        nameProtagonist: "",
+        givenEnding: ""
     };
     //Menü
     let inGameMenu = {
@@ -248,8 +367,9 @@ var Novel;
             //{ scene: Prolog, name: "Prolog" },
             //{ scene: Gasthaus, name: "Gasthaus" },
             //{ scene: Laden, name: "Laden"},
-            //{ scene: Drachenhort, name: "Drachenhort"},
-            { scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" }
+            //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+            { scene: Novel.Drachenhort, name: "Drachenhort" },
+            { scene: Novel.Ende, name: "Ende" }
         ];
         let uiElement = document.querySelector("[type=interface]");
         Novel.dataForSave = Novel.ƒS.Progress.setData(Novel.dataForSave, uiElement);
@@ -304,7 +424,7 @@ var Novel;
                 N002: ":)"
             }
         };
-        await Novel.ƒS.Location.show(Novel.location.gasthausHauptraum);
+        await Novel.ƒS.Location.show(Novel.location.feld);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
         await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.grateful, Novel.ƒS.positionPercent(70, 65));
@@ -318,7 +438,8 @@ var Novel;
         await Novel.ƒS.Character.hide(Novel.character.fairy);
         await Novel.ƒS.update();
         await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.afraid, Novel.ƒS.positionPercent(40, 65));
-        await Novel.ƒS.update(1);
+        //await ƒS.update(1);
+        await Novel.ƒS.update(2);
     }
     Novel.Unterwegs2Fee = Unterwegs2Fee;
 })(Novel || (Novel = {}));

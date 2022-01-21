@@ -10,7 +10,7 @@ namespace Novel {
             }
         };
 
-        await ƒS.Location.show(location.gasthausHauptraum);
+        await ƒS.Location.show(location.feld);
         await ƒS.update(transition.transitionOne.duration, transition.transitionOne.alpha, transition.transitionOne.edge);
 
         await ƒS.Speech.tell(character.narrator, text.narrator.N000);
@@ -30,7 +30,8 @@ namespace Novel {
         await ƒS.Character.hide(character.fairy);
         await ƒS.update();
         await ƒS.Character.show(character.fairy, character.fairy.pose.afraid, ƒS.positionPercent(40, 65));
-        await ƒS.update(1);
+        //await ƒS.update(1);
+        await ƒS.update(2);
 
     }
 }

@@ -2,6 +2,9 @@ declare namespace Novel {
     function Drachenhort(): ƒS.SceneReturn;
 }
 declare namespace Novel {
+    function Ende(): ƒS.SceneReturn;
+}
+declare namespace Novel {
     function Gasthaus(): ƒS.SceneReturn;
 }
 declare namespace Novel {
@@ -17,6 +20,11 @@ declare namespace Novel {
             edge: number;
         };
         transitionTwo: {
+            duration: number;
+            alpha: string;
+            edge: number;
+        };
+        transitionThree: {
             duration: number;
             alpha: string;
             edge: number;
@@ -43,6 +51,22 @@ declare namespace Novel {
             name: string;
             background: string;
         };
+        feld: {
+            name: string;
+            background: string;
+        };
+        wald: {
+            name: string;
+            background: string;
+        };
+        drachenHoehleGang: {
+            name: string;
+            background: string;
+        };
+        drachenHoehle: {
+            name: string;
+            background: string;
+        };
     };
     let roomInventory: {
         gasthausBarCounter: {
@@ -53,6 +77,20 @@ declare namespace Novel {
             };
         };
         ladenTheke: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
+        waldBaeume: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
+        sonnenstrahlen: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {
@@ -101,6 +139,7 @@ declare namespace Novel {
     };
     let dataForSave: {
         nameProtagonist: string;
+        givenEnding: string;
     };
 }
 declare namespace Novel {
