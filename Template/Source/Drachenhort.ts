@@ -48,9 +48,9 @@ namespace Novel {
 
         await ƒS.Speech.tell(character.narrator, "Drache wacht auf");
 
-        await ƒS.Character.hide(character.dragon);
-        await ƒS.update();
         await ƒS.Character.hide(roomInventory.sonnenstrahlen);
+        await ƒS.update();
+        await ƒS.Character.hide(character.dragon);
         await ƒS.update();
 
         await ƒS.Character.show(character.dragon, character.dragon.pose.angry, ƒS.positionPercent(50, 100));
@@ -70,16 +70,16 @@ namespace Novel {
 
 
 
-        async function justIgnoreTheFairy() {
+        async function justIgnoreTheFairy(): Promise<void> {
             await ƒS.Speech.tell(character.narrator, "Angrif!!!!!!");
             dataForSave.givenEnding = "0";
-            return "Ende";
+            //return "Ende";
         }
 
 
 
         async function takeALookInTheInventory() {
-            await ƒS.Speech.tell(character.narrator, "What ya gonna do?");
+            await ƒS.Speech.tell(character.narrator, "test?");
         
             let dialogHowToDealWithDragons = await ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
             switch (dialogHowToDealWithDragons) {

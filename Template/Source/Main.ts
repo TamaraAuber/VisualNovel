@@ -35,7 +35,7 @@ namespace Novel {
     },
     gasthausHauptraum: {
       name: "gasthausHauptraum",
-      background: "Images/Locations/TestLocation2.png"
+      background: "Images/Tavern/Tavern_Entrance1.png"
     },
     gasthausBar: {
       name: "gasthausBar",
@@ -210,11 +210,11 @@ namespace Novel {
 
     let scenes: ƒS.Scenes = [
       //{ scene: Prolog, name: "Prolog" },
-      //{ scene: Gasthaus, name: "Gasthaus" },
+      { scene: Gasthaus, name: "Gasthaus" },
       //{ scene: Laden, name: "Laden"},
       //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
-      { scene: Drachenhort, name: "Drachenhort"},
-      { scene: Ende, name: "Ende"}
+      //{ scene: Drachenhort, name: "Drachenhort"},
+      //{ scene: Ende, name: "Ende"}
       
     ];
 

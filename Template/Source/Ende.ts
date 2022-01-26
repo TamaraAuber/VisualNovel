@@ -3,7 +3,7 @@ namespace Novel {
         console.log("This is the End");
 
 
-        switch (dataForSave.givenEnding) {
+        /*switch (dataForSave.givenEnding) {
             case "0": 
             console.log("End 0");
                 break;
@@ -11,7 +11,9 @@ namespace Novel {
                 break;
             case "2": 
                 break;
-        }
+        }*/
+
+        await ƒS.Speech.tell(character.narrator, "What ya gonna do?");
 
 
 
