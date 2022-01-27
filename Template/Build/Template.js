@@ -45,47 +45,27 @@ var Novel;
         await Novel.ƒS.Speech.tell(Novel.character.fairy, "Möchtest du in dein Inventar schauen?");
         let dialogRatschlagBefolgen = await Novel.ƒS.Menu.getInput(ratschlagBefolgen, "DialogBoxRatschlagBefolgen");
         switch (dialogRatschlagBefolgen) {
-            case ratschlagBefolgen.iChooseYes:
-                takeALookInTheInventory();
-                break;
             case ratschlagBefolgen.iCHooseNo:
-                justIgnoreTheFairy();
-                break;
-        }
-        async function justIgnoreTheFairy() {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Angrif!!!!!!");
-            Novel.dataForSave.givenEnding = "0";
-            //return "Ende";
-        }
-        async function takeALookInTheInventory() {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "test?");
-            let dialogHowToDealWithDragons = await Novel.ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
-            switch (dialogHowToDealWithDragons) {
-                case howToDealWithDragons.iChooseStaff:
-                    fightDragonWithStaff();
-                    break;
-                case howToDealWithDragons.iChooseCloak:
-                    presentTheCloak();
-                    break;
-                case howToDealWithDragons.iChooseSword:
-                    fightDragonWithSword();
-                    break;
-                case howToDealWithDragons.iChooseStone:
-                    presentTheStone();
-                    break;
-            }
-        }
-        async function fightDragonWithStaff() {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff Attack!");
-        }
-        async function presentTheCloak() {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Here's my cloak :)");
-        }
-        async function fightDragonWithSword() {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "My sword will kill you!");
-        }
-        async function presentTheStone() {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "I give you my stone :)");
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Angrif!!!!!!");
+                Novel.dataForSave.givenEnding = "0";
+                return "Ende";
+            case ratschlagBefolgen.iChooseYes:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Was möchtest du tun?");
+                let dialogHowToDealWithDragons = await Novel.ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
+                switch (dialogHowToDealWithDragons) {
+                    case howToDealWithDragons.iChooseStaff:
+                        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff Attack!");
+                        break;
+                    case howToDealWithDragons.iChooseCloak:
+                        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Here's my cloak :)");
+                        break;
+                    case howToDealWithDragons.iChooseSword:
+                        await Novel.ƒS.Speech.tell(Novel.character.narrator, "My sword will kill you!");
+                        break;
+                    case howToDealWithDragons.iChooseStone:
+                        await Novel.ƒS.Speech.tell(Novel.character.narrator, "I give you my stone :)");
+                        break;
+                }
         }
     }
     Novel.Drachenhort = Drachenhort;
@@ -122,9 +102,23 @@ var Novel;
                 D000: "Willkommen im Gasthaus"
             }
         };
+        let helfenOderTrinkenRoundOne = {
+            iChooseHelp: "Ich werde euch helfen",
+            iChooseDrink: "Ich hätte gerne einen Krug Met"
+        };
+        let helfenOderTrinkenRoundTwo = {
+            iChooseHelp: "Vielleicht sollte ich euch doch helfen",
+            iChooseDrink: "Noch ein Krug Met bitte!"
+        };
+        let helfenOderTrinkenRoundThree = {
+            iChooseHelp: "Ich helfe euch!",
+            iChooseDrink: "Mehr Meeeeeeeet!!!"
+        };
+        //Eintritt Gasthaus
         await Novel.ƒS.Location.show(Novel.location.gasthausHauptraum);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
+        //Am Bartresen
         await Novel.ƒS.Location.show(Novel.location.gasthausBar);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Character.show(Novel.roomInventory.gasthausBarCounter, Novel.roomInventory.gasthausBarCounter.pose.standard, Novel.ƒS.positionPercent(50, 100));
@@ -133,11 +127,86 @@ var Novel;
         await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.standard, Novel.ƒS.positionPercent(30, 96.5));
         await Novel.ƒS.update(1);
         await Novel.ƒS.Speech.tell(Novel.character.dwarf, text.dwarf.D000);
+        let dialogHelfenOderTrinken1 = await Novel.ƒS.Menu.getInput(helfenOderTrinkenRoundOne, "DialogBoxHelfenOderTrinken");
+        switch (dialogHelfenOderTrinken1) {
+            case helfenOderTrinkenRoundOne.iChooseHelp:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du beschließt zu helfen");
+                await Novel.ƒS.Character.hide(Novel.character.dwarf);
+                await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.thinking, Novel.ƒS.positionPercent(30, 96.5));
+                await Novel.ƒS.update(1);
+                await Novel.ƒS.Speech.tell(Novel.character.dwarf, "gehe zu Ruby. Sie kann dir sagen wo der Drache ist");
+                await Novel.ƒS.Character.hide(Novel.character.dwarf);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du übernachtest und gehst am nächsten morgen zu Ruby");
+                await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
+                return "Laden";
+            case helfenOderTrinkenRoundOne.iChooseDrink:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du bestellst ein Krug Met");
+                await Novel.ƒS.Character.show(Novel.roomInventory.metKrug, Novel.roomInventory.metKrug.pose.standard, Novel.ƒS.positionPercent(50, 83));
+                //Krug auf Theke stellen
+                await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
+                await Novel.ƒS.Character.show(Novel.roomInventory.gasthausBarCounter, Novel.roomInventory.gasthausBarCounter.pose.standard, Novel.ƒS.positionPercent(50, 100));
+                await Novel.ƒS.Character.hide(Novel.character.dwarf);
+                await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.standard, Novel.ƒS.positionPercent(30, 96.5));
+                await Novel.ƒS.update();
+                //
+                break;
+        }
+        await Novel.ƒS.Speech.tell(Novel.character.dwarf, "genieße es. Bald sind meine Vorräte leer.");
+        let dialogHelfenOderTrinken2 = await Novel.ƒS.Menu.getInput(helfenOderTrinkenRoundTwo, "DialogBoxHelfenOderTrinken");
+        switch (dialogHelfenOderTrinken2) {
+            case helfenOderTrinkenRoundTwo.iChooseHelp:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du beschließt zu helfen");
+                await Novel.ƒS.Character.hide(Novel.character.dwarf);
+                await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.thinking, Novel.ƒS.positionPercent(30, 96.5));
+                await Novel.ƒS.update(1);
+                await Novel.ƒS.Speech.tell(Novel.character.dwarf, "gehe zu Ruby. Sie kann dir sagen wo der Drache ist");
+                await Novel.ƒS.Character.hide(Novel.character.dwarf);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du übernachtest und gehst am nächsten morgen zu Ruby");
+                await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug);
+                await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
+                return "Laden";
+            case helfenOderTrinkenRoundTwo.iChooseDrink:
+                await Novel.ƒS.Character.animate(Novel.roomInventory.metKrug, Novel.roomInventory.metKrug.pose.standard, Novel.fromLeftToRight(50, 83, 70, 83));
+                await Novel.ƒS.Character.show(Novel.roomInventory.metKrug2, Novel.roomInventory.metKrug2.pose.standard, Novel.ƒS.positionPercent(50, 83));
+                //Krug auf Theke stellen
+                await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
+                await Novel.ƒS.Character.show(Novel.roomInventory.gasthausBarCounter, Novel.roomInventory.gasthausBarCounter.pose.standard, Novel.ƒS.positionPercent(50, 100));
+                await Novel.ƒS.Character.hide(Novel.character.dwarf);
+                await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.standard, Novel.ƒS.positionPercent(30, 96.5));
+                await Novel.ƒS.update();
+                //
+                break;
+        }
+        await Novel.ƒS.Speech.tell(Novel.character.dwarf, "Du trinkst aber ganz schön viel");
+        let dialogHelfenOderTrinken3 = await Novel.ƒS.Menu.getInput(helfenOderTrinkenRoundThree, "DialogBoxHelfenOderTrinken");
+        switch (dialogHelfenOderTrinken3) {
+            case helfenOderTrinkenRoundThree.iChooseHelp:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du beschließt zu helfen");
+                await Novel.ƒS.Character.hide(Novel.character.dwarf);
+                await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.thinking, Novel.ƒS.positionPercent(30, 96.5));
+                await Novel.ƒS.update(1);
+                await Novel.ƒS.Speech.tell(Novel.character.dwarf, "gehe zu Ruby. Sie kann dir sagen wo der Drache ist");
+                await Novel.ƒS.Character.hide(Novel.character.dwarf);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du übernachtest und gehst am nächsten morgen zu Ruby");
+                await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug);
+                await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
+                return "Laden";
+            case helfenOderTrinkenRoundThree.iChooseDrink:
+                await Novel.ƒS.Character.animate(Novel.roomInventory.metKrug2, Novel.roomInventory.metKrug2.pose.standard, Novel.fromLeftToRight(50, 83, 60, 83));
+                await Novel.ƒS.Character.show(Novel.roomInventory.metKrug3, Novel.roomInventory.metKrug3.pose.standard, Novel.ƒS.positionPercent(50, 83));
+                //Krug auf Theke stellen
+                await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
+                await Novel.ƒS.Character.show(Novel.roomInventory.gasthausBarCounter, Novel.roomInventory.gasthausBarCounter.pose.standard, Novel.ƒS.positionPercent(50, 100));
+                await Novel.ƒS.Character.hide(Novel.character.dwarf);
+                await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.standard, Novel.ƒS.positionPercent(30, 96.5));
+                await Novel.ƒS.update();
+                //
+                break;
+        }
         await Novel.ƒS.Character.hide(Novel.character.dwarf);
-        await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.thinking, Novel.ƒS.positionPercent(30, 96.5));
-        await Novel.ƒS.update(1);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
-        await Novel.ƒS.Character.hide(Novel.character.dwarf);
+        await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug);
+        await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug2);
+        await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug3);
         await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N003);
     }
@@ -261,6 +330,27 @@ var Novel;
             pose: {
                 standard: "Images/DragonCave/DragonCave_Sunlight1.png"
             }
+        },
+        metKrug: {
+            name: "MetKrug",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Items/Item_MeadMug1.png"
+            }
+        },
+        metKrug2: {
+            name: "MetKrug2",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Items/Item_MeadMug2.png"
+            }
+        },
+        metKrug3: {
+            name: "MetKrug3",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Items/Item_MeadMug3.png"
+            }
         }
     };
     Novel.character = {
@@ -360,6 +450,15 @@ var Novel;
                 }
         }
     }
+    function fromLeftToRight(startX, startY, endX, endY) {
+        return {
+            start: { translation: Novel.ƒS.positionPercent(startX, startY) },
+            end: { translation: Novel.ƒS.positionPercent(endX, endY) },
+            duration: 2,
+            playmode: Novel.ƒS.ANIMATION_PLAYMODE.PLAYONCE
+        };
+    }
+    Novel.fromLeftToRight = fromLeftToRight;
     window.addEventListener("load", start);
     function start(_event) {
         //Menü
@@ -367,10 +466,10 @@ var Novel;
         let scenes = [
             //{ scene: Prolog, name: "Prolog" },
             { scene: Novel.Gasthaus, name: "Gasthaus" },
-            //{ scene: Laden, name: "Laden"},
+            { id: "Laden", scene: Novel.Laden, name: "Laden" },
             //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
             //{ scene: Drachenhort, name: "Drachenhort"},
-            //{ scene: Ende, name: "Ende"}
+            //{id: "End", scene: Ende, name: "Ende"}
         ];
         let uiElement = document.querySelector("[type=interface]");
         Novel.dataForSave = Novel.ƒS.Progress.setData(Novel.dataForSave, uiElement);

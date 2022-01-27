@@ -97,6 +97,27 @@ declare namespace Novel {
                 standard: string;
             };
         };
+        metKrug: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
+        metKrug2: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
+        metKrug3: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
     };
     let character: {
         narrator: {
@@ -141,6 +162,7 @@ declare namespace Novel {
         nameProtagonist: string;
         givenEnding: string;
     };
+    function fromLeftToRight(startX: number, startY: number, endX: number, endY: number): ƒS.AnimationDefinition;
 }
 declare namespace Novel {
     function Prolog(): ƒS.SceneReturn;

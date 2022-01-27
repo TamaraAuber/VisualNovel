@@ -91,6 +91,27 @@ namespace Novel {
       pose: {
         standard: "Images/DragonCave/DragonCave_Sunlight1.png"
       }
+    },
+    metKrug: {
+      name: "MetKrug",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Items/Item_MeadMug1.png"
+      }
+    },
+    metKrug2: {
+      name: "MetKrug2",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Items/Item_MeadMug2.png"
+      }
+    },
+    metKrug3: {
+      name: "MetKrug3",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Items/Item_MeadMug3.png"
+      }
     }
   }
 
@@ -202,6 +223,16 @@ namespace Novel {
   }
 
 
+  export function fromLeftToRight(startX: number, startY: number, endX: number, endY: number): ƒS.AnimationDefinition {
+    return {
+      start: { translation: ƒS.positionPercent(startX, startY) },
+      end: { translation: ƒS.positionPercent(endX, endY) },
+      duration: 2,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+    };
+  }
+
+
 
   window.addEventListener("load", start);
   function start(_event: Event): void {
@@ -211,11 +242,10 @@ namespace Novel {
     let scenes: ƒS.Scenes = [
       //{ scene: Prolog, name: "Prolog" },
       { scene: Gasthaus, name: "Gasthaus" },
-      //{ scene: Laden, name: "Laden"},
+      {id: "Laden", scene: Laden, name: "Laden"},
       //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
       //{ scene: Drachenhort, name: "Drachenhort"},
-      //{ scene: Ende, name: "Ende"}
-      
+      //{id: "End", scene: Ende, name: "Ende"}
     ];
 
 

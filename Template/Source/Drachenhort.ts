@@ -59,62 +59,32 @@ namespace Novel {
         await ƒS.Speech.tell(character.fairy, "Möchtest du in dein Inventar schauen?");
 
         let dialogRatschlagBefolgen = await ƒS.Menu.getInput(ratschlagBefolgen, "DialogBoxRatschlagBefolgen");
-        switch (dialogRatschlagBefolgen) {
-            case ratschlagBefolgen.iChooseYes:
-                takeALookInTheInventory();
-                break;
+        switch (dialogRatschlagBefolgen) {       
             case ratschlagBefolgen.iCHooseNo:
-                justIgnoreTheFairy();
-                break;
-        }
-
-
-
-        async function justIgnoreTheFairy(): Promise<void> {
-            await ƒS.Speech.tell(character.narrator, "Angrif!!!!!!");
-            dataForSave.givenEnding = "0";
-            //return "Ende";
-        }
-
-
-
-        async function takeALookInTheInventory() {
-            await ƒS.Speech.tell(character.narrator, "test?");
+                await ƒS.Speech.tell(character.narrator, "Angrif!!!!!!");
+                dataForSave.givenEnding = "0";
+                return "Ende";    
+            case ratschlagBefolgen.iChooseYes:
+                await ƒS.Speech.tell(character.narrator, "Was möchtest du tun?");
         
-            let dialogHowToDealWithDragons = await ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
-            switch (dialogHowToDealWithDragons) {
-                case howToDealWithDragons.iChooseStaff:
-                    fightDragonWithStaff();
-                    break;
-                case howToDealWithDragons.iChooseCloak:
-                    presentTheCloak();
-                    break;
-                case howToDealWithDragons.iChooseSword:
-                    fightDragonWithSword();
-                    break;
-                case howToDealWithDragons.iChooseStone:
-                    presentTheStone();
-                    break;
+                let dialogHowToDealWithDragons = await ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
+                    switch (dialogHowToDealWithDragons) {
+                        case howToDealWithDragons.iChooseStaff:
+                            await ƒS.Speech.tell(character.narrator, "Staff Attack!");
+                            break;
+                        case howToDealWithDragons.iChooseCloak:
+                            await ƒS.Speech.tell(character.narrator, "Here's my cloak :)");
+                            break;
+                        case howToDealWithDragons.iChooseSword:
+                            await ƒS.Speech.tell(character.narrator, "My sword will kill you!");
+                            break;
+                        case howToDealWithDragons.iChooseStone:
+                            await ƒS.Speech.tell(character.narrator, "I give you my stone :)");
+                            break;
             }
         }
 
-        async function fightDragonWithStaff() {
-            await ƒS.Speech.tell(character.narrator, "Staff Attack!");
-        }
-
-        async function presentTheCloak() {
-            await ƒS.Speech.tell(character.narrator, "Here's my cloak :)");
-        }
-
-        async function fightDragonWithSword() {
-            await ƒS.Speech.tell(character.narrator, "My sword will kill you!");
-        }
-
-        async function presentTheStone() {
-            await ƒS.Speech.tell(character.narrator, "I give you my stone :)");
-        }
-
-      
+    
 
 
     }
