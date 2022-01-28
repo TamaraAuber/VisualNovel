@@ -160,8 +160,13 @@ declare namespace Novel {
     };
     let dataForSave: {
         nameProtagonist: string;
+        drunknessLevel: number;
+        neededLongSleep: number;
         givenEnding: string;
     };
+    function addDrunknessLevel(): void;
+    function removeDrunknessLevel(): void;
+    function SetDrunknessSight(): void;
     function fromLeftToRight(startX: number, startY: number, endX: number, endY: number): ƒS.AnimationDefinition;
 }
 declare namespace Novel {

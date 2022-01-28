@@ -163,6 +163,8 @@ namespace Novel {
 
   export let dataForSave = {
     nameProtagonist: "",
+    drunknessLevel: 0,
+    neededLongSleep: 0,   //0 Player wakes up early; 1 Player slept until afternoon
     givenEnding: ""
   }
 
@@ -222,6 +224,43 @@ namespace Novel {
     }
   }
 
+  export function addDrunknessLevel() {
+    console.log("Old DrunknessLevel " + dataForSave.drunknessLevel);
+    dataForSave.drunknessLevel = dataForSave.drunknessLevel + 1;
+    console.log("New DrunknessLevel " + dataForSave.drunknessLevel);
+    SetDrunknessSight();
+
+    if (dataForSave.drunknessLevel == 3) {
+      dataForSave.neededLongSleep = 1;
+    }
+    console.log("did Player need long sleep? " + dataForSave.neededLongSleep);
+  }
+
+  export function removeDrunknessLevel() {
+    console.log("Old DrunknessLevel " + dataForSave.drunknessLevel);
+    dataForSave.drunknessLevel = 0;
+    console.log("New DrunknessLevel " + dataForSave.drunknessLevel);
+    SetDrunknessSight();
+  }
+
+  export function SetDrunknessSight() {
+    switch(dataForSave.drunknessLevel) {
+      case 0:
+        document.getElementById("drunknessSight").setAttribute("style", "background-image: none;");
+        break;
+      case 1: 
+      document.getElementById("drunknessSight").setAttribute("style", "background-image: url('Images/Filter/Filter_Night1.png');");
+        break;
+      case 2:
+        document.getElementById("drunknessSight").setAttribute("style", "background-image: url('Images/Filter/Filter_Night1.png');");
+        break;
+    }
+  }
+
+
+
+
+//------Animations------
 
   export function fromLeftToRight(startX: number, startY: number, endX: number, endY: number): ƒS.AnimationDefinition {
     return {
@@ -232,7 +271,7 @@ namespace Novel {
     };
   }
 
-
+//----------------------
 
   window.addEventListener("load", start);
   function start(_event: Event): void {

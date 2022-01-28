@@ -149,6 +149,7 @@ var Novel;
                 await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.standard, Novel.ƒS.positionPercent(30, 96.5));
                 await Novel.ƒS.update();
                 //
+                Novel.addDrunknessLevel();
                 break;
         }
         await Novel.ƒS.Speech.tell(Novel.character.dwarf, "genieße es. Bald sind meine Vorräte leer.");
@@ -175,6 +176,7 @@ var Novel;
                 await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.standard, Novel.ƒS.positionPercent(30, 96.5));
                 await Novel.ƒS.update();
                 //
+                Novel.addDrunknessLevel();
                 break;
         }
         await Novel.ƒS.Speech.tell(Novel.character.dwarf, "Du trinkst aber ganz schön viel");
@@ -189,6 +191,7 @@ var Novel;
                 await Novel.ƒS.Character.hide(Novel.character.dwarf);
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du übernachtest und gehst am nächsten morgen zu Ruby");
                 await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug);
+                await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug2);
                 await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
                 return "Laden";
             case helfenOderTrinkenRoundThree.iChooseDrink:
@@ -201,14 +204,21 @@ var Novel;
                 await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.standard, Novel.ƒS.positionPercent(30, 96.5));
                 await Novel.ƒS.update();
                 //
+                Novel.addDrunknessLevel();
                 break;
         }
+        await Novel.ƒS.Speech.tell(Novel.character.dwarf, "Meine Vorräte sind aufgebraucht. Ich habe keinen Met mehr!");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du beschließt dich zu helfen");
         await Novel.ƒS.Character.hide(Novel.character.dwarf);
+        await Novel.ƒS.Character.show(Novel.character.dwarf, Novel.character.dwarf.pose.thinking, Novel.ƒS.positionPercent(30, 96.5));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.dwarf, "gehe zu Ruby. Sie kann dir sagen wo der Drache ist");
+        await Novel.ƒS.Character.hide(Novel.character.dwarf);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du übernachtest und möchtest am nächsten morgen zu Ruby");
         await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug);
         await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug2);
         await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug3);
         await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N003);
     }
     Novel.Gasthaus = Gasthaus;
 })(Novel || (Novel = {}));
@@ -225,11 +235,23 @@ var Novel;
                 T000: "Willkommen in meinem Laden"
             }
         };
+        let presentsMorning = {
+            iChooseCloak: "Umhang",
+            iChooseStaff: "Kampfstab",
+            iChooseSword: "Schwert"
+        };
+        let presentsNoon = {
+            iChooseCloak: "Umhang",
+            iChooseStaff: "Kampfstab"
+        };
+        Novel.removeDrunknessLevel();
+        //Laden betreten
         await Novel.ƒS.Location.show(Novel.location.laden);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
         await Novel.ƒS.Character.show(Novel.roomInventory.ladenTheke, Novel.roomInventory.ladenTheke.pose.standard, Novel.ƒS.positionPercent(50, 100));
         await Novel.ƒS.update(1);
+        //mit Ruby reden
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
         await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 95));
         await Novel.ƒS.update(1);
@@ -238,6 +260,27 @@ var Novel;
         await Novel.ƒS.update();
         await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.thinking, Novel.ƒS.positionPercent(35, 95));
         await Novel.ƒS.update(1);
+        //Ruby bietet Geschenk an
+        if (Novel.dataForSave.neededLongSleep === 0) {
+            let dialogPresentMorning = await Novel.ƒS.Menu.getInput(presentsMorning, "DialogBoxPresents");
+            switch (dialogPresentMorning) {
+                case presentsMorning.iChooseCloak:
+                    break;
+                case presentsMorning.iChooseStaff:
+                    break;
+                case presentsMorning.iChooseSword:
+                    break;
+            }
+        }
+        else {
+            let dialogPresentNoon = await Novel.ƒS.Menu.getInput(presentsNoon, "DialogBoxPresents");
+            switch (dialogPresentNoon) {
+                case presentsNoon.iChooseCloak:
+                    break;
+                case presentsNoon.iChooseStaff:
+                    break;
+            }
+        }
     }
     Novel.Laden = Laden;
 })(Novel || (Novel = {}));
@@ -396,6 +439,8 @@ var Novel;
     //ToDO:sound
     Novel.dataForSave = {
         nameProtagonist: "",
+        drunknessLevel: 0,
+        neededLongSleep: 0,
         givenEnding: ""
     };
     //Menü
@@ -450,6 +495,39 @@ var Novel;
                 }
         }
     }
+    function addDrunknessLevel() {
+        console.log("Old DrunknessLevel " + Novel.dataForSave.drunknessLevel);
+        Novel.dataForSave.drunknessLevel = Novel.dataForSave.drunknessLevel + 1;
+        console.log("New DrunknessLevel " + Novel.dataForSave.drunknessLevel);
+        SetDrunknessSight();
+        if (Novel.dataForSave.drunknessLevel == 3) {
+            Novel.dataForSave.neededLongSleep = 1;
+        }
+        console.log("did Player need long sleep? " + Novel.dataForSave.neededLongSleep);
+    }
+    Novel.addDrunknessLevel = addDrunknessLevel;
+    function removeDrunknessLevel() {
+        console.log("Old DrunknessLevel " + Novel.dataForSave.drunknessLevel);
+        Novel.dataForSave.drunknessLevel = 0;
+        console.log("New DrunknessLevel " + Novel.dataForSave.drunknessLevel);
+        SetDrunknessSight();
+    }
+    Novel.removeDrunknessLevel = removeDrunknessLevel;
+    function SetDrunknessSight() {
+        switch (Novel.dataForSave.drunknessLevel) {
+            case 0:
+                document.getElementById("drunknessSight").setAttribute("style", "background-image: none;");
+                break;
+            case 1:
+                document.getElementById("drunknessSight").setAttribute("style", "background-image: url('Images/Filter/Filter_Night1.png');");
+                break;
+            case 2:
+                document.getElementById("drunknessSight").setAttribute("style", "background-image: url('Images/Filter/Filter_Night1.png');");
+                break;
+        }
+    }
+    Novel.SetDrunknessSight = SetDrunknessSight;
+    //------Animations------
     function fromLeftToRight(startX, startY, endX, endY) {
         return {
             start: { translation: Novel.ƒS.positionPercent(startX, startY) },
@@ -459,6 +537,7 @@ var Novel;
         };
     }
     Novel.fromLeftToRight = fromLeftToRight;
+    //----------------------
     window.addEventListener("load", start);
     function start(_event) {
         //Menü

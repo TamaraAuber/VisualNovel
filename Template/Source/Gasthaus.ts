@@ -30,6 +30,7 @@ namespace Novel {
             iChooseDrink: "Mehr Meeeeeeeet!!!"
         };
 
+
         //Eintritt Gasthaus
         await ƒS.Location.show(location.gasthausHauptraum);
         await ƒS.update(transition.transitionOne.duration, transition.transitionOne.alpha, transition.transitionOne.edge);
@@ -75,6 +76,7 @@ namespace Novel {
                 await ƒS.update();
                 //
 
+                addDrunknessLevel();
                 break;
         }
 
@@ -93,7 +95,7 @@ namespace Novel {
                 await ƒS.Speech.tell(character.narrator, "Du übernachtest und gehst am nächsten morgen zu Ruby");
                 await ƒS.Character.hide(roomInventory.metKrug);
                 await ƒS.Character.hide(roomInventory.gasthausBarCounter);
-
+                
                 return "Laden";
             case helfenOderTrinkenRoundTwo.iChooseDrink:
                 await ƒS.Character.animate(roomInventory.metKrug, roomInventory.metKrug.pose.standard, fromLeftToRight(50, 83, 70, 83));
@@ -106,6 +108,8 @@ namespace Novel {
                 await ƒS.Character.show(character.dwarf, character.dwarf.pose.standard, ƒS.positionPercent(30, 96.5));
                 await ƒS.update();
                 //
+
+                addDrunknessLevel();
                 break;
         }
 
@@ -121,6 +125,7 @@ namespace Novel {
                 await ƒS.Character.hide(character.dwarf);
                 await ƒS.Speech.tell(character.narrator, "Du übernachtest und gehst am nächsten morgen zu Ruby");
                 await ƒS.Character.hide(roomInventory.metKrug);
+                await ƒS.Character.hide(roomInventory.metKrug2);
                 await ƒS.Character.hide(roomInventory.gasthausBarCounter);
 
                 return "Laden";
@@ -135,21 +140,25 @@ namespace Novel {
                 await ƒS.Character.show(character.dwarf, character.dwarf.pose.standard, ƒS.positionPercent(30, 96.5));
                 await ƒS.update();
                 //
+
+                addDrunknessLevel();
                 break;
         }
 
-
-
         
-
-
+        await ƒS.Speech.tell(character.dwarf, "Meine Vorräte sind aufgebraucht. Ich habe keinen Met mehr!");
+        await ƒS.Speech.tell(character.narrator, "Du beschließt dich zu helfen");
 
         await ƒS.Character.hide(character.dwarf);
+        await ƒS.Character.show(character.dwarf, character.dwarf.pose.thinking, ƒS.positionPercent(30, 96.5));
+        await ƒS.update(1);
+        await ƒS.Speech.tell(character.dwarf, "gehe zu Ruby. Sie kann dir sagen wo der Drache ist");
+        await ƒS.Character.hide(character.dwarf);
+        await ƒS.Speech.tell(character.narrator, "Du übernachtest und möchtest am nächsten morgen zu Ruby");
         await ƒS.Character.hide(roomInventory.metKrug);
         await ƒS.Character.hide(roomInventory.metKrug2);
         await ƒS.Character.hide(roomInventory.metKrug3);
         await ƒS.Character.hide(roomInventory.gasthausBarCounter);
-        await ƒS.Speech.tell(character.narrator, text.narrator.N003);
 
 
     }

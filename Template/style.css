@@ -16,6 +16,14 @@ canvas {
   width: 100%;
 }
 
+#drunknessSight {
+  width: 99%;
+  height: 99%;
+  position: absolute;
+  top: 0px;
+  z-index: 10;
+}
+
 .gameMenu{
   position: absolute;
   margin-top: 0px;
