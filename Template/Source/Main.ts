@@ -244,15 +244,20 @@ namespace Novel {
   }
 
   export function SetDrunknessSight() {
+
+    //andere Bilder + andere Größe bei den Bildern
     switch(dataForSave.drunknessLevel) {
       case 0:
         document.getElementById("drunknessSight").setAttribute("style", "background-image: none;");
         break;
       case 1: 
-      document.getElementById("drunknessSight").setAttribute("style", "background-image: url('Images/Filter/Filter_Night1.png');");
+      document.getElementById("drunknessSight").setAttribute("style", "background-image: url('Images/Filter/DrunknessFilter1.png');");
         break;
       case 2:
-        document.getElementById("drunknessSight").setAttribute("style", "background-image: url('Images/Filter/Filter_Night1.png');");
+        document.getElementById("drunknessSight").setAttribute("style", "background-image: url('Images/Filter/DrunknessFilter2.png');");
+        break;
+      case 3:
+        document.getElementById("drunknessSight").setAttribute("style", "background-image: url('Images/Filter/DrunknessFilter3.png');");
         break;
     }
   }
