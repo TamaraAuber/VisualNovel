@@ -256,19 +256,21 @@ var Novel;
         await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 95));
         await Novel.ƒS.update(1);
         await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T000);
-        await Novel.ƒS.Character.hide(Novel.character.tiefling);
-        await Novel.ƒS.update();
-        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.thinking, Novel.ƒS.positionPercent(35, 95));
-        await Novel.ƒS.update(1);
         //Ruby bietet Geschenk an
         if (Novel.dataForSave.neededLongSleep === 0) {
             let dialogPresentMorning = await Novel.ƒS.Menu.getInput(presentsMorning, "DialogBoxPresents");
             switch (dialogPresentMorning) {
                 case presentsMorning.iChooseCloak:
+                    Novel.ƒS.Inventory.add(Novel.items.cloak);
+                    await Novel.ƒS.Inventory.open();
                     break;
                 case presentsMorning.iChooseStaff:
+                    Novel.ƒS.Inventory.add(Novel.items.staff);
+                    await Novel.ƒS.Inventory.open();
                     break;
                 case presentsMorning.iChooseSword:
+                    Novel.ƒS.Inventory.add(Novel.items.sword);
+                    await Novel.ƒS.Inventory.open();
                     break;
             }
         }
@@ -281,6 +283,18 @@ var Novel;
                     break;
             }
         }
+        //Ruby erklärt den Weg zum Drachen
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, "Der Drache lebt in den Bergen");
+        await Novel.ƒS.Character.hide(Novel.character.tiefling);
+        await Novel.ƒS.update();
+        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.thinking, Novel.ƒS.positionPercent(35, 95));
+        await Novel.ƒS.update(1);
+        //Protagonist macht sich auf den Weg
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du verabschiedest dich und gehst weiter");
+        await Novel.ƒS.Character.hide(Novel.character.tiefling);
+        await Novel.ƒS.update();
+        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 95));
+        await Novel.ƒS.update(1);
     }
     Novel.Laden = Laden;
 })(Novel || (Novel = {}));
@@ -335,6 +349,10 @@ var Novel;
         wald: {
             name: "wald",
             background: "Images/OnTheRoad/Forrest_Background1.png"
+        },
+        waldGespiegelt: {
+            name: "waldGespiegelt",
+            background: "Images/OnTheRoad/Forrest_Background_mirrored.png"
         },
         drachenHoehleGang: {
             name: "drachenhoehleGang",
@@ -433,10 +451,42 @@ var Novel;
                 grateful: "Images/Fairy/Fairy_P1.png",
                 afraid: "Images/Fairy/Fairy_P2.png"
             }
+        },
+        goblinGroup: {
+            name: "goblinGroup",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Goblin/Goblin_GoblinGroup1.png",
+                night: "",
+                sleeping: ""
+            }
+        },
+        goblinLeader: {
+            name: "goblinLeader",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Goblin/Goblin_Leader1.png"
+            }
         }
     };
-    //ToDO:item
     //ToDO:sound
+    Novel.items = {
+        cloak: {
+            name: "Umhang",
+            description: "Fancy Umhang",
+            image: "Images/Items/Item_Cloak1.png"
+        },
+        staff: {
+            name: "Stab",
+            description: "Staff Attack",
+            image: "Images/Items/Item_Staff1.png"
+        },
+        sword: {
+            name: "Schwert",
+            description: "Mighty Sword",
+            image: "Images/Items/Item_Sword1.png"
+        }
+    };
     Novel.dataForSave = {
         nameProtagonist: "",
         drunknessLevel: 0,
@@ -548,8 +598,9 @@ var Novel;
         gameMenu = Novel.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
             //{ scene: Prolog, name: "Prolog" },
-            { scene: Novel.Gasthaus, name: "Gasthaus" },
-            { id: "Laden", scene: Novel.Laden, name: "Laden" },
+            //{ scene: Gasthaus, name: "Gasthaus" },
+            //{id: "Laden", scene: Laden, name: "Laden"},
+            { scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
             //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
             //{ scene: Drachenhort, name: "Drachenhort"},
             //{id: "End", scene: Ende, name: "Ende"}
@@ -593,6 +644,45 @@ var Novel;
 (function (Novel) {
     async function Unterwegs1Goblins() {
         console.log("Szene: Unterwegs1Goblins");
+        let text = {
+            narrator: {
+                N000: "Du machst dich auf den Weg zu den Bergen",
+                N001: ""
+            }
+        };
+        let howToTalkWithGoblins = {
+            iChooseTalk: "die Sache friedlich regeln",
+            iChooseFight: "Gegenangriff"
+        };
+        //Unterwegs -- Hilfeschreie aus der Ferne
+        await Novel.ƒS.Location.show(Novel.location.feld);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du willst nachsehen");
+        await Novel.ƒS.Location.show(Novel.location.wald);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Character.show(Novel.roomInventory.waldBaeume, Novel.roomInventory.waldBaeume.pose.standard, Novel.ƒS.positionPercent(50, 100));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Im Wald entdeckst du eine Gruppe Goblins");
+        await Novel.ƒS.Character.show(Novel.character.goblinGroup, Novel.character.goblinGroup.pose.standard, Novel.ƒS.positionPercent(65, 65));
+        await Novel.ƒS.update(1);
+        //Protagonist wird von Goblins entdeckt
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du hörst ein Geräusch hinter dir, drehst dich um, entdeckst weiteren Goblin");
+        await Novel.ƒS.Character.hide(Novel.character.goblinGroup);
+        await Novel.ƒS.update();
+        await Novel.ƒS.Character.hide(Novel.roomInventory.waldBaeume);
+        await Novel.ƒS.update();
+        await Novel.ƒS.Location.show(Novel.location.waldGespiegelt);
+        await Novel.ƒS.update(0.1, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Character.show(Novel.character.goblinLeader, Novel.character.goblinLeader.pose.standard, Novel.ƒS.positionPercent(60, 90));
+        await Novel.ƒS.update(1);
+        let dialogHowToTalkWithGoblins = await Novel.ƒS.Menu.getInput(howToTalkWithGoblins, "DialogBoxGoblins");
+        switch (dialogHowToTalkWithGoblins) {
+            case howToTalkWithGoblins.iChooseFight:
+                break;
+            case howToTalkWithGoblins.iChooseTalk:
+                break;
+        }
     }
     Novel.Unterwegs1Goblins = Unterwegs1Goblins;
 })(Novel || (Novel = {}));

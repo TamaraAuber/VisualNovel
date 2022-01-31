@@ -59,6 +59,10 @@ declare namespace Novel {
             name: string;
             background: string;
         };
+        waldGespiegelt: {
+            name: string;
+            background: string;
+        };
         drachenHoehleGang: {
             name: string;
             background: string;
@@ -156,6 +160,39 @@ declare namespace Novel {
                 grateful: string;
                 afraid: string;
             };
+        };
+        goblinGroup: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+                night: string;
+                sleeping: string;
+            };
+        };
+        goblinLeader: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
+    };
+    let items: {
+        cloak: {
+            name: string;
+            description: string;
+            image: string;
+        };
+        staff: {
+            name: string;
+            description: string;
+            image: string;
+        };
+        sword: {
+            name: string;
+            description: string;
+            image: string;
         };
     };
     let dataForSave: {

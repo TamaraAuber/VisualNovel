@@ -43,20 +43,22 @@ namespace Novel {
 
         await ƒS.Speech.tell(character.tiefling, text.tiefling.T000);
 
-        await ƒS.Character.hide(character.tiefling);
-        await ƒS.update();
-        await ƒS.Character.show(character.tiefling, character.tiefling.pose.thinking, ƒS.positionPercent(35, 95));
-        await ƒS.update(1);
 
         //Ruby bietet Geschenk an
         if (dataForSave.neededLongSleep === 0) {
             let dialogPresentMorning = await ƒS.Menu.getInput(presentsMorning, "DialogBoxPresents");
             switch (dialogPresentMorning) {
                 case presentsMorning.iChooseCloak:
+                    ƒS.Inventory.add(items.cloak);
+                    await ƒS.Inventory.open();
                     break;
                 case presentsMorning.iChooseStaff:
+                    ƒS.Inventory.add(items.staff);
+                    await ƒS.Inventory.open();
                     break;
                 case presentsMorning.iChooseSword:
+                    ƒS.Inventory.add(items.sword);
+                    await ƒS.Inventory.open();
                     break;
             }
         } else {
@@ -68,6 +70,22 @@ namespace Novel {
                     break;
             }
         }
+
+        //Ruby erklärt den Weg zum Drachen
+        await ƒS.Speech.tell(character.tiefling, "Der Drache lebt in den Bergen");
+
+        await ƒS.Character.hide(character.tiefling);
+        await ƒS.update();
+        await ƒS.Character.show(character.tiefling, character.tiefling.pose.thinking, ƒS.positionPercent(35, 95));
+        await ƒS.update(1);
+
+        //Protagonist macht sich auf den Weg
+        await ƒS.Speech.tell(character.narrator, "Du verabschiedest dich und gehst weiter");
+
+        await ƒS.Character.hide(character.tiefling);
+        await ƒS.update();
+        await ƒS.Character.show(character.tiefling, character.tiefling.pose.standard, ƒS.positionPercent(35, 95));
+        await ƒS.update(1);
 
     }
 }

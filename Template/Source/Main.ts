@@ -53,6 +53,10 @@ namespace Novel {
       name: "wald",
       background: "Images/OnTheRoad/Forrest_Background1.png"
     },
+    waldGespiegelt: {
+      name: "waldGespiegelt",
+      background: "Images/OnTheRoad/Forrest_Background_mirrored.png"
+    },
     drachenHoehleGang: {
       name: "drachenhoehleGang",
       background: "Images/DragonCave/DragonCave1.1.png"
@@ -152,13 +156,45 @@ namespace Novel {
         grateful: "Images/Fairy/Fairy_P1.png",
         afraid: "Images/Fairy/Fairy_P2.png"
       }
+    },
+    goblinGroup: {
+      name: "goblinGroup",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Goblin/Goblin_GoblinGroup1.png",
+        night: "",
+        sleeping: ""
+      }
+    },
+    goblinLeader: {
+      name: "goblinLeader",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Goblin/Goblin_Leader1.png"
+      }
     }
   }
 
 
-  //ToDO:item
-
   //ToDO:sound
+
+  export let items = {
+    cloak: {
+      name: "Umhang",
+      description: "Fancy Umhang",
+      image: "Images/Items/Item_Cloak1.png"
+    },
+    staff: {
+      name: "Stab",
+      description: "Staff Attack",
+      image: "Images/Items/Item_Staff1.png"
+    },
+    sword: {
+      name: "Schwert",
+      description: "Mighty Sword",
+      image: "Images/Items/Item_Sword1.png"
+    }
+  };
 
 
   export let dataForSave = {
@@ -285,8 +321,9 @@ namespace Novel {
 
     let scenes: ƒS.Scenes = [
       //{ scene: Prolog, name: "Prolog" },
-      { scene: Gasthaus, name: "Gasthaus" },
-      {id: "Laden", scene: Laden, name: "Laden"},
+      //{ scene: Gasthaus, name: "Gasthaus" },
+      //{id: "Laden", scene: Laden, name: "Laden"},
+      {scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
       //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
       //{ scene: Drachenhort, name: "Drachenhort"},
       //{id: "End", scene: Ende, name: "Ende"}
