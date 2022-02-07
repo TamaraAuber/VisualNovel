@@ -29,6 +29,11 @@ declare namespace Novel {
             alpha: string;
             edge: number;
         };
+        transitionKnockOut: {
+            duration: number;
+            alpha: string;
+            edge: number;
+        };
     };
     let location: {
         blackscreen: {
@@ -63,6 +68,10 @@ declare namespace Novel {
             name: string;
             background: string;
         };
+        waldUpsideDown: {
+            name: string;
+            background: string;
+        };
         drachenHoehleGang: {
             name: string;
             background: string;
@@ -88,6 +97,13 @@ declare namespace Novel {
             };
         };
         waldBaeume: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
+        filterNacht: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {
@@ -167,7 +183,9 @@ declare namespace Novel {
             pose: {
                 standard: string;
                 night: string;
-                sleeping: string;
+                nightUpsideDown: string;
+                sleepingNight: string;
+                sleepingNightUpsideDown: string;
             };
         };
         goblinLeader: {
@@ -214,6 +232,9 @@ declare namespace Novel {
 }
 declare namespace Novel {
     function Unterwegs1Goblins(): ƒS.SceneReturn;
+}
+declare namespace Novel {
+    function Unterwegs1GoblinsAttack(): ƒS.SceneReturn;
 }
 declare namespace Novel {
     function Unterwegs2Fee(): ƒS.SceneReturn;

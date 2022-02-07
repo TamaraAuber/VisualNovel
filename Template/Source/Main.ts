@@ -20,6 +20,11 @@ namespace Novel {
       duration: 1,
       alpha: "Transitions/02.png",
       edge: 1
+    },
+    transitionKnockOut: {
+      duration: 0.05,
+      alpha: "Transitions/01.png",
+      edge: 1
     }
   };
 
@@ -57,6 +62,10 @@ namespace Novel {
       name: "waldGespiegelt",
       background: "Images/OnTheRoad/Forrest_Background_mirrored.png"
     },
+    waldUpsideDown: {
+      name: "waldUpsideDown",
+      background: "Images/OnTheRoad/Forrest_Background_UpsideDown.png"
+    },
     drachenHoehleGang: {
       name: "drachenhoehleGang",
       background: "Images/DragonCave/DragonCave1.1.png"
@@ -87,6 +96,13 @@ namespace Novel {
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         standard: "Images/OnTheRoad/Forrest_Trees1.png"
+      }
+    },
+    filterNacht: {
+      name: "filterNacht",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Filter/Filter_Night1.png"
       }
     },
     sonnenstrahlen: {
@@ -162,8 +178,10 @@ namespace Novel {
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         standard: "Images/Goblin/Goblin_GoblinGroup1.png",
-        night: "",
-        sleeping: ""
+        night: "Images/Goblin/Goblin_GoblinGroup_Night1.png",
+        nightUpsideDown: "Images/Goblin/Goblin_GoblinGroup_Night_UpsideDown.png",
+        sleepingNight: "Images/Goblin/Goblin_GoblinGroupSleeping_Night1.png",
+        sleepingNightUpsideDown: "Images/Goblin/Goblin_GoblinGroupSleeping_Night_UpsideDown.png"
       }
     },
     goblinLeader: {
@@ -324,6 +342,7 @@ namespace Novel {
       //{ scene: Gasthaus, name: "Gasthaus" },
       //{id: "Laden", scene: Laden, name: "Laden"},
       {scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+      {id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
       //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
       //{ scene: Drachenhort, name: "Drachenhort"},
       //{id: "End", scene: Ende, name: "Ende"}

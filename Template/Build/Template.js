@@ -318,6 +318,11 @@ var Novel;
             duration: 1,
             alpha: "Transitions/02.png",
             edge: 1
+        },
+        transitionKnockOut: {
+            duration: 0.05,
+            alpha: "Transitions/01.png",
+            edge: 1
         }
     };
     Novel.location = {
@@ -354,6 +359,10 @@ var Novel;
             name: "waldGespiegelt",
             background: "Images/OnTheRoad/Forrest_Background_mirrored.png"
         },
+        waldUpsideDown: {
+            name: "waldUpsideDown",
+            background: "Images/OnTheRoad/Forrest_Background_UpsideDown.png"
+        },
         drachenHoehleGang: {
             name: "drachenhoehleGang",
             background: "Images/DragonCave/DragonCave1.1.png"
@@ -383,6 +392,13 @@ var Novel;
             origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
                 standard: "Images/OnTheRoad/Forrest_Trees1.png"
+            }
+        },
+        filterNacht: {
+            name: "filterNacht",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Filter/Filter_Night1.png"
             }
         },
         sonnenstrahlen: {
@@ -457,8 +473,10 @@ var Novel;
             origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
                 standard: "Images/Goblin/Goblin_GoblinGroup1.png",
-                night: "",
-                sleeping: ""
+                night: "Images/Goblin/Goblin_GoblinGroup_Night1.png",
+                nightUpsideDown: "Images/Goblin/Goblin_GoblinGroup_Night_UpsideDown.png",
+                sleepingNight: "Images/Goblin/Goblin_GoblinGroupSleeping_Night1.png",
+                sleepingNightUpsideDown: "Images/Goblin/Goblin_GoblinGroupSleeping_Night_UpsideDown.png"
             }
         },
         goblinLeader: {
@@ -601,6 +619,7 @@ var Novel;
             //{ scene: Gasthaus, name: "Gasthaus" },
             //{id: "Laden", scene: Laden, name: "Laden"},
             { scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
+            { id: "Unterwegs1GoblinsAttack", scene: Novel.Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack" },
             //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
             //{ scene: Drachenhort, name: "Drachenhort"},
             //{id: "End", scene: Ende, name: "Ende"}
@@ -646,13 +665,17 @@ var Novel;
         console.log("Szene: Unterwegs1Goblins");
         let text = {
             narrator: {
-                N000: "Du machst dich auf den Weg zu den Bergen",
+                N000: "Du machst dich auf den Weg zu den Bergen. Plötzlich hörst du ein Geräusch.",
                 N001: ""
             }
         };
         let howToTalkWithGoblins = {
             iChooseTalk: "die Sache friedlich regeln",
             iChooseFight: "Gegenangriff"
+        };
+        let sneakOrAttack = {
+            iChooseSneak: "leise und vorsichtig wegrennen",
+            iChooseAttack: "Angriff"
         };
         //Unterwegs -- Hilfeschreie aus der Ferne
         await Novel.ƒS.Location.show(Novel.location.feld);
@@ -669,22 +692,70 @@ var Novel;
         //Protagonist wird von Goblins entdeckt
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du hörst ein Geräusch hinter dir, drehst dich um, entdeckst weiteren Goblin");
         await Novel.ƒS.Character.hide(Novel.character.goblinGroup);
-        await Novel.ƒS.update();
         await Novel.ƒS.Character.hide(Novel.roomInventory.waldBaeume);
         await Novel.ƒS.update();
         await Novel.ƒS.Location.show(Novel.location.waldGespiegelt);
         await Novel.ƒS.update(0.1, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Character.show(Novel.character.goblinLeader, Novel.character.goblinLeader.pose.standard, Novel.ƒS.positionPercent(60, 90));
         await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Er scheint wütend, macht sich bereit dich anzugreifen");
         let dialogHowToTalkWithGoblins = await Novel.ƒS.Menu.getInput(howToTalkWithGoblins, "DialogBoxGoblins");
         switch (dialogHowToTalkWithGoblins) {
             case howToTalkWithGoblins.iChooseFight:
-                break;
+                return "Unterwegs1GoblinsAttack";
             case howToTalkWithGoblins.iChooseTalk:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Sie scheinen nicht an einer friedlichen Lösung interessiert zu sein");
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du wirst von den Goblins überwältigt");
+                //Protagonist wird von den Goblins überwältigt und gefesselt
+                await Novel.ƒS.Character.hide(Novel.character.goblinLeader);
+                await Novel.ƒS.Location.show(Novel.location.blackscreen);
+                await Novel.ƒS.update(Novel.transition.transitionKnockOut.duration, Novel.transition.transitionKnockOut.alpha, Novel.transition.transitionKnockOut.edge);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Als du wieder zu die kommst ist es schon dunkel");
+                await Novel.ƒS.Location.show(Novel.location.waldUpsideDown);
+                await Novel.ƒS.Character.show(Novel.character.goblinGroup, Novel.character.goblinGroup.pose.nightUpsideDown, Novel.ƒS.positionPercent(40, 80));
+                await Novel.ƒS.Character.show(Novel.roomInventory.filterNacht, Novel.roomInventory.filterNacht.pose.standard, Novel.ƒS.positionPercent(50, 100));
+                await Novel.ƒS.update(1, Novel.transition.transitionKnockOut.alpha, Novel.transition.transitionKnockOut.edge);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du hängst kopfüber");
+                //Goblins schlafen ein
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "nach einer Weile schlafen sie ein");
+                await Novel.ƒS.Character.hide(Novel.character.goblinGroup);
+                await Novel.ƒS.Character.hide(Novel.roomInventory.filterNacht);
+                await Novel.ƒS.Character.show(Novel.character.goblinGroup, Novel.character.goblinGroup.pose.sleepingNightUpsideDown, Novel.ƒS.positionPercent(40, 80));
+                await Novel.ƒS.Character.show(Novel.roomInventory.filterNacht, Novel.roomInventory.filterNacht.pose.standard, Novel.ƒS.positionPercent(50, 100));
+                await Novel.ƒS.update(1);
+                //Protagonist schafft es Fesseln zu lösen
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "du schaffst es die Fesseln zu lösen und fällst zu Boden");
+                await Novel.ƒS.Character.hide(Novel.character.goblinGroup);
+                await Novel.ƒS.Character.hide(Novel.roomInventory.filterNacht);
+                await Novel.ƒS.Location.show(Novel.location.blackscreen);
+                await Novel.ƒS.update(Novel.transition.transitionKnockOut.duration, Novel.transition.transitionKnockOut.alpha, Novel.transition.transitionKnockOut.edge);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "du rapelst dich auf");
+                await Novel.ƒS.Location.show(Novel.location.wald);
+                await Novel.ƒS.Character.show(Novel.character.goblinGroup, Novel.character.goblinGroup.pose.sleepingNight, Novel.ƒS.positionPercent(60, 70));
+                await Novel.ƒS.Character.show(Novel.roomInventory.filterNacht, Novel.roomInventory.filterNacht.pose.standard, Novel.ƒS.positionPercent(50, 100));
+                await Novel.ƒS.update();
+                break;
+        }
+        let dialogSneakOrAttack = await Novel.ƒS.Menu.getInput(sneakOrAttack, "DialogBoxGoblins");
+        switch (dialogSneakOrAttack) {
+            case sneakOrAttack.iChooseAttack:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Attack!!");
+                return "Unterwegs1GoblinsAttack";
+                ;
+            case sneakOrAttack.iChooseSneak:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "du versuchst langsam davon zu schleichen");
                 break;
         }
     }
     Novel.Unterwegs1Goblins = Unterwegs1Goblins;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
+    async function Unterwegs1GoblinsAttack() {
+        console.log("Szene: UNterwegs1GoblinsAttack");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "willst du die Goblins wirklich attackieren");
+    }
+    Novel.Unterwegs1GoblinsAttack = Unterwegs1GoblinsAttack;
 })(Novel || (Novel = {}));
 var Novel;
 (function (Novel) {
