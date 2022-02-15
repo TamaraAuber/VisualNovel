@@ -132,7 +132,14 @@ namespace Novel {
       pose: {
         standard: "Images/Items/Item_MeadMug3.png"
       }
-    }
+    },
+    stone: {
+      name: "Stein",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Items/Item_DragonEgg1.png",
+      }
+    },
   }
 
   export let character = {
@@ -211,6 +218,11 @@ namespace Novel {
       name: "Schwert",
       description: "Mighty Sword",
       image: "Images/Items/Item_Sword1.png"
+    },
+    stone: {
+      name: "Stone",
+      description: "Mysterious Stone",
+      image: "Images/Items/Item_DragonEgg1.png"
     }
   };
 
@@ -219,6 +231,7 @@ namespace Novel {
     nameProtagonist: "",
     drunknessLevel: 0,
     neededLongSleep: 0,   //0 Player wakes up early; 1 Player slept until afternoon
+    ownsPlayerWaepon: true,
     givenEnding: ""
   }
 
@@ -317,8 +330,6 @@ namespace Novel {
   }
 
 
-
-
 //------Animations------
 
   export function fromLeftToRight(startX: number, startY: number, endX: number, endY: number): ƒS.AnimationDefinition {
@@ -343,9 +354,9 @@ namespace Novel {
       //{id: "Laden", scene: Laden, name: "Laden"},
       {scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
       {id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-      //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+      {id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
       //{ scene: Drachenhort, name: "Drachenhort"},
-      //{id: "End", scene: Ende, name: "Ende"}
+      {id: "Ende", scene: Ende, name: "Ende"}
     ];
 
 

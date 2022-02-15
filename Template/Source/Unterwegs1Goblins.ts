@@ -83,7 +83,7 @@ namespace Novel {
                 await ƒS.update(1);
 
                 //Protagonist schafft es Fesseln zu lösen
-                await ƒS.Speech.tell(character.narrator, "du schaffst es die Fesseln zu lösen und fällst zu Boden");
+                await ƒS.Speech.tell(character.narrator, "Kurz vor Tagesanbruch: du schaffst es die Fesseln zu lösen und fällst zu Boden");
                 await ƒS.Character.hide(character.goblinGroup);
                 await ƒS.Character.hide(roomInventory.filterNacht);
                 await ƒS.Location.show(location.blackscreen);
@@ -101,10 +101,14 @@ namespace Novel {
         switch (dialogSneakOrAttack) {
             case sneakOrAttack.iChooseAttack:
                 await ƒS.Speech.tell(character.narrator, "Attack!!");
-                return "Unterwegs1GoblinsAttack";;
+                return "Unterwegs1GoblinsAttack";
             case sneakOrAttack.iChooseSneak:
                 await ƒS.Speech.tell(character.narrator, "du versuchst langsam davon zu schleichen");
-                break;
+
+                await ƒS.Character.hide(character.goblinGroup);
+                await ƒS.Character.hide(roomInventory.filterNacht);
+                return "Unterwegs2Fee";
+                
         }
 
 

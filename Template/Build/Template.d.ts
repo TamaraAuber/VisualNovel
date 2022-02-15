@@ -138,6 +138,13 @@ declare namespace Novel {
                 standard: string;
             };
         };
+        stone: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
     };
     let character: {
         narrator: {
@@ -212,11 +219,17 @@ declare namespace Novel {
             description: string;
             image: string;
         };
+        stone: {
+            name: string;
+            description: string;
+            image: string;
+        };
     };
     let dataForSave: {
         nameProtagonist: string;
         drunknessLevel: number;
         neededLongSleep: number;
+        ownsPlayerWaepon: boolean;
         givenEnding: string;
     };
     function addDrunknessLevel(): void;

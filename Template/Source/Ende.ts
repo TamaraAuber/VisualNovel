@@ -2,18 +2,11 @@ namespace Novel {
     export async function Ende(): ƒS.SceneReturn {
         console.log("This is the End");
 
+        await ƒS.Location.show(location.blackscreen);
+        await ƒS.update(transition.transitionOne.duration, transition.transitionOne.alpha, transition.transitionOne.edge);
 
-        /*switch (dataForSave.givenEnding) {
-            case "0": 
-            console.log("End 0");
-                break;
-            case "1": 
-                break;
-            case "2": 
-                break;
-        }*/
 
-        await ƒS.Speech.tell(character.narrator, "What ya gonna do?");
+        await ƒS.Speech.tell(character.narrator, "This is the end");
 
 
 

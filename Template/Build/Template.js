@@ -74,16 +74,9 @@ var Novel;
 (function (Novel) {
     async function Ende() {
         console.log("This is the End");
-        /*switch (dataForSave.givenEnding) {
-            case "0":
-            console.log("End 0");
-                break;
-            case "1":
-                break;
-            case "2":
-                break;
-        }*/
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "What ya gonna do?");
+        await Novel.ƒS.Location.show(Novel.location.blackscreen);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the end");
     }
     Novel.Ende = Ende;
 })(Novel || (Novel = {}));
@@ -263,14 +256,17 @@ var Novel;
                 case presentsMorning.iChooseCloak:
                     Novel.ƒS.Inventory.add(Novel.items.cloak);
                     await Novel.ƒS.Inventory.open();
+                    Novel.dataForSave.ownsPlayerWaepon = false;
                     break;
                 case presentsMorning.iChooseStaff:
                     Novel.ƒS.Inventory.add(Novel.items.staff);
                     await Novel.ƒS.Inventory.open();
+                    Novel.dataForSave.ownsPlayerWaepon = true;
                     break;
                 case presentsMorning.iChooseSword:
                     Novel.ƒS.Inventory.add(Novel.items.sword);
                     await Novel.ƒS.Inventory.open();
+                    Novel.dataForSave.ownsPlayerWaepon = true;
                     break;
             }
         }
@@ -278,8 +274,10 @@ var Novel;
             let dialogPresentNoon = await Novel.ƒS.Menu.getInput(presentsNoon, "DialogBoxPresents");
             switch (dialogPresentNoon) {
                 case presentsNoon.iChooseCloak:
+                    Novel.dataForSave.ownsPlayerWaepon = false;
                     break;
                 case presentsNoon.iChooseStaff:
+                    Novel.dataForSave.ownsPlayerWaepon = true;
                     break;
             }
         }
@@ -428,7 +426,14 @@ var Novel;
             pose: {
                 standard: "Images/Items/Item_MeadMug3.png"
             }
-        }
+        },
+        stone: {
+            name: "Stein",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Items/Item_DragonEgg1.png",
+            }
+        },
     };
     Novel.character = {
         narrator: {
@@ -503,12 +508,18 @@ var Novel;
             name: "Schwert",
             description: "Mighty Sword",
             image: "Images/Items/Item_Sword1.png"
+        },
+        stone: {
+            name: "Stone",
+            description: "Mysterious Stone",
+            image: "Images/Items/Item_DragonEgg1.png"
         }
     };
     Novel.dataForSave = {
         nameProtagonist: "",
         drunknessLevel: 0,
         neededLongSleep: 0,
+        ownsPlayerWaepon: true,
         givenEnding: ""
     };
     //Menü
@@ -620,9 +631,9 @@ var Novel;
             //{id: "Laden", scene: Laden, name: "Laden"},
             { scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
             { id: "Unterwegs1GoblinsAttack", scene: Novel.Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack" },
-            //{ scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+            { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },
             //{ scene: Drachenhort, name: "Drachenhort"},
-            //{id: "End", scene: Ende, name: "Ende"}
+            { id: "Ende", scene: Novel.Ende, name: "Ende" }
         ];
         let uiElement = document.querySelector("[type=interface]");
         Novel.dataForSave = Novel.ƒS.Progress.setData(Novel.dataForSave, uiElement);
@@ -724,7 +735,7 @@ var Novel;
                 await Novel.ƒS.Character.show(Novel.roomInventory.filterNacht, Novel.roomInventory.filterNacht.pose.standard, Novel.ƒS.positionPercent(50, 100));
                 await Novel.ƒS.update(1);
                 //Protagonist schafft es Fesseln zu lösen
-                await Novel.ƒS.Speech.tell(Novel.character.narrator, "du schaffst es die Fesseln zu lösen und fällst zu Boden");
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Kurz vor Tagesanbruch: du schaffst es die Fesseln zu lösen und fällst zu Boden");
                 await Novel.ƒS.Character.hide(Novel.character.goblinGroup);
                 await Novel.ƒS.Character.hide(Novel.roomInventory.filterNacht);
                 await Novel.ƒS.Location.show(Novel.location.blackscreen);
@@ -741,10 +752,11 @@ var Novel;
             case sneakOrAttack.iChooseAttack:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Attack!!");
                 return "Unterwegs1GoblinsAttack";
-                ;
             case sneakOrAttack.iChooseSneak:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "du versuchst langsam davon zu schleichen");
-                break;
+                await Novel.ƒS.Character.hide(Novel.character.goblinGroup);
+                await Novel.ƒS.Character.hide(Novel.roomInventory.filterNacht);
+                return "Unterwegs2Fee";
         }
     }
     Novel.Unterwegs1Goblins = Unterwegs1Goblins;
@@ -752,8 +764,20 @@ var Novel;
 var Novel;
 (function (Novel) {
     async function Unterwegs1GoblinsAttack() {
-        console.log("Szene: UNterwegs1GoblinsAttack");
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "willst du die Goblins wirklich attackieren");
+        console.log("Szene: Unterwegs1GoblinsAttack");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Goblins bemerken deinen Angriff");
+        if (Novel.dataForSave.ownsPlayerWaepon) {
+            //Protagonist hat Waffe mit der er Goblins besiegen kann
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du ziehst deine Waffe und besiegst Goblins");
+            await Novel.ƒS.Character.hide(Novel.character.goblinLeader);
+            return "Unterwegs2Fee";
+        }
+        else {
+            //Protagonist hat keine Waffe und wird von Goblins besiegt
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "You die");
+            await Novel.ƒS.Character.hide(Novel.character.goblinLeader);
+            return "Ende";
+        }
     }
     Novel.Unterwegs1GoblinsAttack = Unterwegs1GoblinsAttack;
 })(Novel || (Novel = {}));
@@ -766,24 +790,53 @@ var Novel;
                 N000: "Lerne die Fee kennen",
                 N001: "Auftritt Fee",
                 N002: ":)"
+            },
+            fairy: {
+                F000: "Hallo, danke, dass du mich gerettet hast"
             }
         };
+        let wannaFancyStone = {
+            iChooseTakeIt: "Stein mitnehmen",
+            iChooseLeaveIt: "Stein liegen lassen"
+        };
+        // P schnappt sich Fee und rennt davon
+        await Novel.ƒS.Location.show(Novel.location.wald);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du schnappst die den Käfig mit der Fee und möchtest verschwinden");
+        //P stolpert über Stein, Möglichkeit ihn mitzunehmen
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Stolperst über Stein, der neben Käfig liegt");
+        await Novel.ƒS.Character.show(Novel.roomInventory.stone, Novel.roomInventory.stone.pose.standard, Novel.ƒS.positionPercent(75, 100));
+        await Novel.ƒS.update(1);
+        let dialogTakeStone = await Novel.ƒS.Menu.getInput(wannaFancyStone, "DialogBoxGoblins");
+        switch (dialogTakeStone) {
+            case wannaFancyStone.iChooseTakeIt:
+                Novel.ƒS.Inventory.add(Novel.items.stone);
+                await Novel.ƒS.Inventory.open();
+                break;
+            case wannaFancyStone.iChooseLeaveIt:
+                break;
+        }
+        await Novel.ƒS.Character.hide(Novel.roomInventory.stone);
+        // P und F lernen sich kennen
         await Novel.ƒS.Location.show(Novel.location.feld);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "In sicherer Entfernung befreist du Fee aus Käfig");
         await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.grateful, Novel.ƒS.positionPercent(70, 65));
         await Novel.ƒS.update(1);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F000);
         await Novel.ƒS.Character.hide(Novel.character.fairy);
-        await Novel.ƒS.update();
+        //await ƒS.update();
         await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.standard, Novel.ƒS.positionPercent(55, 75));
         await Novel.ƒS.update(1);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
-        await Novel.ƒS.Character.hide(Novel.character.fairy);
-        await Novel.ƒS.update();
-        await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.afraid, Novel.ƒS.positionPercent(40, 65));
-        //await ƒS.update(1);
-        await Novel.ƒS.update(2);
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Ich kann dir den Weg zeigen");
+        //P und F rätseln über Stein -- nur möglich wenn Stein im Inventar
+        if (Novel.ƒS.Inventory.getAmount(Novel.items.stone)) {
+            await Novel.ƒS.Speech.tell(Novel.character.fairy, "Interessanter Stein");
+        }
+        //Eingang der Drachenhöhle wird erreicht
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Ihr erreicht den Eingang der Höhle");
+        await Novel.ƒS.Location.show(Novel.location.blackscreen);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
     }
     Novel.Unterwegs2Fee = Unterwegs2Fee;
 })(Novel || (Novel = {}));
