@@ -5,6 +5,18 @@ declare namespace Novel {
     function Ende(): ƒS.SceneReturn;
 }
 declare namespace Novel {
+    function EndingBadDragon(): ƒS.SceneReturn;
+}
+declare namespace Novel {
+    function EndingBadGoblins(): ƒS.SceneReturn;
+}
+declare namespace Novel {
+    function EndingHappyDragon(): ƒS.SceneReturn;
+}
+declare namespace Novel {
+    function EndingSadDragon(): ƒS.SceneReturn;
+}
+declare namespace Novel {
     function Gasthaus(): ƒS.SceneReturn;
 }
 declare namespace Novel {

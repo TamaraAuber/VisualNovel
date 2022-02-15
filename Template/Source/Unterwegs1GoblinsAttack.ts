@@ -19,7 +19,7 @@ namespace Novel {
         await ƒS.Speech.tell(character.narrator, "You die");
 
         await ƒS.Character.hide(character.goblinLeader);
-        return "Ende";
+        return "EndingBadGoblins";
       }
 
       

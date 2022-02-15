@@ -78,7 +78,7 @@ namespace Novel {
                 await ƒS.Character.hide(character.dragon);
                 await ƒS.Character.hide(character.fairy);
                 dataForSave.givenEnding = "0";
-                return "Ende";    
+                return "EndingBadDragon";    
             case ratschlagBefolgen.iChooseYes:
                break;
         }
@@ -91,21 +91,29 @@ namespace Novel {
             switch (dialogHowToDealWithDragons) {
                 case howToDealWithDragons.iChooseStaff:
                     await ƒS.Speech.tell(character.narrator, "Staff Attack!");
-                    break;
+                    await ƒS.Character.hide(character.dragon);
+                    await ƒS.Character.hide(character.fairy);
+                    return "EndingBadDragon";
+                  
                 case howToDealWithDragons.iChooseCloak:
                     await ƒS.Speech.tell(character.narrator, "Here's my cloak :)");
-                    break;
+                    await ƒS.Character.hide(character.dragon);
+                    await ƒS.Character.hide(character.fairy);
+                    return "EndingBadDragon";
+                   
                 case howToDealWithDragons.iChooseSword:
                     await ƒS.Speech.tell(character.narrator, "My sword will kill you!");
-                    break;
+                    await ƒS.Character.hide(character.dragon);
+                    await ƒS.Character.hide(character.fairy);
+                    return "EndingSadDragon";
+                    
                 case howToDealWithDragons.iChooseStone:
                     await ƒS.Speech.tell(character.narrator, "I give you my stone :)");
-                    break;
+                    await ƒS.Character.hide(character.dragon);
+                    await ƒS.Character.hide(character.fairy);
+                    return "EndingHappyDragon";
+                    
             }
-    
-        await ƒS.Character.hide(character.dragon);
-        await ƒS.Character.hide(character.fairy);
-        return "Ende";
 
     }
 }

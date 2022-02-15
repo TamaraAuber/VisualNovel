@@ -58,7 +58,7 @@ var Novel;
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
                 Novel.dataForSave.givenEnding = "0";
-                return "Ende";
+                return "EndingBadDragon";
             case ratschlagBefolgen.iChooseYes:
                 break;
         }
@@ -68,20 +68,25 @@ var Novel;
         switch (dialogHowToDealWithDragons) {
             case howToDealWithDragons.iChooseStaff:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff Attack!");
-                break;
+                await Novel.ƒS.Character.hide(Novel.character.dragon);
+                await Novel.ƒS.Character.hide(Novel.character.fairy);
+                return "EndingBadDragon";
             case howToDealWithDragons.iChooseCloak:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Here's my cloak :)");
-                break;
+                await Novel.ƒS.Character.hide(Novel.character.dragon);
+                await Novel.ƒS.Character.hide(Novel.character.fairy);
+                return "EndingBadDragon";
             case howToDealWithDragons.iChooseSword:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "My sword will kill you!");
-                break;
+                await Novel.ƒS.Character.hide(Novel.character.dragon);
+                await Novel.ƒS.Character.hide(Novel.character.fairy);
+                return "EndingSadDragon";
             case howToDealWithDragons.iChooseStone:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "I give you my stone :)");
-                break;
+                await Novel.ƒS.Character.hide(Novel.character.dragon);
+                await Novel.ƒS.Character.hide(Novel.character.fairy);
+                return "EndingHappyDragon";
         }
-        await Novel.ƒS.Character.hide(Novel.character.dragon);
-        await Novel.ƒS.Character.hide(Novel.character.fairy);
-        return "Ende";
     }
     Novel.Drachenhort = Drachenhort;
 })(Novel || (Novel = {}));
@@ -94,6 +99,46 @@ var Novel;
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the end");
     }
     Novel.Ende = Ende;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
+    async function EndingBadDragon() {
+        console.log("This is the bad End");
+        await Novel.ƒS.Location.show(Novel.location.blackscreen);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the bad end");
+    }
+    Novel.EndingBadDragon = EndingBadDragon;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
+    async function EndingBadGoblins() {
+        console.log("This is the bad Goblin End");
+        await Novel.ƒS.Location.show(Novel.location.blackscreen);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the bad goblin end");
+    }
+    Novel.EndingBadGoblins = EndingBadGoblins;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
+    async function EndingHappyDragon() {
+        console.log("This is the Happy End");
+        await Novel.ƒS.Location.show(Novel.location.blackscreen);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the happy end");
+    }
+    Novel.EndingHappyDragon = EndingHappyDragon;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
+    async function EndingSadDragon() {
+        console.log("This is the sad End");
+        await Novel.ƒS.Location.show(Novel.location.blackscreen);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the sad end");
+    }
+    Novel.EndingSadDragon = EndingSadDragon;
 })(Novel || (Novel = {}));
 var Novel;
 (function (Novel) {
@@ -648,7 +693,10 @@ var Novel;
             //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
             //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
             { scene: Novel.Drachenhort, name: "Drachenhort" },
-            { id: "Ende", scene: Novel.Ende, name: "Ende" }
+            { id: "EndingHappyDragon", scene: Novel.EndingHappyDragon, name: "EndingHappyDragon" },
+            { id: "EndingSadDragon", scene: Novel.EndingSadDragon, name: "EndingSadDragon" },
+            { id: "EndingBadDragon", scene: Novel.EndingBadDragon, name: "EndingBadDragon" },
+            { id: "EndingBadGoblins", scene: Novel.EndingBadGoblins, name: "EndingBadGoblins" }
         ];
         let uiElement = document.querySelector("[type=interface]");
         Novel.dataForSave = Novel.ƒS.Progress.setData(Novel.dataForSave, uiElement);
@@ -791,7 +839,7 @@ var Novel;
             //Protagonist hat keine Waffe und wird von Goblins besiegt
             await Novel.ƒS.Speech.tell(Novel.character.narrator, "You die");
             await Novel.ƒS.Character.hide(Novel.character.goblinLeader);
-            return "Ende";
+            return "EndingBadGoblins";
         }
     }
     Novel.Unterwegs1GoblinsAttack = Unterwegs1GoblinsAttack;
