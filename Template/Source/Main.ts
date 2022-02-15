@@ -177,7 +177,7 @@ namespace Novel {
       pose: {
         standard: "Images/Fairy/Fairy_P3.png",
         grateful: "Images/Fairy/Fairy_P1.png",
-        afraid: "Images/Fairy/Fairy_P2.png"
+        afraid: "Images/Fairy/Fairy_P2_2.png"
       }
     },
     goblinGroup: {
@@ -352,10 +352,10 @@ namespace Novel {
       //{ scene: Prolog, name: "Prolog" },
       //{ scene: Gasthaus, name: "Gasthaus" },
       //{id: "Laden", scene: Laden, name: "Laden"},
-      {scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
-      {id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-      {id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
-      //{ scene: Drachenhort, name: "Drachenhort"},
+      //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+      //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
+      //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+      { scene: Drachenhort, name: "Drachenhort"},
       {id: "Ende", scene: Ende, name: "Ende"}
     ];
 

@@ -21,6 +21,7 @@ var Novel;
             iChooseSword: "Schwert",
             iChooseStone: "Stein"
         };
+        //P und F betreten Höhle
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "Es ist dunkel");
@@ -28,6 +29,7 @@ var Novel;
         await Novel.ƒS.Location.show(Novel.location.drachenHoehleGang);
         await Novel.ƒS.update(Novel.transition.transitionThree.duration, Novel.transition.transitionThree.alpha, Novel.transition.transitionThree.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "gelangst ans Ende der Höhle");
+        //sie entdecken schlafenden Drachen
         await Novel.ƒS.Location.show(Novel.location.drachenHoehle);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "Entdeckst Drache");
@@ -35,38 +37,51 @@ var Novel;
         await Novel.ƒS.update(1);
         await Novel.ƒS.Character.show(Novel.roomInventory.sonnenstrahlen, Novel.roomInventory.sonnenstrahlen.pose.standard, Novel.ƒS.positionPercent(50, 100));
         await Novel.ƒS.update(1);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Drache wacht auf");
+        //Drache wird geweckt
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Fee erschrickt; stößt Stein um -> lautes Geräusch!!!");
+        await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.afraid, Novel.ƒS.positionPercent(20, 70));
+        await Novel.ƒS.update(0.5);
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Glaubst du er hat das bemerkt?");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Drache wird geweckt");
         await Novel.ƒS.Character.hide(Novel.roomInventory.sonnenstrahlen);
-        await Novel.ƒS.update();
         await Novel.ƒS.Character.hide(Novel.character.dragon);
         await Novel.ƒS.update();
         await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.angry, Novel.ƒS.positionPercent(50, 100));
         await Novel.ƒS.update(1);
+        //F schlägt vor ins Inventar zu schauen
         await Novel.ƒS.Speech.tell(Novel.character.fairy, "Möchtest du in dein Inventar schauen?");
+        //Möglichkeit Ratschlag der Fee zu befolgen
         let dialogRatschlagBefolgen = await Novel.ƒS.Menu.getInput(ratschlagBefolgen, "DialogBoxRatschlagBefolgen");
         switch (dialogRatschlagBefolgen) {
             case ratschlagBefolgen.iCHooseNo:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Angrif!!!!!!");
+                await Novel.ƒS.Character.hide(Novel.character.dragon);
+                await Novel.ƒS.Character.hide(Novel.character.fairy);
                 Novel.dataForSave.givenEnding = "0";
                 return "Ende";
             case ratschlagBefolgen.iChooseYes:
-                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Was möchtest du tun?");
-                let dialogHowToDealWithDragons = await Novel.ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
-                switch (dialogHowToDealWithDragons) {
-                    case howToDealWithDragons.iChooseStaff:
-                        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff Attack!");
-                        break;
-                    case howToDealWithDragons.iChooseCloak:
-                        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Here's my cloak :)");
-                        break;
-                    case howToDealWithDragons.iChooseSword:
-                        await Novel.ƒS.Speech.tell(Novel.character.narrator, "My sword will kill you!");
-                        break;
-                    case howToDealWithDragons.iChooseStone:
-                        await Novel.ƒS.Speech.tell(Novel.character.narrator, "I give you my stone :)");
-                        break;
-                }
+                break;
         }
+        //Ratschlag der Fee befolgt --> Blick ins Inventar
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Was möchtest du tun?");
+        let dialogHowToDealWithDragons = await Novel.ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
+        switch (dialogHowToDealWithDragons) {
+            case howToDealWithDragons.iChooseStaff:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff Attack!");
+                break;
+            case howToDealWithDragons.iChooseCloak:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Here's my cloak :)");
+                break;
+            case howToDealWithDragons.iChooseSword:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "My sword will kill you!");
+                break;
+            case howToDealWithDragons.iChooseStone:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "I give you my stone :)");
+                break;
+        }
+        await Novel.ƒS.Character.hide(Novel.character.dragon);
+        await Novel.ƒS.Character.hide(Novel.character.fairy);
+        return "Ende";
     }
     Novel.Drachenhort = Drachenhort;
 })(Novel || (Novel = {}));
@@ -470,7 +485,7 @@ var Novel;
             pose: {
                 standard: "Images/Fairy/Fairy_P3.png",
                 grateful: "Images/Fairy/Fairy_P1.png",
-                afraid: "Images/Fairy/Fairy_P2.png"
+                afraid: "Images/Fairy/Fairy_P2_2.png"
             }
         },
         goblinGroup: {
@@ -629,10 +644,10 @@ var Novel;
             //{ scene: Prolog, name: "Prolog" },
             //{ scene: Gasthaus, name: "Gasthaus" },
             //{id: "Laden", scene: Laden, name: "Laden"},
-            { scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
-            { id: "Unterwegs1GoblinsAttack", scene: Novel.Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack" },
-            { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },
-            //{ scene: Drachenhort, name: "Drachenhort"},
+            //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+            //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
+            //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+            { scene: Novel.Drachenhort, name: "Drachenhort" },
             { id: "Ende", scene: Novel.Ende, name: "Ende" }
         ];
         let uiElement = document.querySelector("[type=interface]");
