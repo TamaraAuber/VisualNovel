@@ -8,7 +8,7 @@ namespace Novel {
 
         await ƒS.Speech.tell(character.narrator, "This is the happy end");
 
-
+        return "Epilog";
 
 
     }

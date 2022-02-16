@@ -2,9 +2,6 @@ declare namespace Novel {
     function Drachenhort(): ƒS.SceneReturn;
 }
 declare namespace Novel {
-    function Ende(): ƒS.SceneReturn;
-}
-declare namespace Novel {
     function EndingBadDragon(): ƒS.SceneReturn;
 }
 declare namespace Novel {
@@ -15,6 +12,9 @@ declare namespace Novel {
 }
 declare namespace Novel {
     function EndingSadDragon(): ƒS.SceneReturn;
+}
+declare namespace Novel {
+    function Epilog(): ƒS.SceneReturn;
 }
 declare namespace Novel {
     function Gasthaus(): ƒS.SceneReturn;

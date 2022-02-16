@@ -91,21 +91,12 @@ var Novel;
 })(Novel || (Novel = {}));
 var Novel;
 (function (Novel) {
-    async function Ende() {
-        console.log("This is the End");
-        await Novel.ƒS.Location.show(Novel.location.blackscreen);
-        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the end");
-    }
-    Novel.Ende = Ende;
-})(Novel || (Novel = {}));
-var Novel;
-(function (Novel) {
     async function EndingBadDragon() {
         console.log("This is the bad End");
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the bad end");
+        return "Epilog";
     }
     Novel.EndingBadDragon = EndingBadDragon;
 })(Novel || (Novel = {}));
@@ -116,6 +107,7 @@ var Novel;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the bad goblin end");
+        return "Epilog";
     }
     Novel.EndingBadGoblins = EndingBadGoblins;
 })(Novel || (Novel = {}));
@@ -126,6 +118,7 @@ var Novel;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the happy end");
+        return "Epilog";
     }
     Novel.EndingHappyDragon = EndingHappyDragon;
 })(Novel || (Novel = {}));
@@ -136,8 +129,21 @@ var Novel;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the sad end");
+        return "Epilog";
     }
     Novel.EndingSadDragon = EndingSadDragon;
+})(Novel || (Novel = {}));
+var Novel;
+(function (Novel) {
+    async function Epilog() {
+        console.log("Szene: Prolog");
+        await Novel.ƒS.Location.show(Novel.location.blackscreen);
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        // Novel Page
+        Novel.ƒS.Text.setClass("Epilog");
+        Novel.ƒS.Text.print("Ich bin ein Epilog :)");
+    }
+    Novel.Epilog = Epilog;
 })(Novel || (Novel = {}));
 var Novel;
 (function (Novel) {
@@ -715,12 +721,13 @@ var Novel;
             //{id: "Laden", scene: Laden, name: "Laden"},
             //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
             //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-            { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },
+            //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
             { scene: Novel.Drachenhort, name: "Drachenhort" },
             { id: "EndingHappyDragon", scene: Novel.EndingHappyDragon, name: "EndingHappyDragon" },
             { id: "EndingSadDragon", scene: Novel.EndingSadDragon, name: "EndingSadDragon" },
             { id: "EndingBadDragon", scene: Novel.EndingBadDragon, name: "EndingBadDragon" },
-            { id: "EndingBadGoblins", scene: Novel.EndingBadGoblins, name: "EndingBadGoblins" }
+            { id: "EndingBadGoblins", scene: Novel.EndingBadGoblins, name: "EndingBadGoblins" },
+            { id: "Epilog", scene: Novel.Epilog, name: "Epilog" }
         ];
         let uiElement = document.querySelector("[type=interface]");
         Novel.dataForSave = Novel.ƒS.Progress.setData(Novel.dataForSave, uiElement);

@@ -1,16 +1,19 @@
 namespace Novel {
-    export async function Ende(): ƒS.SceneReturn {
-        console.log("This is the End");
+    export async function Epilog(): ƒS.SceneReturn {
+        console.log("Szene: Prolog");
+
+       
 
         await ƒS.Location.show(location.blackscreen);
         await ƒS.update(transition.transitionOne.duration, transition.transitionOne.alpha, transition.transitionOne.edge);
 
 
-        await ƒS.Speech.tell(character.narrator, "This is the end");
+        // Novel Page
+        ƒS.Text.setClass("Epilog");
+        ƒS.Text.print("Ich bin ein Epilog :)");
 
 
 
 
     }
 }
-

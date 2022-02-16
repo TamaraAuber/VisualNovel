@@ -379,12 +379,13 @@ namespace Novel {
       //{id: "Laden", scene: Laden, name: "Laden"},
       //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
       //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-      {id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+      //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
       { scene: Drachenhort, name: "Drachenhort"},
       {id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
       {id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
       {id: "EndingBadDragon", scene: EndingBadDragon, name: "EndingBadDragon"},
-      {id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"}
+      {id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"},
+      {id: "Epilog", scene: Epilog, name: "Epilog"}
     ];
 
 
