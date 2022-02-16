@@ -29,7 +29,6 @@ namespace Novel {
   };
 
   export let location = {
-    //ToDo: schauen ob überhaupt benötigt wird
     blackscreen: {
       name: "blackscreen",
       background: "Images/Locations/blackscreen.png"
@@ -73,6 +72,18 @@ namespace Novel {
     drachenHoehle: {
       name: "drachenhoehle",
       background: "Images/DragonCave/DragonCave2.1.png"
+    },
+    drachenHoehleEingang: {
+      name: "drachenHoehleEingang",
+      background: "Images/DragonCave/CaveEntrance1.png"
+    },
+    talGutesWetter: {
+      name: "talGutesWetter",
+      background: "Images/OnTheRoad/ValleyGoodWeather1.png"
+    },
+    talSchlechtesWetter: {
+      name: "talSchlechtesWetter",
+      background: "Images/OnTheRoad/ValleyBadWeather1.png"
     }
   };
 
@@ -103,6 +114,13 @@ namespace Novel {
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         standard: "Images/Filter/Filter_Night1.png"
+      }
+    },
+    filterLicht: {
+      name: "filterLicht",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/Filter/LightFilter1.png"
       }
     },
     sonnenstrahlen: {
@@ -138,6 +156,13 @@ namespace Novel {
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         standard: "Images/Items/Item_DragonEgg1.png",
+      }
+    },
+    blitze: {
+      name: "blitze",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        standard: "Images/OnTheRoad/Lightning1.png",
       }
     },
   }
@@ -232,7 +257,7 @@ namespace Novel {
     drunknessLevel: 0,
     neededLongSleep: 0,   //0 Player wakes up early; 1 Player slept until afternoon
     ownsPlayerWaepon: true,
-    givenEnding: ""
+    longTimeWithGoblins: false
   }
 
   //Menü
@@ -354,7 +379,7 @@ namespace Novel {
       //{id: "Laden", scene: Laden, name: "Laden"},
       //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
       //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-      //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+      {id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
       { scene: Drachenhort, name: "Drachenhort"},
       {id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
       {id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},

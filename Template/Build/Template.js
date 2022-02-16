@@ -35,8 +35,8 @@ var Novel;
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "Entdeckst Drache");
         await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.sleeping, Novel.ƒS.positionPercent(55, 80));
         await Novel.ƒS.update(1);
-        await Novel.ƒS.Character.show(Novel.roomInventory.sonnenstrahlen, Novel.roomInventory.sonnenstrahlen.pose.standard, Novel.ƒS.positionPercent(50, 100));
-        await Novel.ƒS.update(1);
+        //await ƒS.Character.show(roomInventory.sonnenstrahlen, roomInventory.sonnenstrahlen.pose.standard, ƒS.positionPercent(50, 100));
+        //await ƒS.update(1);
         //Drache wird geweckt
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "Fee erschrickt; stößt Stein um -> lautes Geräusch!!!");
         await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.afraid, Novel.ƒS.positionPercent(20, 70));
@@ -57,7 +57,6 @@ var Novel;
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Angrif!!!!!!");
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
-                Novel.dataForSave.givenEnding = "0";
                 return "EndingBadDragon";
             case ratschlagBefolgen.iChooseYes:
                 break;
@@ -384,7 +383,6 @@ var Novel;
         }
     };
     Novel.location = {
-        //ToDo: schauen ob überhaupt benötigt wird
         blackscreen: {
             name: "blackscreen",
             background: "Images/Locations/blackscreen.png"
@@ -428,6 +426,18 @@ var Novel;
         drachenHoehle: {
             name: "drachenhoehle",
             background: "Images/DragonCave/DragonCave2.1.png"
+        },
+        drachenHoehleEingang: {
+            name: "drachenHoehleEingang",
+            background: "Images/DragonCave/CaveEntrance1.png"
+        },
+        talGutesWetter: {
+            name: "talGutesWetter",
+            background: "Images/OnTheRoad/ValleyGoodWeather1.png"
+        },
+        talSchlechtesWetter: {
+            name: "talSchlechtesWetter",
+            background: "Images/OnTheRoad/ValleyBadWeather1.png"
         }
     };
     Novel.roomInventory = {
@@ -457,6 +467,13 @@ var Novel;
             origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
                 standard: "Images/Filter/Filter_Night1.png"
+            }
+        },
+        filterLicht: {
+            name: "filterLicht",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/Filter/LightFilter1.png"
             }
         },
         sonnenstrahlen: {
@@ -492,6 +509,13 @@ var Novel;
             origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
                 standard: "Images/Items/Item_DragonEgg1.png",
+            }
+        },
+        blitze: {
+            name: "blitze",
+            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                standard: "Images/OnTheRoad/Lightning1.png",
             }
         },
     };
@@ -580,7 +604,7 @@ var Novel;
         drunknessLevel: 0,
         neededLongSleep: 0,
         ownsPlayerWaepon: true,
-        givenEnding: ""
+        longTimeWithGoblins: false
     };
     //Menü
     let inGameMenu = {
@@ -691,7 +715,7 @@ var Novel;
             //{id: "Laden", scene: Laden, name: "Laden"},
             //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
             //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-            //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+            { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },
             { scene: Novel.Drachenhort, name: "Drachenhort" },
             { id: "EndingHappyDragon", scene: Novel.EndingHappyDragon, name: "EndingHappyDragon" },
             { id: "EndingSadDragon", scene: Novel.EndingSadDragon, name: "EndingSadDragon" },
@@ -776,8 +800,10 @@ var Novel;
         let dialogHowToTalkWithGoblins = await Novel.ƒS.Menu.getInput(howToTalkWithGoblins, "DialogBoxGoblins");
         switch (dialogHowToTalkWithGoblins) {
             case howToTalkWithGoblins.iChooseFight:
+                Novel.dataForSave.longTimeWithGoblins = false;
                 return "Unterwegs1GoblinsAttack";
             case howToTalkWithGoblins.iChooseTalk:
+                Novel.dataForSave.longTimeWithGoblins = true;
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Sie scheinen nicht an einer friedlichen Lösung interessiert zu sein");
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du wirst von den Goblins überwältigt");
                 //Protagonist wird von den Goblins überwältigt und gefesselt
@@ -897,9 +923,40 @@ var Novel;
             await Novel.ƒS.Speech.tell(Novel.character.fairy, "Interessanter Stein");
         }
         //Eingang der Drachenhöhle wird erreicht
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Ihr erreicht den Eingang der Höhle");
-        await Novel.ƒS.Location.show(Novel.location.blackscreen);
+        await Novel.ƒS.Character.hide(Novel.character.fairy);
+        await Novel.ƒS.Location.show(Novel.location.drachenHoehleEingang);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Euer Weg endet an einem Felsvorsprung. Ihr habt den Eingang der Höhle erreicht");
+        await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.standard, Novel.ƒS.positionPercent(25, 55));
+        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Wir sind da");
+        //Ausblick über Tal  --> je nachdem wie viel Zeit mit den Goblins verbracht wurde
+        if (Novel.dataForSave.longTimeWithGoblins) {
+            //es wurde viel Zeit mit den Goblins verschwendet -> schlechtes Wetter
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du drehst dich um und erhälst einen Ausblick über das Tal. Jedoch verleiht ihm das schlechte Wetter einen erschreckendes Aussehen");
+            await Novel.ƒS.Location.show(Novel.location.talSchlechtesWetter);
+            await Novel.ƒS.Character.hide(Novel.character.fairy);
+            await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+            await Novel.ƒS.Character.show(Novel.roomInventory.blitze, Novel.roomInventory.blitze.pose.standard, Novel.ƒS.positionPercent(50, 100));
+            await Novel.ƒS.update();
+            await Novel.ƒS.Character.hide(Novel.roomInventory.blitze);
+            //await ƒS.update(0.5);
+            await Novel.ƒS.Character.show(Novel.roomInventory.filterLicht, Novel.roomInventory.filterLicht.pose.standard, Novel.ƒS.positionPercent(50, 100));
+            await Novel.ƒS.update(1);
+            await Novel.ƒS.Character.hide(Novel.roomInventory.filterLicht);
+            await Novel.ƒS.update(2);
+        }
+        else {
+            //wenig Zeit verschwendet -> gutes Wetter
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du drehst dich um und erhälst einen wunderschönen Ausblick über das Tal. Du vergisst fast wieso du hier bist.");
+            await Novel.ƒS.Location.show(Novel.location.talGutesWetter);
+            await Novel.ƒS.Character.hide(Novel.character.fairy);
+            await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du vergisst fast wieso du hier bist.");
+        }
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Lass uns weiter gehen!");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Ihr geht zusammen in die Höhle");
+        await Novel.ƒS.Character.hide(Novel.character.fairy);
     }
     Novel.Unterwegs2Fee = Unterwegs2Fee;
 })(Novel || (Novel = {}));

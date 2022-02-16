@@ -92,6 +92,18 @@ declare namespace Novel {
             name: string;
             background: string;
         };
+        drachenHoehleEingang: {
+            name: string;
+            background: string;
+        };
+        talGutesWetter: {
+            name: string;
+            background: string;
+        };
+        talSchlechtesWetter: {
+            name: string;
+            background: string;
+        };
     };
     let roomInventory: {
         gasthausBarCounter: {
@@ -116,6 +128,13 @@ declare namespace Novel {
             };
         };
         filterNacht: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
+        filterLicht: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {
@@ -151,6 +170,13 @@ declare namespace Novel {
             };
         };
         stone: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                standard: string;
+            };
+        };
+        blitze: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {
@@ -242,7 +268,7 @@ declare namespace Novel {
         drunknessLevel: number;
         neededLongSleep: number;
         ownsPlayerWaepon: boolean;
-        givenEnding: string;
+        longTimeWithGoblins: boolean;
     };
     function addDrunknessLevel(): void;
     function removeDrunknessLevel(): void;

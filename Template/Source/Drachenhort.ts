@@ -46,8 +46,8 @@ namespace Novel {
         await ƒS.Character.show(character.dragon, character.dragon.pose.sleeping, ƒS.positionPercent(55, 80));
         await ƒS.update(1);
 
-        await ƒS.Character.show(roomInventory.sonnenstrahlen, roomInventory.sonnenstrahlen.pose.standard, ƒS.positionPercent(50, 100));
-        await ƒS.update(1);
+        //await ƒS.Character.show(roomInventory.sonnenstrahlen, roomInventory.sonnenstrahlen.pose.standard, ƒS.positionPercent(50, 100));
+        //await ƒS.update(1);
 
 
         //Drache wird geweckt
@@ -77,7 +77,6 @@ namespace Novel {
                 await ƒS.Speech.tell(character.narrator, "Angrif!!!!!!");
                 await ƒS.Character.hide(character.dragon);
                 await ƒS.Character.hide(character.fairy);
-                dataForSave.givenEnding = "0";
                 return "EndingBadDragon";    
             case ratschlagBefolgen.iChooseYes:
                break;

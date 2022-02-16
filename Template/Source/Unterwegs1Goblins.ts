@@ -57,8 +57,10 @@ namespace Novel {
         let dialogHowToTalkWithGoblins = await ƒS.Menu.getInput(howToTalkWithGoblins, "DialogBoxGoblins");
         switch (dialogHowToTalkWithGoblins) {
             case howToTalkWithGoblins.iChooseFight:
+                dataForSave.longTimeWithGoblins = false;
                 return "Unterwegs1GoblinsAttack";
             case howToTalkWithGoblins.iChooseTalk:
+                dataForSave.longTimeWithGoblins = true;
                 await ƒS.Speech.tell(character.narrator, "Sie scheinen nicht an einer friedlichen Lösung interessiert zu sein");
                 await ƒS.Speech.tell(character.narrator, "Du wirst von den Goblins überwältigt");
 
