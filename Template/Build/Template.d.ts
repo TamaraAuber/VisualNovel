@@ -264,11 +264,11 @@ declare namespace Novel {
         };
     };
     let dataForSave: {
-        nameProtagonist: string;
         drunknessLevel: number;
         neededLongSleep: number;
         ownsPlayerWaepon: boolean;
         longTimeWithGoblins: boolean;
+        badDragonEndingNo: number;
     };
     function addDrunknessLevel(): void;
     function removeDrunknessLevel(): void;

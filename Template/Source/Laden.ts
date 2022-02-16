@@ -92,5 +92,9 @@ namespace Novel {
         await ƒS.Character.show(character.tiefling, character.tiefling.pose.standard, ƒS.positionPercent(35, 95));
         await ƒS.update(1);
 
+
+
+        await ƒS.Character.hide(character.tiefling);
+        await ƒS.Character.hide(roomInventory.ladenTheke);
     }
 }

@@ -253,11 +253,11 @@ namespace Novel {
 
 
   export let dataForSave = {
-    nameProtagonist: "",
     drunknessLevel: 0,
-    neededLongSleep: 0,   //0 Player wakes up early; 1 Player slept until afternoon
+    neededLongSleep: 0,         //0 Player wakes up early; 1 Player slept until afternoon
     ownsPlayerWaepon: true,
-    longTimeWithGoblins: false
+    longTimeWithGoblins: true,
+    badDragonEndingNo: 0        
   }
 
   //Menü
@@ -374,12 +374,12 @@ namespace Novel {
     gameMenu = ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
 
     let scenes: ƒS.Scenes = [
-      //{ scene: Prolog, name: "Prolog" },
-      //{ scene: Gasthaus, name: "Gasthaus" },
-      //{id: "Laden", scene: Laden, name: "Laden"},
-      //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
-      //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-      //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+      { scene: Prolog, name: "Prolog" },
+      { scene: Gasthaus, name: "Gasthaus" },
+      {id: "Laden", scene: Laden, name: "Laden"},
+      {scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+      {id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
+      {id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
       { scene: Drachenhort, name: "Drachenhort"},
       {id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
       {id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},

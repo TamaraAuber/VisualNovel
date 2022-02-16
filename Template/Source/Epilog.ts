@@ -12,6 +12,8 @@ namespace Novel {
         ƒS.Text.setClass("Epilog");
         ƒS.Text.print("Ich bin ein Epilog :)");
 
+        
+
 
 
 

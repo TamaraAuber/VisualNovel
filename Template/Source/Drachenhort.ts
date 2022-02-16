@@ -2,6 +2,17 @@ namespace Novel {
     export async function Drachenhort(): ƒS.SceneReturn {
         console.log("Szene: Drachenhort");
 
+        //test
+        //ƒS.Inventory.add(items.staff);
+        //ƒS.Inventory.add(items.cloak);
+        //ƒS.Inventory.add(items.sword);
+        //ƒS.Inventory.add(items.stone);
+        
+
+
+
+
+
         /*let text = {
             narrator: {
                 N000: "Hier wohnt ein Drache",
@@ -15,13 +26,61 @@ namespace Novel {
             iCHooseNo: "Drache einfach bekämpfen"
         };
 
-        //schauen wie ich checke was Protagonist im Inventar dabei hat
-        let howToDealWithDragons = {
+        let howToDealWithDragons;
+        /* --> alle Auswahlmöglichkeiten
+        howToDealWithDragons = {
             iChooseStaff: "Stab",
             iChooseCloak: "Umhang",
             iChooseSword: "Schwert",
-            iChooseStone: "Stein"
-        };
+            iChooseStone: "Stein",
+            iChooseRun: "Weglaufen!!!"
+        };*/
+
+        if (ƒS.Inventory.getAmount(items.staff)) {
+            howToDealWithDragons = {
+                iChooseStaff: "Stab",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+
+        if (ƒS.Inventory.getAmount(items.staff) && ƒS.Inventory.getAmount(items.stone)) {
+            howToDealWithDragons = {
+                iChooseStaff: "Stab",
+                iChooseStone: "Stein",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+
+        if (ƒS.Inventory.getAmount(items.cloak)) {
+            howToDealWithDragons = {
+                iChooseCloak: "Umhang",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+
+        if (ƒS.Inventory.getAmount(items.cloak) && ƒS.Inventory.getAmount(items.stone)) {
+            howToDealWithDragons = {
+                iChooseCloak: "Umhang",
+                iChooseStone: "Stein",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+
+        if (ƒS.Inventory.getAmount(items.sword)) {
+            howToDealWithDragons = {
+                iChooseSword: "Schwert",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+
+        if (ƒS.Inventory.getAmount(items.sword) && ƒS.Inventory.getAmount(items.stone)) {
+            howToDealWithDragons = {
+                iChooseSword: "Schwert",
+                iChooseStone: "Stein",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+        
 
 
         //P und F betreten Höhle
@@ -77,6 +136,7 @@ namespace Novel {
                 await ƒS.Speech.tell(character.narrator, "Angrif!!!!!!");
                 await ƒS.Character.hide(character.dragon);
                 await ƒS.Character.hide(character.fairy);
+                dataForSave.badDragonEndingNo = 0;
                 return "EndingBadDragon";    
             case ratschlagBefolgen.iChooseYes:
                break;
@@ -84,6 +144,7 @@ namespace Novel {
 
 
         //Ratschlag der Fee befolgt --> Blick ins Inventar
+        await ƒS.Inventory.open();
         await ƒS.Speech.tell(character.narrator, "Was möchtest du tun?");
         
         let dialogHowToDealWithDragons = await ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
@@ -92,12 +153,14 @@ namespace Novel {
                     await ƒS.Speech.tell(character.narrator, "Staff Attack!");
                     await ƒS.Character.hide(character.dragon);
                     await ƒS.Character.hide(character.fairy);
+                    dataForSave.badDragonEndingNo = 1;
                     return "EndingBadDragon";
                   
                 case howToDealWithDragons.iChooseCloak:
                     await ƒS.Speech.tell(character.narrator, "Here's my cloak :)");
                     await ƒS.Character.hide(character.dragon);
                     await ƒS.Character.hide(character.fairy);
+                    dataForSave.badDragonEndingNo = 2;
                     return "EndingBadDragon";
                    
                 case howToDealWithDragons.iChooseSword:
@@ -111,6 +174,13 @@ namespace Novel {
                     await ƒS.Character.hide(character.dragon);
                     await ƒS.Character.hide(character.fairy);
                     return "EndingHappyDragon";
+                
+                case howToDealWithDragons.iChooseRun:
+                    await ƒS.Speech.tell(character.narrator, "Run Forrest Run");
+                    await ƒS.Character.hide(character.dragon);
+                    await ƒS.Character.hide(character.fairy);
+                    dataForSave.badDragonEndingNo = 3;
+                    return "EndingBadDragon";
                     
             }
 

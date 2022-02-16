@@ -3,6 +3,11 @@ var Novel;
 (function (Novel) {
     async function Drachenhort() {
         console.log("Szene: Drachenhort");
+        //test
+        //ƒS.Inventory.add(items.staff);
+        //ƒS.Inventory.add(items.cloak);
+        //ƒS.Inventory.add(items.sword);
+        //ƒS.Inventory.add(items.stone);
         /*let text = {
             narrator: {
                 N000: "Hier wohnt ein Drache",
@@ -14,13 +19,54 @@ var Novel;
             iChooseYes: "Ins Inventar schauen",
             iCHooseNo: "Drache einfach bekämpfen"
         };
-        //schauen wie ich checke was Protagonist im Inventar dabei hat
-        let howToDealWithDragons = {
+        let howToDealWithDragons;
+        /* --> alle Auswahlmöglichkeiten
+        howToDealWithDragons = {
             iChooseStaff: "Stab",
             iChooseCloak: "Umhang",
             iChooseSword: "Schwert",
-            iChooseStone: "Stein"
-        };
+            iChooseStone: "Stein",
+            iChooseRun: "Weglaufen!!!"
+        };*/
+        if (Novel.ƒS.Inventory.getAmount(Novel.items.staff)) {
+            howToDealWithDragons = {
+                iChooseStaff: "Stab",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+        if (Novel.ƒS.Inventory.getAmount(Novel.items.staff) && Novel.ƒS.Inventory.getAmount(Novel.items.stone)) {
+            howToDealWithDragons = {
+                iChooseStaff: "Stab",
+                iChooseStone: "Stein",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+        if (Novel.ƒS.Inventory.getAmount(Novel.items.cloak)) {
+            howToDealWithDragons = {
+                iChooseCloak: "Umhang",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+        if (Novel.ƒS.Inventory.getAmount(Novel.items.cloak) && Novel.ƒS.Inventory.getAmount(Novel.items.stone)) {
+            howToDealWithDragons = {
+                iChooseCloak: "Umhang",
+                iChooseStone: "Stein",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+        if (Novel.ƒS.Inventory.getAmount(Novel.items.sword)) {
+            howToDealWithDragons = {
+                iChooseSword: "Schwert",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
+        if (Novel.ƒS.Inventory.getAmount(Novel.items.sword) && Novel.ƒS.Inventory.getAmount(Novel.items.stone)) {
+            howToDealWithDragons = {
+                iChooseSword: "Schwert",
+                iChooseStone: "Stein",
+                iChooseRun: "Weglaufen!!!"
+            };
+        }
         //P und F betreten Höhle
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
@@ -57,11 +103,13 @@ var Novel;
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Angrif!!!!!!");
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
+                Novel.dataForSave.badDragonEndingNo = 0;
                 return "EndingBadDragon";
             case ratschlagBefolgen.iChooseYes:
                 break;
         }
         //Ratschlag der Fee befolgt --> Blick ins Inventar
+        await Novel.ƒS.Inventory.open();
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "Was möchtest du tun?");
         let dialogHowToDealWithDragons = await Novel.ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
         switch (dialogHowToDealWithDragons) {
@@ -69,11 +117,13 @@ var Novel;
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff Attack!");
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
+                Novel.dataForSave.badDragonEndingNo = 1;
                 return "EndingBadDragon";
             case howToDealWithDragons.iChooseCloak:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Here's my cloak :)");
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
+                Novel.dataForSave.badDragonEndingNo = 2;
                 return "EndingBadDragon";
             case howToDealWithDragons.iChooseSword:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "My sword will kill you!");
@@ -85,6 +135,12 @@ var Novel;
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
                 return "EndingHappyDragon";
+            case howToDealWithDragons.iChooseRun:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Run Forrest Run");
+                await Novel.ƒS.Character.hide(Novel.character.dragon);
+                await Novel.ƒS.Character.hide(Novel.character.fairy);
+                Novel.dataForSave.badDragonEndingNo = 3;
+                return "EndingBadDragon";
         }
     }
     Novel.Drachenhort = Drachenhort;
@@ -96,6 +152,24 @@ var Novel;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the bad end");
+        /*
+        0: Ending Attack
+        1: Ending Staff
+        2: Ending Cloak
+        3: Ending Run
+        */
+        if (Novel.dataForSave.badDragonEndingNo === 0) {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Attack");
+        }
+        if (Novel.dataForSave.badDragonEndingNo === 1) {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff");
+        }
+        if (Novel.dataForSave.badDragonEndingNo === 2) {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Cloak");
+        }
+        if (Novel.dataForSave.badDragonEndingNo === 3) {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Run");
+        }
         return "Epilog";
     }
     Novel.EndingBadDragon = EndingBadDragon;
@@ -358,6 +432,8 @@ var Novel;
         await Novel.ƒS.update();
         await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 95));
         await Novel.ƒS.update(1);
+        await Novel.ƒS.Character.hide(Novel.character.tiefling);
+        await Novel.ƒS.Character.hide(Novel.roomInventory.ladenTheke);
     }
     Novel.Laden = Laden;
 })(Novel || (Novel = {}));
@@ -606,11 +682,11 @@ var Novel;
         }
     };
     Novel.dataForSave = {
-        nameProtagonist: "",
         drunknessLevel: 0,
         neededLongSleep: 0,
         ownsPlayerWaepon: true,
-        longTimeWithGoblins: false
+        longTimeWithGoblins: true,
+        badDragonEndingNo: 0
     };
     //Menü
     let inGameMenu = {
@@ -716,12 +792,12 @@ var Novel;
         //Menü
         gameMenu = Novel.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
-            //{ scene: Prolog, name: "Prolog" },
-            //{ scene: Gasthaus, name: "Gasthaus" },
-            //{id: "Laden", scene: Laden, name: "Laden"},
-            //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
-            //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-            //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+            { scene: Novel.Prolog, name: "Prolog" },
+            { scene: Novel.Gasthaus, name: "Gasthaus" },
+            { id: "Laden", scene: Novel.Laden, name: "Laden" },
+            { scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
+            { id: "Unterwegs1GoblinsAttack", scene: Novel.Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack" },
+            { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },
             { scene: Novel.Drachenhort, name: "Drachenhort" },
             { id: "EndingHappyDragon", scene: Novel.EndingHappyDragon, name: "EndingHappyDragon" },
             { id: "EndingSadDragon", scene: Novel.EndingSadDragon, name: "EndingSadDragon" },
