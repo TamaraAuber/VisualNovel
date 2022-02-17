@@ -800,7 +800,7 @@ var Novel;
     Novel.dataForSave = {
         drunknessLevel: 0,
         neededLongSleep: false,
-        ownsPlayerWaepon: true,
+        ownsPlayerWaepon: false,
         longTimeWithGoblins: true,
         badDragonEndingNo: 0
     };
@@ -999,7 +999,7 @@ var Novel;
                 N005: "Gerade als du überlegst was du tun sollst, hörst du hinter dir ein wütendes Grummeln.",
                 N006: "Du drehst dich um und ein weiterer wütender Goblin steht hinter dir.",
                 N007: "Er hebt seine Keule, ruft nach seinen Gefährten und macht sich bereit dich anzugreifen.",
-                N008: "Du suchst das Gespräch und versuchts die Sache friedlich zu regeln.",
+                N008: "Du suchst das Gespräch und versuchst die Sache friedlich zu regeln.",
                 N009: "Jedoch können oder wollen die Goblins dich nicht verstehen und stürzen auf dich los.",
                 N010: "Du wirst von Ihnen überwältigt und niedergeschlagen.",
                 N011: "Als du wieder zu dir kommst, ist es bereits dunkel.",
@@ -1114,16 +1114,23 @@ var Novel;
 (function (Novel) {
     async function Unterwegs1GoblinsAttack() {
         console.log("Szene: Unterwegs1GoblinsAttack");
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Goblins bemerken deinen Angriff");
+        let text = {
+            narrator: {
+                N000: "Du ziehst deine Waffe und mit viel Geschick (und vielleicht auch viel Glück) schaffst du es die Goblins zu besiegen!",
+                N001: "Du trittst den Goblins zwar mutig, aber ohne richtige Waffe entgegen.",
+                N002: "Unglücklicherweise sind diese dir zahlenmäßig überlegen und ziemlich wütend."
+            }
+        };
         if (Novel.dataForSave.ownsPlayerWaepon) {
             //Protagonist hat Waffe mit der er Goblins besiegen kann
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du ziehst deine Waffe und besiegst Goblins");
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
             await Novel.ƒS.Character.hide(Novel.character.goblinLeader);
             return "Unterwegs2Fee";
         }
         else {
             //Protagonist hat keine Waffe und wird von Goblins besiegt
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "You die");
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
             await Novel.ƒS.Character.hide(Novel.character.goblinLeader);
             return "EndingBadGoblins";
         }

@@ -14,7 +14,7 @@ namespace Novel {
                 N006: "Du drehst dich um und ein weiterer wütender Goblin steht hinter dir.",
                 N007: "Er hebt seine Keule, ruft nach seinen Gefährten und macht sich bereit dich anzugreifen.",
 
-                N008: "Du suchst das Gespräch und versuchts die Sache friedlich zu regeln.",
+                N008: "Du suchst das Gespräch und versuchst die Sache friedlich zu regeln.",
                 N009: "Jedoch können oder wollen die Goblins dich nicht verstehen und stürzen auf dich los.",
                 N010: "Du wirst von Ihnen überwältigt und niedergeschlagen.",
                 N011: "Als du wieder zu dir kommst, ist es bereits dunkel.",

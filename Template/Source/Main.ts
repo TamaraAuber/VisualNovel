@@ -251,7 +251,7 @@ namespace Novel {
   export let dataForSave = {
     drunknessLevel: 0,
     neededLongSleep: false,         //false Player wakes up early; true Player slept until afternoon
-    ownsPlayerWaepon: true,
+    ownsPlayerWaepon: false,
     longTimeWithGoblins: true,
     badDragonEndingNo: 0        
   }
