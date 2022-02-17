@@ -193,7 +193,7 @@ namespace Novel {
       }
     },
     fairy: {
-      name: "fairy",
+      name: "Amalya",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         standard: "Images/Fairy/Fairy_P3.png",
@@ -251,7 +251,7 @@ namespace Novel {
   export let dataForSave = {
     drunknessLevel: 0,
     neededLongSleep: false,         //false Player wakes up early; true Player slept until afternoon
-    ownsPlayerWaepon: false,
+    ownsPlayerWaepon: true,
     longTimeWithGoblins: true,
     badDragonEndingNo: 0        
   }

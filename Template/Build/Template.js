@@ -747,7 +747,7 @@ var Novel;
             }
         },
         fairy: {
-            name: "fairy",
+            name: "Amalya",
             origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
                 standard: "Images/Fairy/Fairy_P3.png",
@@ -800,7 +800,7 @@ var Novel;
     Novel.dataForSave = {
         drunknessLevel: 0,
         neededLongSleep: false,
-        ownsPlayerWaepon: false,
+        ownsPlayerWaepon: true,
         longTimeWithGoblins: true,
         badDragonEndingNo: 0
     };
@@ -1143,12 +1143,32 @@ var Novel;
         console.log("Szene: Unterwegs2Fee");
         let text = {
             narrator: {
-                N000: "Lerne die Fee kennen",
-                N001: "Auftritt Fee",
-                N002: ":)"
+                N000: "Du schnappst dir den Käfig mit der Fee und möchtest so schnell wie möglich verschwinden.",
+                N001: "Da fällt dir auf einmal ein seltsamer Stein auf. Er wirkt irgendwie wertvoll.",
+                N002: "Du packst den Stein in deine Tasche und läufst weiter.",
+                N003: "Du lässt den Stein liegen und läufst weiter.",
+                N004: "In sicherer Entfernung befreist du die Fee aus ihrem Käfig.",
+                N005: "Amalya ist sehr neugierig und fragt dich über alles aus. Also erzählst du ihr von dem Gastwirt Andvari und Ruby und, dass du jetzt auf der Suche nach der Drachenhöhle bist.",
+                N006: "Ihr macht euch also gemeinsam auf den Weg.",
+                N007: "Unterwegs versucht ihr herauszufinden, was für einen Stein du da bei den Goblins eingesammelt hast.",
+                N008: "Das letzte Stück eures Weges führt einen steilen Berghang hinauf, welcher an einem kleinen Felsvorsprung endet.",
+                N009: "Ihr steht vor einem großen Höhleneingang. ",
+                N010: "Aber als du dich umdrehst bietet sich dir ein noch viel beeindruckenderer Anblick!",
+                N011: "Von hier oben kannst du über das gesamte Tal sehen.",
+                N012: "Jedoch verleiht ihm das schlechte Wetter ein erschreckendes Aussehen.",
+                N013: "Das heranziehende Unwetter bereitet dir nicht gerade viel Mut.",
+                N014: "Ihr könnt gerade noch die untergehende Sonne betrachten.",
+                N015: "Dieser wunderschöne Anblick verleiht dir ein Gefühl alles schaffen zu können und du vergisst fast, weshalb du hier bist.",
+                N016: "Du drehst dich wieder der Fee zu und ihr betretet gemeinsam die Höhle…"
             },
             fairy: {
-                F000: "Hallo, danke, dass du mich gerettet hast"
+                F000: "Vielen Dank, dass du mich gerettet hast! Du bist mein Held! Ich heiße übrigens Amalya :)",
+                F001: "Oh, ich weiß wo die Drachenhöhle ist. Ich kann dir den weg zeigen!",
+                F002: "Ich weiß nicht, wo sie den herhaben. Den hatten sie schon als sie mich gefangen genommen haben.",
+                F003: "So wie sie sich benommen haben muss er wohl sehr wertvoll sein…aber mehr weiß ich darüber auch nicht.",
+                F004: "Ich finde ihn jedenfalls sehr hübsch! :)",
+                F005: "Wir sind da! Da drin befindet sich die Höhle des Drachen.",
+                F006: "Wir sollten weiter gehen!"
             }
         };
         let wannaFancyStone = {
@@ -1158,52 +1178,62 @@ var Novel;
         // P schnappt sich Fee und rennt davon
         await Novel.ƒS.Location.show(Novel.location.wald);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du schnappst die den Käfig mit der Fee und möchtest verschwinden");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
         //P stolpert über Stein, Möglichkeit ihn mitzunehmen
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Stolperst über Stein, der neben Käfig liegt");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
         await Novel.ƒS.Character.show(Novel.roomInventory.stone, Novel.roomInventory.stone.pose.standard, Novel.ƒS.positionPercent(75, 100));
         await Novel.ƒS.update(1);
         let dialogTakeStone = await Novel.ƒS.Menu.getInput(wannaFancyStone, "DialogBoxGoblins");
         switch (dialogTakeStone) {
             case wannaFancyStone.iChooseTakeIt:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
                 Novel.ƒS.Inventory.add(Novel.items.stone);
                 await Novel.ƒS.Inventory.open();
                 break;
             case wannaFancyStone.iChooseLeaveIt:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N003);
                 break;
         }
         await Novel.ƒS.Character.hide(Novel.roomInventory.stone);
         // P und F lernen sich kennen
         await Novel.ƒS.Location.show(Novel.location.feld);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "In sicherer Entfernung befreist du Fee aus Käfig");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N004);
         await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.grateful, Novel.ƒS.positionPercent(70, 65));
         await Novel.ƒS.update(1);
         await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F000);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N005);
         await Novel.ƒS.Character.hide(Novel.character.fairy);
         //await ƒS.update();
         await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.standard, Novel.ƒS.positionPercent(55, 75));
         await Novel.ƒS.update(1);
-        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Ich kann dir den Weg zeigen");
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F001);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N006);
         //P und F rätseln über Stein -- nur möglich wenn Stein im Inventar
         if (Novel.ƒS.Inventory.getAmount(Novel.items.stone)) {
-            await Novel.ƒS.Speech.tell(Novel.character.fairy, "Interessanter Stein");
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N007);
+            await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F002);
+            await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F003);
+            await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F004);
         }
         //Eingang der Drachenhöhle wird erreicht
         await Novel.ƒS.Character.hide(Novel.character.fairy);
         await Novel.ƒS.Location.show(Novel.location.drachenHoehleEingang);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Euer Weg endet an einem Felsvorsprung. Ihr habt den Eingang der Höhle erreicht");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N008);
         await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.standard, Novel.ƒS.positionPercent(25, 55));
         await Novel.ƒS.update(1);
-        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Wir sind da");
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F005);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N009);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N010);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N011);
         //Ausblick über Tal  --> je nachdem wie viel Zeit mit den Goblins verbracht wurde
         if (Novel.dataForSave.longTimeWithGoblins) {
             //es wurde viel Zeit mit den Goblins verschwendet -> schlechtes Wetter
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du drehst dich um und erhälst einen Ausblick über das Tal. Jedoch verleiht ihm das schlechte Wetter einen erschreckendes Aussehen");
             await Novel.ƒS.Location.show(Novel.location.talSchlechtesWetter);
             await Novel.ƒS.Character.hide(Novel.character.fairy);
             await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N012);
             await Novel.ƒS.Character.show(Novel.roomInventory.blitze, Novel.roomInventory.blitze.pose.standard, Novel.ƒS.positionPercent(50, 100));
             await Novel.ƒS.update();
             await Novel.ƒS.Character.hide(Novel.roomInventory.blitze);
@@ -1212,17 +1242,19 @@ var Novel;
             await Novel.ƒS.update(1);
             await Novel.ƒS.Character.hide(Novel.roomInventory.filterLicht);
             await Novel.ƒS.update(2);
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N013);
         }
         else {
             //wenig Zeit verschwendet -> gutes Wetter
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du drehst dich um und erhälst einen wunderschönen Ausblick über das Tal. Du vergisst fast wieso du hier bist.");
             await Novel.ƒS.Location.show(Novel.location.talGutesWetter);
             await Novel.ƒS.Character.hide(Novel.character.fairy);
             await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du vergisst fast wieso du hier bist.");
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N014);
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N015);
         }
-        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Lass uns weiter gehen!");
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Ihr geht zusammen in die Höhle");
+        //Höhle betreten
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F006);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N016);
         await Novel.ƒS.Character.hide(Novel.character.fairy);
     }
     Novel.Unterwegs2Fee = Unterwegs2Fee;
