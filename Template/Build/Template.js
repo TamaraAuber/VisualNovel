@@ -413,9 +413,13 @@ var Novel;
             let dialogPresentNoon = await Novel.ƒS.Menu.getInput(presentsNoon, "DialogBoxPresents");
             switch (dialogPresentNoon) {
                 case presentsNoon.iChooseCloak:
+                    Novel.ƒS.Inventory.add(Novel.items.cloak);
+                    await Novel.ƒS.Inventory.open();
                     Novel.dataForSave.ownsPlayerWaepon = false;
                     break;
                 case presentsNoon.iChooseStaff:
+                    Novel.ƒS.Inventory.add(Novel.items.staff);
+                    await Novel.ƒS.Inventory.open();
                     Novel.dataForSave.ownsPlayerWaepon = true;
                     break;
             }
@@ -923,6 +927,8 @@ var Novel;
         switch (dialogSneakOrAttack) {
             case sneakOrAttack.iChooseAttack:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "Attack!!");
+                await Novel.ƒS.Character.hide(Novel.character.goblinGroup);
+                await Novel.ƒS.Character.hide(Novel.roomInventory.filterNacht);
                 return "Unterwegs1GoblinsAttack";
             case sneakOrAttack.iChooseSneak:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, "du versuchst langsam davon zu schleichen");

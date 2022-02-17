@@ -103,7 +103,10 @@ namespace Novel {
         switch (dialogSneakOrAttack) {
             case sneakOrAttack.iChooseAttack:
                 await ƒS.Speech.tell(character.narrator, "Attack!!");
+                await ƒS.Character.hide(character.goblinGroup);
+                await ƒS.Character.hide(roomInventory.filterNacht);
                 return "Unterwegs1GoblinsAttack";
+    
             case sneakOrAttack.iChooseSneak:
                 await ƒS.Speech.tell(character.narrator, "du versuchst langsam davon zu schleichen");
 

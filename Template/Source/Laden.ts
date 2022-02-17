@@ -68,9 +68,13 @@ namespace Novel {
             let dialogPresentNoon = await ƒS.Menu.getInput(presentsNoon, "DialogBoxPresents");
             switch (dialogPresentNoon) {
                 case presentsNoon.iChooseCloak:
+                    ƒS.Inventory.add(items.cloak);
+                    await ƒS.Inventory.open();
                     dataForSave.ownsPlayerWaepon = false;
                     break;
                 case presentsNoon.iChooseStaff:
+                    ƒS.Inventory.add(items.staff);
+                    await ƒS.Inventory.open();
                     dataForSave.ownsPlayerWaepon = true;
                     break;
             }
