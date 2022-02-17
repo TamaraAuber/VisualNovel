@@ -261,7 +261,7 @@ declare namespace Novel {
     };
     let dataForSave: {
         drunknessLevel: number;
-        neededLongSleep: number;
+        neededLongSleep: boolean;
         ownsPlayerWaepon: boolean;
         longTimeWithGoblins: boolean;
         badDragonEndingNo: number;

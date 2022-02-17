@@ -447,11 +447,26 @@ var Novel;
         console.log("Szene: Laden");
         let text = {
             narrator: {
-                N000: "Willkommen im Laden",
-                N001: "Auftritt Händlerin"
+                N000: "Am nächsten Morgen machst du dich auf den Weg zu Rubys Laden.",
+                N001: "Der Met war wohl ein bisschen stärker als gedacht und so ist es erst Mittag als du dich zu Rubys Laden begibst.",
+                N002: "Du betrittst den Laden und willst dich gerade ein bisschen umschauen, als eine junge Tieflingdame aus einem Nebenzimmer kommt und dich begrüßt.",
+                N003: "Du erzählst ihr, von Gestern Abend und, dass der Gastwirt dich geschickt hat.",
+                N004: "Du bedankst und verabschiedest dich bei Ruby, bevor du dich schließlich auf den in die Berge machst."
             },
             tiefling: {
-                T000: "Willkommen in meinem Laden"
+                T000: "Hallo, Ich bin Ruby.",
+                T001: "Willkommen in meinem Laden! Wie kann ich dir helfen?",
+                T002: "Ach ja, zu Andvari geh ich immer gerne. In seinem Gasthaus ist normalerweise immer so viel los :)",
+                T003: "Natürlich helfe ich dir gerne! Das Drachenproblem betrifft mich ja genauso sehr wie alle anderen in unserem Dorf auch.",
+                T004: "Man munkelt, dass der Drache seine Höhle in den Bergen hat und sich dort meistens versteckt.",
+                T005: "Es wäre wirklich schön, wenn er aufhören würde uns heimzusuchen.",
+                T006: "Einige denken ihn zu töten wäre die einzige Lösung… Ich denke nicht, dass man das tun sollte. Es wird schon einen Grund haben, wieso der Drache jetzt erst aufgetaucht ist…",
+                T007: "Vielleicht lässt sich die Sache ja friedlich klären? Denke doch an meine Worte, wenn du ihm begegnest.",
+                T008: "Aber genug, ich schweife ab. Du musst los!",
+                T009: "Aber davor würde ich dir gerne etwas mitgeben, was dir auf deiner Reise vielleicht helfen könnte.",
+                T010: "Was möchtest du mitnehmen?",
+                T011: "Leider habe ich mein letztes Schwert heute Morgen verkauft, aber vielleicht findest du ja etwas anderes. Was möchtest du mitnehmen?",
+                T012: "Ich hoffe mein Geschenk wird dir auf deiner Reise behilflich sein. Viel Glück!"
             }
         };
         let presentsMorning = {
@@ -467,16 +482,38 @@ var Novel;
         //Laden betreten
         await Novel.ƒS.Location.show(Novel.location.laden);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
         await Novel.ƒS.Character.show(Novel.roomInventory.ladenTheke, Novel.roomInventory.ladenTheke.pose.standard, Novel.ƒS.positionPercent(50, 100));
-        await Novel.ƒS.update(1);
+        await Novel.ƒS.update(0.3);
+        if (Novel.dataForSave.neededLongSleep === false) {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
+        }
+        else {
+            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
+        }
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
         //mit Ruby reden
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
         await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 95));
         await Novel.ƒS.update(1);
         await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T000);
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T001);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N003);
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T002);
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T003);
+        await Novel.ƒS.Character.hide(Novel.character.tiefling);
+        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.thinking, Novel.ƒS.positionPercent(35, 95));
+        await Novel.ƒS.update();
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T004);
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T005);
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T006);
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T007);
+        await Novel.ƒS.Character.hide(Novel.character.tiefling);
+        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 95));
+        await Novel.ƒS.update();
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T008);
         //Ruby bietet Geschenk an
-        if (Novel.dataForSave.neededLongSleep === 0) {
+        if (Novel.dataForSave.neededLongSleep === false) {
+            await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T009);
+            await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T010);
             let dialogPresentMorning = await Novel.ƒS.Menu.getInput(presentsMorning, "DialogBoxPresents");
             switch (dialogPresentMorning) {
                 case presentsMorning.iChooseCloak:
@@ -497,6 +534,7 @@ var Novel;
             }
         }
         else {
+            await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T011);
             let dialogPresentNoon = await Novel.ƒS.Menu.getInput(presentsNoon, "DialogBoxPresents");
             switch (dialogPresentNoon) {
                 case presentsNoon.iChooseCloak:
@@ -511,18 +549,9 @@ var Novel;
                     break;
             }
         }
-        //Ruby erklärt den Weg zum Drachen
-        await Novel.ƒS.Speech.tell(Novel.character.tiefling, "Der Drache lebt in den Bergen");
-        await Novel.ƒS.Character.hide(Novel.character.tiefling);
-        await Novel.ƒS.update();
-        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.thinking, Novel.ƒS.positionPercent(35, 95));
-        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.tiefling, text.tiefling.T012);
         //Protagonist macht sich auf den Weg
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du verabschiedest dich und gehst weiter");
-        await Novel.ƒS.Character.hide(Novel.character.tiefling);
-        await Novel.ƒS.update();
-        await Novel.ƒS.Character.show(Novel.character.tiefling, Novel.character.tiefling.pose.standard, Novel.ƒS.positionPercent(35, 95));
-        await Novel.ƒS.update(1);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N004);
         await Novel.ƒS.Character.hide(Novel.character.tiefling);
         await Novel.ƒS.Character.hide(Novel.roomInventory.ladenTheke);
     }
@@ -749,28 +778,28 @@ var Novel;
     Novel.items = {
         cloak: {
             name: "Umhang",
-            description: "Fancy Umhang",
+            description: "„Er schützt dich vor nichts (abgesehen von dem Wetter vielleicht), er hilft dir nicht im Kampf, aber du siehst einfach fabelhaft aus!“",
             image: "Images/Items/Item_Cloak1.png"
         },
         staff: {
             name: "Stab",
-            description: "Staff Attack",
+            description: "„Macht nicht viel her, kann aber durchaus effektiv sein, wenn es in die richtigen Hände fällt“",
             image: "Images/Items/Item_Staff1.png"
         },
         sword: {
             name: "Schwert",
-            description: "Mighty Sword",
+            description: "„Eine schmuckvoll verzierte Waffe, die schon viele Besitzer und noch mehr Kämpfe erlebt hat“",
             image: "Images/Items/Item_Sword1.png"
         },
         stone: {
             name: "Stone",
-            description: "Mysterious Stone",
+            description: "Mysteriöser Stein",
             image: "Images/Items/Item_DragonEgg1.png"
         }
     };
     Novel.dataForSave = {
         drunknessLevel: 0,
-        neededLongSleep: 0,
+        neededLongSleep: false,
         ownsPlayerWaepon: true,
         longTimeWithGoblins: true,
         badDragonEndingNo: 0
@@ -846,7 +875,7 @@ var Novel;
         console.log("New DrunknessLevel " + Novel.dataForSave.drunknessLevel);
         SetDrunknessSight();
         if (Novel.dataForSave.drunknessLevel == 3) {
-            Novel.dataForSave.neededLongSleep = 1;
+            Novel.dataForSave.neededLongSleep = true;
         }
         console.log("did Player need long sleep? " + Novel.dataForSave.neededLongSleep);
     }
@@ -893,8 +922,8 @@ var Novel;
         gameMenu = Novel.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
             //{ scene: Prolog, name: "Prolog" },
-            { scene: Novel.Gasthaus, name: "Gasthaus" },
-            { id: "Laden", scene: Novel.Laden, name: "Laden" },
+            //{ scene: Gasthaus, name: "Gasthaus" },
+            //{id: "Laden", scene: Laden, name: "Laden"},
             { scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
             { id: "Unterwegs1GoblinsAttack", scene: Novel.Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack" },
             { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },

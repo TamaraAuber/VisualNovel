@@ -227,22 +227,22 @@ namespace Novel {
   export let items = {
     cloak: {
       name: "Umhang",
-      description: "Fancy Umhang",
+      description: "„Er schützt dich vor nichts (abgesehen von dem Wetter vielleicht), er hilft dir nicht im Kampf, aber du siehst einfach fabelhaft aus!“",
       image: "Images/Items/Item_Cloak1.png"
     },
     staff: {
       name: "Stab",
-      description: "Staff Attack",
+      description: "„Macht nicht viel her, kann aber durchaus effektiv sein, wenn es in die richtigen Hände fällt“",
       image: "Images/Items/Item_Staff1.png"
     },
     sword: {
       name: "Schwert",
-      description: "Mighty Sword",
+      description: "„Eine schmuckvoll verzierte Waffe, die schon viele Besitzer und noch mehr Kämpfe erlebt hat“",
       image: "Images/Items/Item_Sword1.png"
     },
     stone: {
       name: "Stone",
-      description: "Mysterious Stone",
+      description: "Mysteriöser Stein",
       image: "Images/Items/Item_DragonEgg1.png"
     }
   };
@@ -250,7 +250,7 @@ namespace Novel {
 
   export let dataForSave = {
     drunknessLevel: 0,
-    neededLongSleep: 0,         //0 Player wakes up early; 1 Player slept until afternoon
+    neededLongSleep: false,         //false Player wakes up early; true Player slept until afternoon
     ownsPlayerWaepon: true,
     longTimeWithGoblins: true,
     badDragonEndingNo: 0        
@@ -332,7 +332,7 @@ namespace Novel {
     SetDrunknessSight();
 
     if (dataForSave.drunknessLevel == 3) {
-      dataForSave.neededLongSleep = 1;
+      dataForSave.neededLongSleep = true;
     }
     console.log("did Player need long sleep? " + dataForSave.neededLongSleep);
   }
@@ -384,8 +384,8 @@ namespace Novel {
 
     let scenes: ƒS.Scenes = [
       //{ scene: Prolog, name: "Prolog" },
-      { scene: Gasthaus, name: "Gasthaus" },
-      {id: "Laden", scene: Laden, name: "Laden"},
+      //{ scene: Gasthaus, name: "Gasthaus" },
+      //{id: "Laden", scene: Laden, name: "Laden"},
       {scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
       {id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
       {id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
