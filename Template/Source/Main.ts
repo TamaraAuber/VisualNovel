@@ -383,7 +383,7 @@ namespace Novel {
     gameMenu = ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
 
     let scenes: ƒS.Scenes = [
-      { scene: Prolog, name: "Prolog" },
+      //{ scene: Prolog, name: "Prolog" },
       { scene: Gasthaus, name: "Gasthaus" },
       {id: "Laden", scene: Laden, name: "Laden"},
       {scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
