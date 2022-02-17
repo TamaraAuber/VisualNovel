@@ -33,10 +33,6 @@ namespace Novel {
       name: "blackscreen",
       background: "Images/Locations/blackscreen.png"
     },
-    menuErklaerung: {
-      name: "menuErklaerung",
-      background: "Images/Locations/TestLocation1.png"
-    },
     gasthausHauptraum: {
       name: "gasthausHauptraum",
       background: "Images/Tavern/Tavern_Entrance1.png"
@@ -263,6 +259,7 @@ namespace Novel {
   //Menü
   let inGameMenu = {
    //buttons, die man angezeigt haben möchte & strings dienen zur css-gestaltung
+   credits: "Credits",
    save: "Save",
    load: "Load",
    close: "Close"
@@ -286,6 +283,9 @@ namespace Novel {
         gameMenu.close();
         menu = false;
         break;
+        case inGameMenu.credits:
+          showCredits();
+          break;
     }
   }
 
@@ -313,7 +313,16 @@ namespace Novel {
           await gameMenu.open();
           menu = true;
         }
+        break;
+      case ƒ.KEYBOARD_CODE.C:
+        showCredits();
+          break;
     }
+  }
+
+  export function showCredits() {
+    ƒS.Text.addClass("credits");
+    ƒS.Text.print("Hier könnten jetzt Credits stehen.");
   }
 
   export function addDrunknessLevel() {

@@ -52,10 +52,6 @@ declare namespace Novel {
             name: string;
             background: string;
         };
-        menuErklaerung: {
-            name: string;
-            background: string;
-        };
         gasthausHauptraum: {
             name: string;
             background: string;
@@ -270,6 +266,7 @@ declare namespace Novel {
         longTimeWithGoblins: boolean;
         badDragonEndingNo: number;
     };
+    function showCredits(): void;
     function addDrunknessLevel(): void;
     function removeDrunknessLevel(): void;
     function SetDrunknessSight(): void;

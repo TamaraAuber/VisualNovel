@@ -473,10 +473,6 @@ var Novel;
             name: "blackscreen",
             background: "Images/Locations/blackscreen.png"
         },
-        menuErklaerung: {
-            name: "menuErklaerung",
-            background: "Images/Locations/TestLocation1.png"
-        },
         gasthausHauptraum: {
             name: "gasthausHauptraum",
             background: "Images/Tavern/Tavern_Entrance1.png"
@@ -695,6 +691,7 @@ var Novel;
     //Menü
     let inGameMenu = {
         //buttons, die man angezeigt haben möchte & strings dienen zur css-gestaltung
+        credits: "Credits",
         save: "Save",
         load: "Load",
         close: "Close"
@@ -714,6 +711,9 @@ var Novel;
             case inGameMenu.close:
                 gameMenu.close();
                 menu = false;
+                break;
+            case inGameMenu.credits:
+                showCredits();
                 break;
         }
     }
@@ -742,8 +742,17 @@ var Novel;
                     await gameMenu.open();
                     menu = true;
                 }
+                break;
+            case Novel.ƒ.KEYBOARD_CODE.C:
+                showCredits();
+                break;
         }
     }
+    function showCredits() {
+        Novel.ƒS.Text.addClass("credits");
+        Novel.ƒS.Text.print("Hier könnten jetzt Credits stehen.");
+    }
+    Novel.showCredits = showCredits;
     function addDrunknessLevel() {
         console.log("Old DrunknessLevel " + Novel.dataForSave.drunknessLevel);
         Novel.dataForSave.drunknessLevel = Novel.dataForSave.drunknessLevel + 1;
@@ -821,18 +830,34 @@ var Novel;
         console.log("Szene: Prolog");
         let text = {
             prologText: {
-                T000: "Hier könnte ihr Prolog stehen"
+                T000: "&nbsp;",
+                T001: "198 n.D.",
+                T002: "Die Drachenkriege sind seit fast 200 Jahren vorbei. ",
+                T003: "Obwohl mit den letzten verbleibenden Drachen Frieden geschlossen wurde, halten diese sich nun überwiegend im Verborgenen auf.",
+                T004: "Nur selten bekommt man einen von Ihnen zu sehen.",
+                T005: "Nach einer längeren Reise kommst du gerade in einem kleinen Dorf an.",
+                T006: "Du stammst aus einer, in deiner Heimat, angesehenen Familie von Abenteurern.",
+                T007: "Da du jedoch der Jüngste in deiner Familie bist, steht dir das große Glück zu jegliche Botengänge zu erledigen. Von solch einem Botengang kommst du gerade.",
+                T008: "Du bist hungrig und sehnst dich nach einem Bett als du am Ende der Straße ein Gasthaus entdeckst."
+            },
+            novelPage: {
+                N000: "<h1> Shortcuts </h1><b> F8: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save <br><b> F9: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load <br><b> M: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open/Close Menu<br><b> C: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show Credits<br>"
             }
         };
-        //!!!!!!!!!!!!Startscreen durch Novel Page ersetzen?????????????
-        //kurze Zwischensequenz, in der shortcuts für menü gezeigt werden
-        await Novel.ƒS.Location.show(Novel.location.menuErklaerung);
-        await Novel.ƒS.update();
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Menü Shortcuts");
-        //evtl. Transition raus
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionTwo.duration, Novel.transition.transitionTwo.alpha, Novel.transition.transitionTwo.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T000);
+        //Anzeige Shortcuts
+        Novel.ƒS.Text.addClass("menuShortcuts");
+        await Novel.ƒS.Text.print(text.novelPage.N000);
+        //Prolog
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T001);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T002);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T003);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T004);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T005);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T006);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T007);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T008);
     }
     Novel.Prolog = Prolog;
 })(Novel || (Novel = {}));
