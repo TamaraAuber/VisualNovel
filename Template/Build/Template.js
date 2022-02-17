@@ -8,16 +8,52 @@ var Novel;
         //ƒS.Inventory.add(items.cloak);
         //ƒS.Inventory.add(items.sword);
         //ƒS.Inventory.add(items.stone);
-        /*let text = {
+        let text = {
             narrator: {
-                N000: "Hier wohnt ein Drache",
-                N001: "Auftritt Drache",
-                N002: ":)"
+                N000: "Als ihr in die Höhle eintretet herrscht totale Finsternis.",
+                N001: "Ihr lauft langsam weiter und allmählich wird es heller…",
+                N002: "Vorsichtig tastet ihr euch an das Ende der Höhle voran, bis …",
+                N003: "Ihr steht plötzlich einem riesigen schlafenden Drachen gegenüber.",
+                N004: "Neben dir zittert Amalya vor Angst. Du erkennst, wie sie sich anstrengt nicht nochmal loszuschreien.",
+                N005: "Pfffff!",
+                N006: "Schnaubend steht der Drache auf.",
+                N007: "Schon im Liegen war dieser riesig, aber jetzt wird er immer größer, bis er in seiner vollen Größe wütend vor euch dasteht.",
+                N008: "Ihr steht einem riesigen wütenden Drachen bevor.",
+                N009: "Dein Mut ist bewundernswert, deine Intelligenz jedoch nicht. Wer greift einen Drachen mit bloßen Händen an?!",
+                N010: "Voller Selbstvertrauen stellst du dich dem Drachen entgegen…",
+                N011: "Ein böser Fehler!",
+                N012: "Du wirfst einen Blick in deinen Rucksack und ziehst den alles entscheidenden Gegenstand heraus…",
+                N013: "Du nimmst deinen Stab und stellst dich todesmutig dem Drachen entgegen…",
+                N014: "Du greifst einen feuerspeienden Drachen mit einem Holzstock an…wer hätte gedacht, dass das schief gehen kann!",
+                N015: "Du erinnerst dich an Rubys Worte…friedliche Lösung!",
+                N016: "Du kniest vor dem Drachen nieder und bietest ihm deinen Umhang als Geschenk an.",
+                N017: "Der Drache scheint kurz verwirrt aber immer noch wütend…",
+                N018: "…der Umhang ist ja auch viel zu klein!",
+                N019: "Du greifst zu deinem Schwert und stellst dich dem Drachen entgegen!",
+                N020: "Du kniest nieder und bietest dem Drachen als Geschenk den wunderschönen Stein an.",
+                N021: "Auf einmal wird der Drache ganz ruhig und friedlich…",
+                N022: "Er nimmt den Stein vorsichtig an sich.",
+                N023: "Plötzlich fängt der Stein sich an zu bewegen…",
+                N024: "Da erkennst du…es ist gar kein Stein, sondern ein Ei!",
+                N025: "Aus dem Ei schlüpft ein kleines Drachenbaby, welches von seiner Mutter liebevoll betrachtet wird.",
+                N026: "Du schreist Amalya zu, dass sie fliehen soll…",
+                N027: "…so schnell du kannst rennst du ihr hinterher…",
+                N028: "Jedoch zu langsam!"
+            },
+            fairy: {
+                F000: "Aaahhhhhhhhh!!!",
+                F001: "I-i-ich d-d-dachte nicht, dass er so groß ist…",
+                F002: "G-g-glaubst du e-e-er hat mich gehört?!",
+                F003: "Tu doch etwas!",
+                F004: "Vielleicht hast du ja etwas Nützliches dabei! O-o-oder Ruby hat Recht und man kann die Sache doch i-i-irgendwie friedlich lösen!",
+                F005: "",
+                F006: "",
+                F007: ""
             }
-        };*/
+        };
         let ratschlagBefolgen = {
-            iChooseYes: "Ins Inventar schauen",
-            iCHooseNo: "Drache einfach bekämpfen"
+            iChooseYes: "Hast Recht, ich sollte in meinen Rucksack schauen!",
+            iCHooseNo: "Ach was, ich besiege den Drachen schon!"
         };
         let howToDealWithDragons;
         /* --> alle Auswahlmöglichkeiten
@@ -70,73 +106,93 @@ var Novel;
         //P und F betreten Höhle
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Es ist dunkel");
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Du läufst weiter und es wird heller");
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N000);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
         await Novel.ƒS.Location.show(Novel.location.drachenHoehleGang);
-        await Novel.ƒS.update(Novel.transition.transitionThree.duration, Novel.transition.transitionThree.alpha, Novel.transition.transitionThree.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "gelangst ans Ende der Höhle");
+        await Novel.ƒS.update(8, Novel.transition.transitionThree.alpha, Novel.transition.transitionThree.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
         //sie entdecken schlafenden Drachen
         await Novel.ƒS.Location.show(Novel.location.drachenHoehle);
-        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Entdeckst Drache");
         await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.sleeping, Novel.ƒS.positionPercent(55, 80));
-        await Novel.ƒS.update(1);
-        //await ƒS.Character.show(roomInventory.sonnenstrahlen, roomInventory.sonnenstrahlen.pose.standard, ƒS.positionPercent(50, 100));
-        //await ƒS.update(1);
-        //Drache wird geweckt
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Fee erschrickt; stößt Stein um -> lautes Geräusch!!!");
+        await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F000);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N003);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N004);
         await Novel.ƒS.Character.show(Novel.character.fairy, Novel.character.fairy.pose.afraid, Novel.ƒS.positionPercent(20, 70));
         await Novel.ƒS.update(0.5);
-        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Glaubst du er hat das bemerkt?");
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Drache wird geweckt");
-        await Novel.ƒS.Character.hide(Novel.roomInventory.sonnenstrahlen);
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F001);
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F002);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N005);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N006);
         await Novel.ƒS.Character.hide(Novel.character.dragon);
         await Novel.ƒS.update();
         await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.angry, Novel.ƒS.positionPercent(50, 100));
-        await Novel.ƒS.update(1);
+        await Novel.ƒS.update(3);
+        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N007);
+        //await ƒS.Speech.tell(character.narrator, text.narrator.N008);
         //F schlägt vor ins Inventar zu schauen
-        await Novel.ƒS.Speech.tell(Novel.character.fairy, "Möchtest du in dein Inventar schauen?");
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F003);
+        await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F004);
         //Möglichkeit Ratschlag der Fee zu befolgen
         let dialogRatschlagBefolgen = await Novel.ƒS.Menu.getInput(ratschlagBefolgen, "DialogBoxRatschlagBefolgen");
         switch (dialogRatschlagBefolgen) {
             case ratschlagBefolgen.iCHooseNo:
-                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Angrif!!!!!!");
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N009);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N010);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N011);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
                 Novel.dataForSave.badDragonEndingNo = 0;
                 return "EndingBadDragon";
             case ratschlagBefolgen.iChooseYes:
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N012);
                 break;
         }
         //Ratschlag der Fee befolgt --> Blick ins Inventar
-        await Novel.ƒS.Inventory.open();
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "Was möchtest du tun?");
+        //await ƒS.Inventory.open();
+        //await ƒS.Speech.tell(character.narrator, "  ");
         let dialogHowToDealWithDragons = await Novel.ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
         switch (dialogHowToDealWithDragons) {
             case howToDealWithDragons.iChooseStaff:
-                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff Attack!");
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N013);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N014);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
                 Novel.dataForSave.badDragonEndingNo = 1;
                 return "EndingBadDragon";
             case howToDealWithDragons.iChooseCloak:
-                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Here's my cloak :)");
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N015);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N016);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N017);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N018);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
                 Novel.dataForSave.badDragonEndingNo = 2;
                 return "EndingBadDragon";
             case howToDealWithDragons.iChooseSword:
-                await Novel.ƒS.Speech.tell(Novel.character.narrator, "My sword will kill you!");
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N019);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
                 return "EndingSadDragon";
             case howToDealWithDragons.iChooseStone:
-                await Novel.ƒS.Speech.tell(Novel.character.narrator, "I give you my stone :)");
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N015);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N020);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N021);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N022);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N023);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N024);
+                await Novel.ƒS.update();
+                await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.happyWithBaby, Novel.ƒS.positionPercent(50, 100));
+                await Novel.ƒS.update(1);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N025);
+                await Novel.ƒS.Character.hide(Novel.character.dragon);
                 return "EndingHappyDragon";
             case howToDealWithDragons.iChooseRun:
-                await Novel.ƒS.Speech.tell(Novel.character.narrator, "Run Forrest Run");
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N026);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N027);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N028);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
                 Novel.dataForSave.badDragonEndingNo = 3;
@@ -800,7 +856,7 @@ var Novel;
     Novel.dataForSave = {
         drunknessLevel: 0,
         neededLongSleep: false,
-        ownsPlayerWaepon: true,
+        ownsPlayerWaepon: false,
         longTimeWithGoblins: true,
         badDragonEndingNo: 0
     };
@@ -924,9 +980,9 @@ var Novel;
             //{ scene: Prolog, name: "Prolog" },
             //{ scene: Gasthaus, name: "Gasthaus" },
             //{id: "Laden", scene: Laden, name: "Laden"},
-            { scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
-            { id: "Unterwegs1GoblinsAttack", scene: Novel.Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack" },
-            { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },
+            //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+            //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
+            //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
             { scene: Novel.Drachenhort, name: "Drachenhort" },
             { id: "EndingHappyDragon", scene: Novel.EndingHappyDragon, name: "EndingHappyDragon" },
             { id: "EndingSadDragon", scene: Novel.EndingSadDragon, name: "EndingSadDragon" },

@@ -251,7 +251,7 @@ namespace Novel {
   export let dataForSave = {
     drunknessLevel: 0,
     neededLongSleep: false,         //false Player wakes up early; true Player slept until afternoon
-    ownsPlayerWaepon: true,
+    ownsPlayerWaepon: false,
     longTimeWithGoblins: true,
     badDragonEndingNo: 0        
   }
@@ -386,9 +386,9 @@ namespace Novel {
       //{ scene: Prolog, name: "Prolog" },
       //{ scene: Gasthaus, name: "Gasthaus" },
       //{id: "Laden", scene: Laden, name: "Laden"},
-      {scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
-      {id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-      {id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+      //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+      //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
+      //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
       { scene: Drachenhort, name: "Drachenhort"},
       {id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
       {id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
