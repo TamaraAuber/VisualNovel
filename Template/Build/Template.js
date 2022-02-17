@@ -234,6 +234,11 @@ var Novel;
 (function (Novel) {
     async function EndingBadGoblins() {
         console.log("This is the bad Goblin End");
+        let text = {
+            narrator: {
+                N000: "Du bist schon eine Weile unterwegs als du plötzlich wildes Geschrei hörst. ",
+            }
+        };
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the bad goblin end");
@@ -977,12 +982,12 @@ var Novel;
         //Menü
         gameMenu = Novel.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
-            //{ scene: Prolog, name: "Prolog" },
-            //{ scene: Gasthaus, name: "Gasthaus" },
-            //{id: "Laden", scene: Laden, name: "Laden"},
-            //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
-            //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-            //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+            { scene: Novel.Prolog, name: "Prolog" },
+            { scene: Novel.Gasthaus, name: "Gasthaus" },
+            { id: "Laden", scene: Novel.Laden, name: "Laden" },
+            { scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
+            { id: "Unterwegs1GoblinsAttack", scene: Novel.Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack" },
+            { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },
             { scene: Novel.Drachenhort, name: "Drachenhort" },
             { id: "EndingHappyDragon", scene: Novel.EndingHappyDragon, name: "EndingHappyDragon" },
             { id: "EndingSadDragon", scene: Novel.EndingSadDragon, name: "EndingSadDragon" },
