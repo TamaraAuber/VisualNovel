@@ -311,8 +311,8 @@ namespace Novel {
   }
 
   export function showCredits() {
-    ƒS.Text.addClass("credits");
-    ƒS.Text.print("Hier könnten jetzt Credits stehen.");
+    ƒS.Text.addClass("novelPage");
+    ƒS.Text.print("<h1> Credits </h1><p><b> Story: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamara Auber <br><b> Texte: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamara Auber <br><b> Bilder: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tamara Auber<br></p>");
   }
 
   export function addDrunknessLevel() {

@@ -1095,8 +1095,8 @@ var Novel;
         }
     }
     function showCredits() {
-        Novel.ƒS.Text.addClass("credits");
-        Novel.ƒS.Text.print("Hier könnten jetzt Credits stehen.");
+        Novel.ƒS.Text.addClass("novelPage");
+        Novel.ƒS.Text.print("<h1> Credits </h1><p><b> Story: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamara Auber <br><b> Texte: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tamara Auber <br><b> Bilder: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tamara Auber<br></p>");
     }
     Novel.showCredits = showCredits;
     function addDrunknessLevel() {
@@ -1191,7 +1191,7 @@ var Novel;
                 T008: "Du bist hungrig und sehnst dich nach einem Bett, als du am Ende der Straße ein Gasthaus entdeckst."
             },
             novelPage: {
-                N000: "<h1> Shortcuts </h1><b> F8: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save <br><b> F9: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load <br><b> M: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open/Close Menu<br><b> C: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show Credits<br>"
+                N000: "<h1> Shortcuts </h1><p><b> F8: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save <br><b> F9: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load <br><b> M: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open/Close Menu<br><b> C: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show Credits<br></p>"
             }
         };
         let textDelay1 = 5000;
@@ -1200,7 +1200,7 @@ var Novel;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionTwo.duration, Novel.transition.transitionTwo.alpha, Novel.transition.transitionTwo.edge);
         //Anzeige Shortcuts
-        Novel.ƒS.Text.addClass("menuShortcuts");
+        Novel.ƒS.Text.addClass("novelPage");
         await Novel.ƒS.Text.print(text.novelPage.N000);
         //Prolog
         let storyDIv = document.getElementById("storyDiv");

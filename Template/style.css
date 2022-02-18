@@ -16,6 +16,26 @@ canvas {
   width: 100%;
 }
 
+.novelPage {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: -30%;
+  background-color: rgb(224, 212, 193);
+}
+
+.novelPage h1{
+  margin-left: 10%;
+  margin-top: 5%;
+  font-size: 50px;
+}
+
+.novelPage p{
+  margin-left: 10%;
+  margin-top: 5%;
+  font-size: 30px;
+}
+
 #storyDiv {
   position: absolute;
   top: 250px;
@@ -54,20 +74,42 @@ canvas {
 
 .gameMenu{
   position: absolute;
-  margin-top: 0px;
-  margin-right: 0px;
+  top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0px;
+  right: 0px;
+  text-align: center;
   z-index: 10;
+  width: 90%;
+  display:flex; 
+	justify-content: space-around;
+  background-color: rgb(75, 37, 20);
+  border: solid 4px rgb(32, 12, 3);
+}
+
+.gameMenu button {
+  width: 20%;
+  height: 30px;
+  background-color: rgb(32, 12, 3);
+  border: none;
+  color: white;
 }
 
 speech {
   position: absolute;
-  top:540px;
-  left: 150px;
+  top: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0px;
+  right: 0px;
+  text-align: center;
   color: beige;
-  background-color:rgb(109, 67, 48);
-  border: double 8px rgb(49, 19, 6);
-  width: 40%;
+  background-color:rgb(75, 37, 20);
+  border: double 8px rgb(32, 12, 3);
+  width: 60%;
   height: 10vh;
+  font-size: 20px;
   padding: 10px;;
 }
 
@@ -75,37 +117,118 @@ speech name {
   display: block;
   margin-bottom: 20px;
   color: rgb(209, 217, 224);
+  font-weight: bold;
 }
 
 speech content {
   color: rgb(209, 217, 224);
 }
 
-.dialogBox {
-  background-color: rgb(55, 109, 209);
-  width: 480px;
-  border: double;
-  margin-left: 500px;
-  margin-top: 300px;
-}
-.dialogBox button {
-  background-color: rgb(160, 186, 235);
-  border: double;
-  margin: 5px;
-  width: 150px;
+.DialogBoxHelfenOderTrinken {
+  background-color:rgb(32, 12, 3);
+  padding: 30px;
+} 
+
+.DialogBoxHelfenOderTrinken button {
+  height: 50px;
+  width: 300px;
+  background-color:rgb(75, 37, 20);
+  border: solid 2px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
-.dialogBox2 {
-  background-color: rgb(55, 109, 209);
-  width: 280px;
-  border: double;
-  margin-left: 600px;
-  margin-top: 300px;
+.DialogBoxPresents {
+  background-color:rgb(35, 3, 46);
+  padding: 30px;
 }
-.dialogBox2 button {
-  background-color: rgb(160, 186, 235);
-  border: double;
-  margin: 10px;
-  width: 250px;
+
+.DialogBoxPresents button {
   height: 50px;
+  width: 200px;
+  background-color:rgb(92, 27, 100);
+  border: solid 2px;
+  font-weight: bold;
+  margin-right: 10px;
 }
+
+.DialogBoxGoblins {
+  background-color:rgb(2, 29, 4);
+  padding: 30px;
+}
+
+.DialogBoxGoblins button {
+  height: 50px;
+  width: 300px;
+  background-color:rgb(104, 168, 108);
+  border: solid 2px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.DialogBoxRatschlagBefolgen {
+  background-color:rgb(2, 6, 29);
+  padding: 30px;
+}
+
+.DialogBoxRatschlagBefolgen button {
+  height: 50px;
+  width: 400px;
+  background-color:rgb(122, 76, 6);
+  border: solid 2px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.DialogBoxhowToDealWithDragons {
+  background-color:rgb(2, 6, 29);
+  padding: 30px;
+}
+
+.DialogBoxhowToDealWithDragons button {
+  height: 50px;
+  width: 200px;
+  background-color:rgb(122, 76, 6);
+  border: solid 2px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+dialog[type="inventory"] {
+  color: rgb(49, 19, 17);
+  width: 50%;
+  border: 2px solid;
+  background-color: rgb(54, 32, 20);
+  font-family: 'KoHo', sans-serif;
+}
+
+dialog[type="inventory"] amount{
+  visibility: hidden;
+}
+dialog[type="inventory"] name{
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+dialog[type="inventory"] description{
+  display: block;
+  text-align: center;
+}
+
+dialog[type="inventory"]>ul {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+}
+
+dialog[type="inventory"]>ul>li {
+  width: 15vw;
+  border: solid rgb(49, 19, 17);
+  background-color: rgb(224, 224, 193);
+  border-radius: 10px;
+  /* border-: ; */
+  list-style-type: none;
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+

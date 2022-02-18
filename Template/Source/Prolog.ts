@@ -15,7 +15,7 @@ namespace Novel {
                 T008: "Du bist hungrig und sehnst dich nach einem Bett, als du am Ende der Straße ein Gasthaus entdeckst."
             },
             novelPage: {
-                N000: "<h1> Shortcuts </h1><b> F8: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save <br><b> F9: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load <br><b> M: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open/Close Menu<br><b> C: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show Credits<br>"
+                N000: "<h1> Shortcuts </h1><p><b> F8: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save <br><b> F9: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load <br><b> M: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open/Close Menu<br><b> C: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show Credits<br></p>"
             }
         };
 
@@ -28,7 +28,7 @@ namespace Novel {
         await ƒS.update(transition.transitionTwo.duration, transition.transitionTwo.alpha, transition.transitionTwo.edge)
        
         //Anzeige Shortcuts
-        ƒS.Text.addClass("menuShortcuts");
+        ƒS.Text.addClass("novelPage");
         await ƒS.Text.print(text.novelPage.N000);
         
 
