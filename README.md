@@ -1,13 +1,23 @@
 # VisualNovel
+
+# Links
+- [Zur Visual Novel](https://tamaraauber.github.io/VisualNovel/Template/index.html)
+- [Code](Template/Source)
+- [Konzept](Konzeption)
+
+
+## Bewertungskriterien
+© Prof. Dipl.-Ing. Jirka R. Dell'Oro-Friedl, HFU
+
 | Nr | Bezeichnung           | Inhalt                                                                                                                                                                                                                                                                         |
 |---:|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |    | Titel                 |  Dragons of the West
 |    | Name                  |  Tamara Auber
 |    | Matrikelnummer        |  263618
-|  1 | Konzeption     | Die Story wird in einem Drehbuch und in einem Konzeptionsdiagramm beschrieben.                                                                                                                          |
-|  2 | Charakter-Konzept     | Die CHaraktere werden in Steckbriefen kurz erläutert.                                                                                                                                                                                |
+|  1 | Konzeption     | Die Story wird in einem [Drehbuch](Konzeption/VN-Drehbuch.pdf) und in einem [Konzeptionsdiagramm](Konzeption/VN_Konzeption_Diagramm.png) beschrieben.                                                                                                                          |
+|  2 | Charakter-Konzept     | Die Charaktere werden in [Steckbriefen](Konzeption/VN_CharakterSteckbriefe.pdf) kurz erläutert.                                                                                                                                                                                |
 |  3 | Auswahlmöglichkeiten | Dialoge beeinflussen das Ende der Story und kleinere Szenenabschnitte.                                                                                                                                                     |
-|  4 | Branching narratives      | siehe Konzeptionsdiagramm.                                                                                                                                                        |
+|  4 | Branching narratives      | siehe [Konzeptionsdiagramm](Konzeption/VN_Konzeption_Diagramm.png)                                                                                                                                                        |
 |  5 | Transitions            | Transitions werden zwischen den Szenen eingesetzt.                                                                                                                                                      |
 |  6 | Novel-Pages            | Novel-Pages werden für die Credits und zum Zeigen der vorhandenen Shortcuts genutzt.                                                                                                                                                        |
 |  7 |         Audio         | Die Novel hat kein Audio.                                                                                                                                                  |
