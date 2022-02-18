@@ -1,38 +1,39 @@
 namespace Novel {
     export async function EndingBadDragon(): ƒS.SceneReturn {
-        console.log("This is the bad End");
+        console.log("This is the bad Dragon End");
+
+        let text = {
+            narrator: {
+                N000: "Du spürst, wie es in der Höhle schlagartig heißer wird…",
+                N001: "Das letzte was du wahrnehmen kannst ist der fürchterliche Schrei eines Drachen, bevor du von glühenden Flammen umgeben wirst.",
+            }
+        };
+
+        let textDelay1 = 5000;
+        let textDelay2 = 2000;
+
+        document.getElementById("speech").hidden = true;
 
         await ƒS.Location.show(location.blackscreen);
         await ƒS.update(transition.transitionOne.duration, transition.transitionOne.alpha, transition.transitionOne.edge);
 
+        let storyDIv = document.getElementById("storyDiv");
 
-        await ƒS.Speech.tell(character.narrator, "This is the bad end");
+        storyDIv.innerHTML = text.narrator.N000;
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade out")
+        await delay(textDelay2);
 
-
-        /*
-        0: Ending Attack
-        1: Ending Staff
-        2: Ending Cloak
-        3: Ending Run
-        */
-
-        if (dataForSave.badDragonEndingNo === 0) {
-            await ƒS.Speech.tell(character.narrator, "Attack");
-        }
-        if (dataForSave.badDragonEndingNo === 1) {
-            await ƒS.Speech.tell(character.narrator, "Staff");
-        }
-        if (dataForSave.badDragonEndingNo === 2) {
-            await ƒS.Speech.tell(character.narrator, "Cloak");
-        }
-        if (dataForSave.badDragonEndingNo === 3) {
-            await ƒS.Speech.tell(character.narrator, "Run");
-        }
-
+        storyDIv.innerHTML = text.narrator.N001;
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade")
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay2);
+        
+        dataForSave.whichEnd = 0;
         return "Epilog";
-
-
-
-
     }
 }

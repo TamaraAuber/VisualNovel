@@ -174,7 +174,6 @@ namespace Novel {
                 await ƒS.Speech.tell(character.narrator, text.narrator.N011);
                 await ƒS.Character.hide(character.dragon);
                 await ƒS.Character.hide(character.fairy);
-                dataForSave.badDragonEndingNo = 0;
                 return "EndingBadDragon";    
             case ratschlagBefolgen.iChooseYes:
                 await ƒS.Speech.tell(character.narrator, text.narrator.N012);
@@ -193,7 +192,6 @@ namespace Novel {
                     await ƒS.Speech.tell(character.narrator, text.narrator.N014);
                     await ƒS.Character.hide(character.dragon);
                     await ƒS.Character.hide(character.fairy);
-                    dataForSave.badDragonEndingNo = 1;
                     return "EndingBadDragon";
                   
                 case howToDealWithDragons.iChooseCloak:
@@ -203,7 +201,6 @@ namespace Novel {
                     await ƒS.Speech.tell(character.narrator, text.narrator.N018);
                     await ƒS.Character.hide(character.dragon);
                     await ƒS.Character.hide(character.fairy);
-                    dataForSave.badDragonEndingNo = 2;
                     return "EndingBadDragon";
                    
                 case howToDealWithDragons.iChooseSword:
@@ -234,7 +231,6 @@ namespace Novel {
                     await ƒS.Speech.tell(character.narrator, text.narrator.N028);
                     await ƒS.Character.hide(character.dragon);
                     await ƒS.Character.hide(character.fairy);
-                    dataForSave.badDragonEndingNo = 3;
                     return "EndingBadDragon";
                     
             }

@@ -16,6 +16,34 @@ canvas {
   width: 100%;
 }
 
+#storyDiv {
+  position: absolute;
+  top: 250px;
+  width: 1280px;;
+  opacity: 0;
+  color: white;
+  font-size: 40px;
+  text-align: center;
+}
+
+#storyDiv.fade {
+  opacity: 1;
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#storyDiv.fadeOut {
+  opacity: 0;
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
 #drunknessSight {
   width: 99%;
   height: 99%;

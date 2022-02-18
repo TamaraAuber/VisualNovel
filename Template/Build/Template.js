@@ -142,7 +142,6 @@ var Novel;
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N011);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
-                Novel.dataForSave.badDragonEndingNo = 0;
                 return "EndingBadDragon";
             case ratschlagBefolgen.iChooseYes:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N012);
@@ -158,7 +157,6 @@ var Novel;
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N014);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
-                Novel.dataForSave.badDragonEndingNo = 1;
                 return "EndingBadDragon";
             case howToDealWithDragons.iChooseCloak:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N015);
@@ -167,7 +165,6 @@ var Novel;
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N018);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
-                Novel.dataForSave.badDragonEndingNo = 2;
                 return "EndingBadDragon";
             case howToDealWithDragons.iChooseSword:
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N019);
@@ -195,7 +192,6 @@ var Novel;
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N028);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
-                Novel.dataForSave.badDragonEndingNo = 3;
                 return "EndingBadDragon";
         }
     }
@@ -204,28 +200,32 @@ var Novel;
 var Novel;
 (function (Novel) {
     async function EndingBadDragon() {
-        console.log("This is the bad End");
+        console.log("This is the bad Dragon End");
+        let text = {
+            narrator: {
+                N000: "Du spürst, wie es in der Höhle schlagartig heißer wird…",
+                N001: "Das letzte was du wahrnehmen kannst ist der fürchterliche Schrei eines Drachen, bevor du von glühenden Flammen umgeben wirst.",
+            }
+        };
+        let textDelay1 = 5000;
+        let textDelay2 = 2000;
+        document.getElementById("speech").hidden = true;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the bad end");
-        /*
-        0: Ending Attack
-        1: Ending Staff
-        2: Ending Cloak
-        3: Ending Run
-        */
-        if (Novel.dataForSave.badDragonEndingNo === 0) {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Attack");
-        }
-        if (Novel.dataForSave.badDragonEndingNo === 1) {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Staff");
-        }
-        if (Novel.dataForSave.badDragonEndingNo === 2) {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Cloak");
-        }
-        if (Novel.dataForSave.badDragonEndingNo === 3) {
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, "Run");
-        }
+        let storyDIv = document.getElementById("storyDiv");
+        storyDIv.innerHTML = text.narrator.N000;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade out");
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N001;
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade");
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        Novel.dataForSave.whichEnd = 0;
         return "Epilog";
     }
     Novel.EndingBadDragon = EndingBadDragon;
@@ -236,12 +236,41 @@ var Novel;
         console.log("This is the bad Goblin End");
         let text = {
             narrator: {
-                N000: "Du bist schon eine Weile unterwegs als du plötzlich wildes Geschrei hörst. ",
+                N000: "Du trittst den Goblins zwar mutig, aber ohne richtige Waffe entgegen.",
+                N001: "Unglücklicherweise sind diese dir zahlenmäßig überlegen und ziemlich wütend.",
+                N002: "So sehr du es auch versuchst, sie sind einfach zu viele…",
+                N003: "Du wirst von den Goblins besiegt!"
             }
         };
+        let textDelay1 = 3000;
+        let textDelay2 = 2000;
+        document.getElementById("speech").hidden = true;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the bad goblin end");
+        let storyDIv = document.getElementById("storyDiv");
+        storyDIv.innerHTML = text.narrator.N000;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade out");
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N001;
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade");
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N002;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N003;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        Novel.dataForSave.whichEnd = 0;
         return "Epilog";
     }
     Novel.EndingBadGoblins = EndingBadGoblins;
@@ -250,9 +279,55 @@ var Novel;
 (function (Novel) {
     async function EndingHappyDragon() {
         console.log("This is the Happy End");
+        let text = {
+            narrator: {
+                N000: "Du betrachtest die Familie noch eine Weile und trittst dann den Rückweg an.",
+                N001: "Im Dorf angekommen beschließt du mit Amalya noch eine Weile dort zu bleiben.",
+                N002: "Drachenangriffe gibt es seitdem jedoch keine mehr…",
+                N003: "Im Dorf wirst du als Held gefeiert und zum Ehrenbürger erklärt.",
+                N004: "Du besuchst die Drachen noch ein paar Mal, um zu sehen, wie es ihnen geht…",
+                N005: "Bis du schließlich deine Heimreise antrittst, um deiner Familie von deinem Abenteuer zu berichten."
+            }
+        };
+        let textDelay1 = 5000;
+        let textDelay2 = 2000;
+        document.getElementById("speech").hidden = true;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the happy end");
+        let storyDIv = document.getElementById("storyDiv");
+        storyDIv.innerHTML = text.narrator.N000;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade out");
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N001;
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade");
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N002;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N003;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N004;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N005;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        Novel.dataForSave.whichEnd = 2;
         return "Epilog";
     }
     Novel.EndingHappyDragon = EndingHappyDragon;
@@ -261,9 +336,91 @@ var Novel;
 (function (Novel) {
     async function EndingSadDragon() {
         console.log("This is the sad End");
+        let text = {
+            narrator: {
+                N000: "Es ist fast so als würdest du gar nicht selbst kämpfen.",
+                N001: "Als würde das Schwert sich von selbst bewegen…",
+                N002: "Du schlägst und weichst ein paar Mal aus …",
+                N003: "… bis du dem Drachen schließlich den Todesstoß verpasst!",
+                N004: "Mit einem qualvollen Schrei geht dieser zu Boden und regt sich nicht mehr.",
+                N005: "Plötzlich fängt dein Rucksack an sich zu bewegen…",
+                N006: "Du schaust hinein und ziehst den Stein heraus, welcher anfängt Risse zu bekommen…",
+                N007: "Als der Stein ganz auseinanderfällt, hältst du plötzlich einen kleinen Drachen in den Armen…",
+                N008: "Er schaut dich erwartungsvoll mit seinen großen Kulleraugen an.",
+                N009: "Da wird dir klar …",
+                N010: "Der fürchterliche Drache war gar nicht so böse, sondern nur auf der Suche nach seinem Baby…",
+                N011: "und du hast sie umgebracht."
+            }
+        };
+        let textDelay1 = 5000;
+        let textDelay2 = 2000;
+        document.getElementById("speech").hidden = true;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, "This is the sad end");
+        let storyDIv = document.getElementById("storyDiv");
+        storyDIv.innerHTML = text.narrator.N000;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade out");
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N001;
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade");
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N002;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N003;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N004;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N005;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N006;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N007;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N008;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N009;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N010;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.narrator.N011;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        Novel.dataForSave.whichEnd = 1;
         return "Epilog";
     }
     Novel.EndingSadDragon = EndingSadDragon;
@@ -271,12 +428,31 @@ var Novel;
 var Novel;
 (function (Novel) {
     async function Epilog() {
-        console.log("Szene: Prolog");
+        console.log("Szene: Epilog");
+        let text = {
+            narrator: {
+                N000: "Bad End",
+                N001: "Sad End",
+                N002: "Happy End"
+            }
+        };
+        document.getElementById("speech").hidden = true;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
-        // Novel Page
-        Novel.ƒS.Text.setClass("Epilog");
-        Novel.ƒS.Text.print("Ich bin ein Epilog :)");
+        let storyDIv = document.getElementById("storyDiv");
+        storyDIv.setAttribute("style", "font-size: 70px;");
+        switch (Novel.dataForSave.whichEnd) {
+            case 0:
+                storyDIv.innerHTML = text.narrator.N000;
+                break;
+            case 1:
+                storyDIv.innerHTML = text.narrator.N001;
+                break;
+            case 2:
+                storyDIv.innerHTML = text.narrator.N002;
+                break;
+        }
+        storyDIv.classList.toggle('fade');
     }
     Novel.Epilog = Epilog;
 })(Novel || (Novel = {}));
@@ -863,7 +1039,7 @@ var Novel;
         neededLongSleep: false,
         ownsPlayerWaepon: false,
         longTimeWithGoblins: true,
-        badDragonEndingNo: 0
+        whichEnd: 0
     };
     //Menü
     let inGameMenu = {
@@ -966,6 +1142,10 @@ var Novel;
         }
     }
     Novel.SetDrunknessSight = SetDrunknessSight;
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    Novel.delay = delay;
     //------Animations------
     function fromLeftToRight(startX, startY, endX, endY) {
         return {
@@ -982,17 +1162,17 @@ var Novel;
         //Menü
         gameMenu = Novel.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
-            { scene: Novel.Prolog, name: "Prolog" },
-            { scene: Novel.Gasthaus, name: "Gasthaus" },
-            { id: "Laden", scene: Novel.Laden, name: "Laden" },
-            { scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
-            { id: "Unterwegs1GoblinsAttack", scene: Novel.Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack" },
-            { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },
-            { scene: Novel.Drachenhort, name: "Drachenhort" },
-            { id: "EndingHappyDragon", scene: Novel.EndingHappyDragon, name: "EndingHappyDragon" },
-            { id: "EndingSadDragon", scene: Novel.EndingSadDragon, name: "EndingSadDragon" },
-            { id: "EndingBadDragon", scene: Novel.EndingBadDragon, name: "EndingBadDragon" },
-            { id: "EndingBadGoblins", scene: Novel.EndingBadGoblins, name: "EndingBadGoblins" },
+            //{ scene: Prolog, name: "Prolog" },
+            //{ scene: Gasthaus, name: "Gasthaus" },
+            //{id: "Laden", scene: Laden, name: "Laden"},
+            //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+            //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
+            //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+            //{ scene: Drachenhort, name: "Drachenhort"},
+            //{id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
+            //{id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
+            //{id: "EndingBadDragon", scene: EndingBadDragon, name: "EndingBadDragon"},
+            //{id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"},
             { id: "Epilog", scene: Novel.Epilog, name: "Epilog" }
         ];
         let uiElement = document.querySelector("[type=interface]");
@@ -1178,8 +1358,7 @@ var Novel;
         let text = {
             narrator: {
                 N000: "Du ziehst deine Waffe und mit viel Geschick (und vielleicht auch viel Glück) schaffst du es die Goblins zu besiegen!",
-                N001: "Du trittst den Goblins zwar mutig, aber ohne richtige Waffe entgegen.",
-                N002: "Unglücklicherweise sind diese dir zahlenmäßig überlegen und ziemlich wütend."
+                N001: "Voller Selbstvertrauen und fest entschlossen, alle zu besiegen, begibst du dich in den Kampf."
             }
         };
         if (Novel.dataForSave.ownsPlayerWaepon) {
@@ -1191,7 +1370,6 @@ var Novel;
         else {
             //Protagonist hat keine Waffe und wird von Goblins besiegt
             await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N001);
-            await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N002);
             await Novel.ƒS.Character.hide(Novel.character.goblinLeader);
             return "EndingBadGoblins";
         }

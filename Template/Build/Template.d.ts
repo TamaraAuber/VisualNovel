@@ -264,12 +264,13 @@ declare namespace Novel {
         neededLongSleep: boolean;
         ownsPlayerWaepon: boolean;
         longTimeWithGoblins: boolean;
-        badDragonEndingNo: number;
+        whichEnd: number;
     };
     function showCredits(): void;
     function addDrunknessLevel(): void;
     function removeDrunknessLevel(): void;
     function SetDrunknessSight(): void;
+    function delay(ms: number): Promise<unknown>;
     function fromLeftToRight(startX: number, startY: number, endX: number, endY: number): ƒS.AnimationDefinition;
 }
 declare namespace Novel {

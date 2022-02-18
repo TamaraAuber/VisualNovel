@@ -252,8 +252,8 @@ namespace Novel {
     drunknessLevel: 0,
     neededLongSleep: false,         //false Player wakes up early; true Player slept until afternoon
     ownsPlayerWaepon: false,
-    longTimeWithGoblins: true,
-    badDragonEndingNo: 0        
+    longTimeWithGoblins: true,   
+    whichEnd: 0
   }
 
   //Menü
@@ -364,6 +364,11 @@ namespace Novel {
   }
 
 
+  export function delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+
 //------Animations------
 
   export function fromLeftToRight(startX: number, startY: number, endX: number, endY: number): ƒS.AnimationDefinition {
@@ -383,17 +388,17 @@ namespace Novel {
     gameMenu = ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
 
     let scenes: ƒS.Scenes = [
-      { scene: Prolog, name: "Prolog" },
-      { scene: Gasthaus, name: "Gasthaus" },
-      {id: "Laden", scene: Laden, name: "Laden"},
-      {scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
-      {id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-      {id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
-      { scene: Drachenhort, name: "Drachenhort"},
-      {id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
-      {id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
-      {id: "EndingBadDragon", scene: EndingBadDragon, name: "EndingBadDragon"},
-      {id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"},
+      //{ scene: Prolog, name: "Prolog" },
+      //{ scene: Gasthaus, name: "Gasthaus" },
+      //{id: "Laden", scene: Laden, name: "Laden"},
+      //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+      //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
+      //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+      //{ scene: Drachenhort, name: "Drachenhort"},
+      //{id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
+      //{id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
+      //{id: "EndingBadDragon", scene: EndingBadDragon, name: "EndingBadDragon"},
+      //{id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"},
       {id: "Epilog", scene: Epilog, name: "Epilog"}
     ];
 
