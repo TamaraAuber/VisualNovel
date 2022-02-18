@@ -130,5 +130,7 @@ namespace Novel {
 
         await ƒS.Character.hide(character.tiefling);
         await ƒS.Character.hide(roomInventory.ladenTheke);
+
+        return "Unterwegs1Goblins";
     }
 }

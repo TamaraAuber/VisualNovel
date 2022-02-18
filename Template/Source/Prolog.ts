@@ -2,7 +2,6 @@ namespace Novel {
     export async function Prolog(): ƒS.SceneReturn {
         console.log("Szene: Prolog");
 
-
         let text = {
             prologText: {
                 T000: "&nbsp;",
@@ -20,10 +19,13 @@ namespace Novel {
             }
         };
 
+        let textDelay1 = 5000;
+        let textDelay2 = 2000;
+
+        document.getElementById("speech").hidden = true;
 
         await ƒS.Location.show(location.blackscreen);
         await ƒS.update(transition.transitionTwo.duration, transition.transitionTwo.alpha, transition.transitionTwo.edge)
-
        
         //Anzeige Shortcuts
         ƒS.Text.addClass("menuShortcuts");
@@ -31,16 +33,59 @@ namespace Novel {
         
 
         //Prolog
-        await ƒS.Speech.tell(character.narrator, text.prologText.T001);
-        await ƒS.Speech.tell(character.narrator, text.prologText.T002);
-        await ƒS.Speech.tell(character.narrator, text.prologText.T003);
-        await ƒS.Speech.tell(character.narrator, text.prologText.T004);
-        await ƒS.Speech.tell(character.narrator, text.prologText.T005);
-        await ƒS.Speech.tell(character.narrator, text.prologText.T006);
-        await ƒS.Speech.tell(character.narrator, text.prologText.T007);
-        await ƒS.Speech.tell(character.narrator, text.prologText.T008);
+        let storyDIv = document.getElementById("storyDiv");
 
+        storyDIv.innerHTML = text.prologText.T001;
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade out")
+        await delay(textDelay2);
 
-        
+        storyDIv.innerHTML = text.prologText.T002;
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade")
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay2);
+
+        storyDIv.innerHTML = text.prologText.T003;
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await delay(textDelay2);
+
+        storyDIv.innerHTML = text.prologText.T004;
+        storyDIv.classList.toggle('fadeOut');
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay2);
+
+        storyDIv.innerHTML = text.prologText.T005;
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await delay(textDelay2);
+
+        storyDIv.innerHTML = text.prologText.T006;
+        storyDIv.classList.toggle('fadeOut');
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay2);
+
+        storyDIv.innerHTML = text.prologText.T007;
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await delay(textDelay2);
+
+        storyDIv.innerHTML = text.prologText.T008;
+        storyDIv.classList.toggle('fadeOut');
+        await delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await delay(textDelay2);
+      
+
+        return "Gasthaus";
     }
 }

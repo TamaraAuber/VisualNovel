@@ -134,5 +134,7 @@ namespace Novel {
 
 
         await ƒS.Character.hide(character.fairy);
+
+        return "Drachenhort";
     }
 }

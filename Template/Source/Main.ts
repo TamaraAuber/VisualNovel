@@ -388,18 +388,18 @@ namespace Novel {
     gameMenu = ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
 
     let scenes: ƒS.Scenes = [
-      //{ scene: Prolog, name: "Prolog" },
-      //{ scene: Gasthaus, name: "Gasthaus" },
+      { scene: Prolog, name: "Prolog" },
+      //{id: "Gasthaus", scene: Gasthaus, name: "Gasthaus" },
       //{id: "Laden", scene: Laden, name: "Laden"},
-      //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+      //{id: "Unterwegs1Goblins", scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
       //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
       //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
-      //{ scene: Drachenhort, name: "Drachenhort"},
+      //{id: "Drachenhort", scene: Drachenhort, name: "Drachenhort"},
       //{id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
       //{id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
       //{id: "EndingBadDragon", scene: EndingBadDragon, name: "EndingBadDragon"},
       //{id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"},
-      {id: "Epilog", scene: Epilog, name: "Epilog"}
+      //{id: "Epilog", scene: Epilog, name: "Epilog"}
     ];
 
 

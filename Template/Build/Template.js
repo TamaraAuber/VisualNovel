@@ -791,6 +791,7 @@ var Novel;
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N004);
         await Novel.ƒS.Character.hide(Novel.character.tiefling);
         await Novel.ƒS.Character.hide(Novel.roomInventory.ladenTheke);
+        return "Unterwegs1Goblins";
     }
     Novel.Laden = Laden;
 })(Novel || (Novel = {}));
@@ -1162,18 +1163,18 @@ var Novel;
         //Menü
         gameMenu = Novel.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
-            //{ scene: Prolog, name: "Prolog" },
-            //{ scene: Gasthaus, name: "Gasthaus" },
+            { scene: Novel.Prolog, name: "Prolog" },
+            //{id: "Gasthaus", scene: Gasthaus, name: "Gasthaus" },
             //{id: "Laden", scene: Laden, name: "Laden"},
-            //{scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+            //{id: "Unterwegs1Goblins", scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
             //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
             //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
-            //{ scene: Drachenhort, name: "Drachenhort"},
+            //{id: "Drachenhort", scene: Drachenhort, name: "Drachenhort"},
             //{id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
             //{id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
             //{id: "EndingBadDragon", scene: EndingBadDragon, name: "EndingBadDragon"},
             //{id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"},
-            { id: "Epilog", scene: Novel.Epilog, name: "Epilog" }
+            //{id: "Epilog", scene: Epilog, name: "Epilog"}
         ];
         let uiElement = document.querySelector("[type=interface]");
         Novel.dataForSave = Novel.ƒS.Progress.setData(Novel.dataForSave, uiElement);
@@ -1201,20 +1202,59 @@ var Novel;
                 N000: "<h1> Shortcuts </h1><b> F8: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save <br><b> F9: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load <br><b> M: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open/Close Menu<br><b> C: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show Credits<br>"
             }
         };
+        let textDelay1 = 5000;
+        let textDelay2 = 2000;
+        document.getElementById("speech").hidden = true;
         await Novel.ƒS.Location.show(Novel.location.blackscreen);
         await Novel.ƒS.update(Novel.transition.transitionTwo.duration, Novel.transition.transitionTwo.alpha, Novel.transition.transitionTwo.edge);
         //Anzeige Shortcuts
         Novel.ƒS.Text.addClass("menuShortcuts");
         await Novel.ƒS.Text.print(text.novelPage.N000);
         //Prolog
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T001);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T002);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T003);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T004);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T005);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T006);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T007);
-        await Novel.ƒS.Speech.tell(Novel.character.narrator, text.prologText.T008);
+        let storyDIv = document.getElementById("storyDiv");
+        storyDIv.innerHTML = text.prologText.T001;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade out");
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.prologText.T002;
+        storyDIv.classList.toggle('fadeOut');
+        console.log("fade");
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.prologText.T003;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.prologText.T004;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.prologText.T005;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.prologText.T006;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.prologText.T007;
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay2);
+        storyDIv.innerHTML = text.prologText.T008;
+        storyDIv.classList.toggle('fadeOut');
+        await Novel.delay(textDelay1);
+        storyDIv.classList.toggle('fade');
+        await Novel.delay(textDelay2);
+        return "Gasthaus";
     }
     Novel.Prolog = Prolog;
 })(Novel || (Novel = {}));
@@ -1495,6 +1535,7 @@ var Novel;
         await Novel.ƒS.Speech.tell(Novel.character.fairy, text.fairy.F006);
         await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N016);
         await Novel.ƒS.Character.hide(Novel.character.fairy);
+        return "Drachenhort";
     }
     Novel.Unterwegs2Fee = Unterwegs2Fee;
 })(Novel || (Novel = {}));
