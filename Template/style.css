@@ -1,5 +1,6 @@
 html {
-  background: rgb(102, 67, 1);
+  background-image: url("Images/backgroundImage.png");
+  background-size: cover;
 }
 
 scene {
