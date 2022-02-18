@@ -147,9 +147,7 @@ var Novel;
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N012);
                 break;
         }
-        //Ratschlag der Fee befolgt --> Blick ins Inventar
-        //await ƒS.Inventory.open();
-        //await ƒS.Speech.tell(character.narrator, "  ");
+        //Ratschlag der Fee befolgt
         let dialogHowToDealWithDragons = await Novel.ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
         switch (dialogHowToDealWithDragons) {
             case howToDealWithDragons.iChooseStaff:
@@ -179,10 +177,10 @@ var Novel;
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 await Novel.ƒS.Character.hide(Novel.character.fairy);
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N023);
-                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N024);
                 await Novel.ƒS.update();
                 await Novel.ƒS.Character.show(Novel.character.dragon, Novel.character.dragon.pose.happyWithBaby, Novel.ƒS.positionPercent(50, 100));
                 await Novel.ƒS.update(1);
+                await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N024);
                 await Novel.ƒS.Speech.tell(Novel.character.narrator, text.narrator.N025);
                 await Novel.ƒS.Character.hide(Novel.character.dragon);
                 return "EndingHappyDragon";
@@ -515,6 +513,7 @@ var Novel;
             iChooseHelp: "Ich besiege den Drachen!!!",
             iChooseDrink: "Mehr Meeeeeeeet!!!"
         };
+        document.getElementById("speech").hidden = false;
         //Eintritt Gasthaus
         await Novel.ƒS.Location.show(Novel.location.gasthausHauptraum);
         await Novel.ƒS.update(Novel.transition.transitionOne.duration, Novel.transition.transitionOne.alpha, Novel.transition.transitionOne.edge);
@@ -675,6 +674,7 @@ var Novel;
         await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug2);
         await Novel.ƒS.Character.hide(Novel.roomInventory.metKrug3);
         await Novel.ƒS.Character.hide(Novel.roomInventory.gasthausBarCounter);
+        return "Laden";
     }
     Novel.Gasthaus = Gasthaus;
 })(Novel || (Novel = {}));
@@ -912,13 +912,6 @@ var Novel;
                 standard: "Images/Filter/LightFilter1.png"
             }
         },
-        sonnenstrahlen: {
-            name: "sonnenstrahlen",
-            origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
-            pose: {
-                standard: "Images/DragonCave/DragonCave_Sunlight1.png"
-            }
-        },
         metKrug: {
             name: "MetKrug",
             origin: Novel.ƒS.ORIGIN.BOTTOMCENTER,
@@ -1012,7 +1005,6 @@ var Novel;
             }
         }
     };
-    //ToDO:sound
     Novel.items = {
         cloak: {
             name: "Umhang",
@@ -1164,17 +1156,17 @@ var Novel;
         gameMenu = Novel.ƒS.Menu.create(inGameMenu, buttonFunctionalities, "gameMenu");
         let scenes = [
             { scene: Novel.Prolog, name: "Prolog" },
-            //{id: "Gasthaus", scene: Gasthaus, name: "Gasthaus" },
-            //{id: "Laden", scene: Laden, name: "Laden"},
-            //{id: "Unterwegs1Goblins", scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
-            //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-            //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
-            //{id: "Drachenhort", scene: Drachenhort, name: "Drachenhort"},
-            //{id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
-            //{id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
-            //{id: "EndingBadDragon", scene: EndingBadDragon, name: "EndingBadDragon"},
-            //{id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"},
-            //{id: "Epilog", scene: Epilog, name: "Epilog"}
+            { id: "Gasthaus", scene: Novel.Gasthaus, name: "Gasthaus" },
+            { id: "Laden", scene: Novel.Laden, name: "Laden" },
+            { id: "Unterwegs1Goblins", scene: Novel.Unterwegs1Goblins, name: "Unterwegs1Goblins" },
+            { id: "Unterwegs1GoblinsAttack", scene: Novel.Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack" },
+            { id: "Unterwegs2Fee", scene: Novel.Unterwegs2Fee, name: "Unterwegs2Fee" },
+            { id: "Drachenhort", scene: Novel.Drachenhort, name: "Drachenhort" },
+            { id: "EndingHappyDragon", scene: Novel.EndingHappyDragon, name: "EndingHappyDragon" },
+            { id: "EndingSadDragon", scene: Novel.EndingSadDragon, name: "EndingSadDragon" },
+            { id: "EndingBadDragon", scene: Novel.EndingBadDragon, name: "EndingBadDragon" },
+            { id: "EndingBadGoblins", scene: Novel.EndingBadGoblins, name: "EndingBadGoblins" },
+            { id: "Epilog", scene: Novel.Epilog, name: "Epilog" }
         ];
         let uiElement = document.querySelector("[type=interface]");
         Novel.dataForSave = Novel.ƒS.Progress.setData(Novel.dataForSave, uiElement);
@@ -1196,7 +1188,7 @@ var Novel;
                 T005: "Nach einer längeren Reise kommst du gerade in einem kleinen Dorf an.",
                 T006: "Du stammst aus einer, in deiner Heimat, angesehenen Familie von Abenteurern.",
                 T007: "Da du jedoch der Jüngste in deiner Familie bist, steht dir das große Glück zu jegliche Botengänge zu erledigen. Von solch einem Botengang kommst du gerade.",
-                T008: "Du bist hungrig und sehnst dich nach einem Bett als du am Ende der Straße ein Gasthaus entdeckst."
+                T008: "Du bist hungrig und sehnst dich nach einem Bett, als du am Ende der Straße ein Gasthaus entdeckst."
             },
             novelPage: {
                 N000: "<h1> Shortcuts </h1><b> F8: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save <br><b> F9: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load <br><b> M: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open/Close Menu<br><b> C: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show Credits<br>"

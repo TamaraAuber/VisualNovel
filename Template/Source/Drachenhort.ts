@@ -181,10 +181,7 @@ namespace Novel {
         }
 
 
-        //Ratschlag der Fee befolgt --> Blick ins Inventar
-        //await ƒS.Inventory.open();
-        //await ƒS.Speech.tell(character.narrator, "  ");
-        
+        //Ratschlag der Fee befolgt
         let dialogHowToDealWithDragons = await ƒS.Menu.getInput(howToDealWithDragons, "DialogBoxhowToDealWithDragons");
             switch (dialogHowToDealWithDragons) {
                 case howToDealWithDragons.iChooseStaff:
@@ -217,10 +214,10 @@ namespace Novel {
                     await ƒS.Character.hide(character.dragon);
                     await ƒS.Character.hide(character.fairy);
                     await ƒS.Speech.tell(character.narrator, text.narrator.N023);
-                    await ƒS.Speech.tell(character.narrator, text.narrator.N024);
                     await ƒS.update();
                     await ƒS.Character.show(character.dragon, character.dragon.pose.happyWithBaby, ƒS.positionPercent(50, 100));
                     await ƒS.update(1);
+                    await ƒS.Speech.tell(character.narrator, text.narrator.N024);
                     await ƒS.Speech.tell(character.narrator, text.narrator.N025);
                     await ƒS.Character.hide(character.dragon);
                     return "EndingHappyDragon";

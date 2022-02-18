@@ -12,7 +12,7 @@ namespace Novel {
                 T005: "Nach einer längeren Reise kommst du gerade in einem kleinen Dorf an.",
                 T006: "Du stammst aus einer, in deiner Heimat, angesehenen Familie von Abenteurern.",
                 T007: "Da du jedoch der Jüngste in deiner Familie bist, steht dir das große Glück zu jegliche Botengänge zu erledigen. Von solch einem Botengang kommst du gerade.",
-                T008: "Du bist hungrig und sehnst dich nach einem Bett als du am Ende der Straße ein Gasthaus entdeckst."
+                T008: "Du bist hungrig und sehnst dich nach einem Bett, als du am Ende der Straße ein Gasthaus entdeckst."
             },
             novelPage: {
                 N000: "<h1> Shortcuts </h1><b> F8: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save <br><b> F9: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Load <br><b> M: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open/Close Menu<br><b> C: </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show Credits<br>"

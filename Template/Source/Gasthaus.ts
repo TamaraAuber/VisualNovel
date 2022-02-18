@@ -72,6 +72,7 @@ namespace Novel {
             iChooseDrink: "Mehr Meeeeeeeet!!!"
         };
 
+        document.getElementById("speech").hidden = false;
 
         //Eintritt Gasthaus
         await ƒS.Location.show(location.gasthausHauptraum);
@@ -259,6 +260,6 @@ namespace Novel {
         await ƒS.Character.hide(roomInventory.metKrug3);
         await ƒS.Character.hide(roomInventory.gasthausBarCounter);
 
-
+        return "Laden";
     }
 }

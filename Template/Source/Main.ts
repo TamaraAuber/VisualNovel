@@ -119,13 +119,6 @@ namespace Novel {
         standard: "Images/Filter/LightFilter1.png"
       }
     },
-    sonnenstrahlen: {
-      name: "sonnenstrahlen",
-      origin: ƒS.ORIGIN.BOTTOMCENTER,
-      pose: {
-        standard: "Images/DragonCave/DragonCave_Sunlight1.png"
-      }
-    },
     metKrug: {
       name: "MetKrug",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
@@ -220,9 +213,6 @@ namespace Novel {
       }
     }
   }
-
-
-  //ToDO:sound
 
   export let items = {
     cloak: {
@@ -389,17 +379,17 @@ namespace Novel {
 
     let scenes: ƒS.Scenes = [
       { scene: Prolog, name: "Prolog" },
-      //{id: "Gasthaus", scene: Gasthaus, name: "Gasthaus" },
-      //{id: "Laden", scene: Laden, name: "Laden"},
-      //{id: "Unterwegs1Goblins", scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
-      //{id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
-      //{id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
-      //{id: "Drachenhort", scene: Drachenhort, name: "Drachenhort"},
-      //{id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
-      //{id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
-      //{id: "EndingBadDragon", scene: EndingBadDragon, name: "EndingBadDragon"},
-      //{id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"},
-      //{id: "Epilog", scene: Epilog, name: "Epilog"}
+      {id: "Gasthaus", scene: Gasthaus, name: "Gasthaus" },
+      {id: "Laden", scene: Laden, name: "Laden"},
+      {id: "Unterwegs1Goblins", scene: Unterwegs1Goblins, name: "Unterwegs1Goblins"},
+      {id: "Unterwegs1GoblinsAttack", scene: Unterwegs1GoblinsAttack, name: "Unterwegs1GoblinsAttack"},
+      {id: "Unterwegs2Fee", scene: Unterwegs2Fee, name: "Unterwegs2Fee"},
+      {id: "Drachenhort", scene: Drachenhort, name: "Drachenhort"},
+      {id: "EndingHappyDragon", scene: EndingHappyDragon, name: "EndingHappyDragon"},
+      {id: "EndingSadDragon", scene: EndingSadDragon, name: "EndingSadDragon"},
+      {id: "EndingBadDragon", scene: EndingBadDragon, name: "EndingBadDragon"},
+      {id: "EndingBadGoblins", scene: EndingBadGoblins, name: "EndingBadGoblins"},
+      {id: "Epilog", scene: Epilog, name: "Epilog"}
     ];
 
 

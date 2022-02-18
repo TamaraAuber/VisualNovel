@@ -137,13 +137,6 @@ declare namespace Novel {
                 standard: string;
             };
         };
-        sonnenstrahlen: {
-            name: string;
-            origin: ƒ.ORIGIN2D;
-            pose: {
-                standard: string;
-            };
-        };
         metKrug: {
             name: string;
             origin: ƒ.ORIGIN2D;
